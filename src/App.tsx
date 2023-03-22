@@ -1,10 +1,10 @@
-import React, {useRef} from 'react';
-import { firestore } from './firebase';
-import { addDoc, collection} from '@firebase/firestore';
+import { addDoc, collection } from '@firebase/firestore';
+import React, { useRef } from 'react';
+import { firestore } from './firebase/firebase';
 
 function App() {
 
-  
+
   const formRef = useRef<HTMLInputElement>(null);
   const ref = collection(firestore, 'todos');
 
@@ -15,7 +15,7 @@ function App() {
     console.log(formRef.current?.value);
 
     let data = {
-       message: formRef.current?.value,
+      message: formRef.current?.value,
     }
     try {
       addDoc(ref, data)
@@ -30,7 +30,7 @@ function App() {
       <h1>Everyday TODOs</h1>
       <form onSubmit={handleSubmit}>
         <label>Something</label>
-        <input type="text" ref={formRef}/>
+        <input type="text" ref={formRef} />
         <button type="submit">Submit</button>
       </form>
     </div>
