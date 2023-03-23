@@ -6,5 +6,8 @@
   "editor.codeActionsOnSave": {
     "source.sortImports": true
   },
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "cSpell.words": [
+    "Todos"
+  ]
 }

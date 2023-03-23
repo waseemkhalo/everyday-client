@@ -1,38 +1,53 @@
-import React, {useRef} from 'react';
-import { firestore } from './firebase';
-import { addDoc, collection} from '@firebase/firestore';
+import React, { FormEvent, useEffect, useState } from "react";
+import { addTodo, getTodos, Todo } from "./services/todoService";
 
 function App() {
 
-  
-  const formRef = useRef<HTMLInputElement>(null);
-  const ref = collection(firestore, 'todos');
-
-
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(formRef.current?.value);
-
-    let data = {
-       message: formRef.current?.value,
+  //* for testing todo services
+  const [newTodo, setNewTodo] = useState<string>('')
+  const [todos, setTodos] = useState<Todo[]>([])
+  const handleNewTodo = async (e: FormEvent) => {
+    e.preventDefault()
+    if (newTodo) {
+      await addTodo(newTodo)
+      setNewTodo('')
+      getTodos().then(todos => setTodos(todos))
     }
-    try {
-      addDoc(ref, data)
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-
   }
+
+  useEffect(() => {
+    getTodos().then(todos => setTodos(todos))
+  }, [])
+  //* end of services testing
 
   return (
     <div className="App">
       <h1>Everyday TODOs</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Something</label>
-        <input type="text" ref={formRef}/>
-        <button type="submit">Submit</button>
-      </form>
+
+      {//* testing todo services */
+        <>
+          <form onSubmit={handleNewTodo} >
+            <label>
+              <p>add new Todo</p>
+              <input type="text" placeholder="new todo" value={newTodo}
+                onChange={(e: FormEvent<HTMLInputElement>) => setNewTodo(e.currentTarget.value)}
+              />
+              <button>add</button>
+            </label>
+          </form>
+          <ul>
+            {todos.sort((a, b) => a.timestamp.seconds - b.timestamp.seconds)
+              .map(todo =>
+                <li key={todo.id} >
+                  {todo.content}
+                </li>
+              )
+            }
+          </ul>
+        </>
+      }
+
+
     </div>
   );
 }
