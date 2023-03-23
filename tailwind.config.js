@@ -15,9 +15,11 @@ module.exports = {
       ghost: "#EEEEEE",
       ghostShade: "#747474",
       red: "#FFC1C1",
-
-      extend: {},
     },
-    plugins: [],
+    fontFamily: {
+      verdana: ["Verdana", "Roboto", "sans-serif"],
+    },
+    extend: {},
   },
+  plugins: [],
 };
