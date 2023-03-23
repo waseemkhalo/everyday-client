@@ -1,14 +1,12 @@
-import React from 'react'
+import React from "react";
 
 function NavPreAuth() {
-
-
   return (
-
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-  )
+    <>
+      <img src='../../assets/logo/logo.png'></img>
+      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+    </>
+  );
 }
 
-export default NavPreAuth
+export default NavPreAuth;
