@@ -22,7 +22,6 @@ export const addTodo = async (todo: string) => {
     const docRef = await addDoc(collection(firestore, "todos"),
       (({ id, ...rest }) => rest)(newTodo)
     )
-    console.log("new doc added: ", docRef);
     return docRef
 
   } catch (e) {

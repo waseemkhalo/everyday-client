@@ -36,7 +36,7 @@ function App() {
             </label>
           </form>
           <ul>
-            {todos.map(todo => <li key={todo.id} >{todo.content}</li>)}
+            {todos.sort((a, b) => a.timestamp.seconds - b.timestamp.seconds).map(todo => <li key={todo.id} >{todo.content}</li>)}
           </ul>
 
         </>
