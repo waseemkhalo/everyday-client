@@ -3,7 +3,7 @@ import { addTodo, getTodos, Todo } from "./services/todoService";
 
 function App() {
 
-  //for testing todo services
+  //* for testing todo services
   const [newTodo, setNewTodo] = useState<string>('')
   const [todos, setTodos] = useState<Todo[]>([])
   const handleNewTodo = async (e: FormEvent) => {
@@ -18,13 +18,13 @@ function App() {
   useEffect(() => {
     getTodos().then(todos => setTodos(todos))
   }, [])
-  //
+  //* end of services testing
 
   return (
     <div className="App">
       <h1>Everyday TODOs</h1>
 
-      {/* testing todo services */
+      {//* testing todo services */
         <>
           <form onSubmit={handleNewTodo} >
             <label>
@@ -36,9 +36,14 @@ function App() {
             </label>
           </form>
           <ul>
-            {todos.sort((a, b) => a.timestamp.seconds - b.timestamp.seconds).map(todo => <li key={todo.id} >{todo.content}</li>)}
+            {todos.sort((a, b) => a.timestamp.seconds - b.timestamp.seconds)
+              .map(todo =>
+                <li key={todo.id} >
+                  {todo.content}
+                </li>
+              )
+            }
           </ul>
-
         </>
       }
 
