@@ -1,16 +1,17 @@
 import React, { FormEvent, useEffect, useState } from "react";
-import { addTodo, getTodos } from "./services/todoService";
+import { addTodo, getTodos, Todo } from "./services/todoService";
 
 function App() {
 
   //for testing todo services
   const [newTodo, setNewTodo] = useState<string>('')
-  const [todos, setTodos] = useState<string[]>([])
-  const handleNewTodo = (e: FormEvent) => {
+  const [todos, setTodos] = useState<Todo[]>([])
+  const handleNewTodo = async (e: FormEvent) => {
     e.preventDefault()
     if (newTodo) {
-      addTodo(newTodo)
+      await addTodo(newTodo)
       setNewTodo('')
+      getTodos().then(todos => setTodos(todos))
     }
   }
 
@@ -35,7 +36,7 @@ function App() {
             </label>
           </form>
           <ul>
-            {todos.map(todo => <li key={todo} >{todo}</li>)}
+            {todos.map(todo => <li key={todo.id} >{todo.content}</li>)}
           </ul>
 
         </>
