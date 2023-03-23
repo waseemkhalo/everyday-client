@@ -1,4 +1,5 @@
 import React, { FormEvent, useEffect, useState } from "react";
+import NavPreAuth from "./Component/NavPreAuth/NavPreAuth";
 import { addTodo, getTodos, Todo } from "./services/todoService";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
 
       {//* testing todo services */
         <>
+          <NavPreAuth />
           <form onSubmit={handleNewTodo} >
             <label>
               <p>add new Todo</p>
