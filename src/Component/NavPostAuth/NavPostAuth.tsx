@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../../assets/logo/logo.png";
+import hamburgerMenu from "../../assets/icons/hamburger-menu.png";
 
 function NavPostAuth() {
   return (
@@ -10,7 +11,9 @@ function NavPostAuth() {
           src={logo}
         ></img>
         <div className="HAMBURGER-ICON flex space-x-0 lg:ml-48">
-          
+          <button className="w-60">
+            <img src={hamburgerMenu} alt="hamburger menu" />
+          </button>
         </div>
       </div>
     </>
