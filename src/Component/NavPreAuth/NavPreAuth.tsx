@@ -1,9 +1,10 @@
 import React from "react";
+import logo from "../../assets/logo/logo.png"
 
 function NavPreAuth() {
   return (
     <>
-      <img src='../../assets/logo/logo.png'></img>
+      <img src={logo}></img>
       <h1 className="text-3xl font-bold underline">Hello world!</h1>
     </>
   );
