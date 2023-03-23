@@ -1,25 +1,23 @@
-import { v4 as uuid } from "uuid"
+import { addDoc, collection, getDocs, Timestamp } from "firebase/firestore";
+import { firestore } from "../firebase/firebase";
 
-export class Todo {
-  constructor(content: string) {
-    this.timestamp = new Date()
-    this.content = content
-    this.completed = false
-    this.id = uuid()
+
+export const getTodos = async () => {
+  const snapshot = await getDocs(collection(firestore, "todos"))
+  return snapshot.docs.map(doc => doc.data().content)
+}
+
+export const addTodo = async (todo: string) => {
+  try {
+    const docRef = await addDoc(collection(firestore, "todos"), {
+      content: todo,
+      completed: false,
+      timestamp: Timestamp.now()
+    });
+    console.log("new doc added: ", docRef);
+  } catch (e) {
+    console.error("Error adding document: ", e);
   }
-  content: string
-  completed: boolean
-  timestamp: Date
-  id: string
-}
-
-export const getTodos = (): Todo[] => {
-  return []
-}
-
-export const addTodo = (todo: Todo) => {
-  console.log(todo);
-
 }
 
 export const editTodo = (id: string) => {
