@@ -15,9 +15,9 @@ function App() {
     }
   }
 
-  // useEffect(() => {
-  //   setTodos(getTodos())
-  // }, [])
+  useEffect(() => {
+    setTodos(getTodos())
+  }, [])
   //
 
   return (

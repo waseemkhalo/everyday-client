@@ -13,8 +13,8 @@ export class Todo {
   id: string
 }
 
-export const getTodos = () => {
-
+export const getTodos = (): Todo[] => {
+  return []
 }
 
 export const addTodo = (todo: Todo) => {
