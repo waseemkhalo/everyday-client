@@ -1,38 +1,48 @@
-import { addDoc, collection } from '@firebase/firestore';
-import React, { useRef } from 'react';
-import { firestore } from './firebase/firebase';
+import React, { FormEvent, useEffect, useState } from "react";
+import { addTodo, getTodos, Todo } from "./services/todoService";
 
 function App() {
 
-
-  const formRef = useRef<HTMLInputElement>(null);
-  const ref = collection(firestore, 'todos');
-
-
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(formRef.current?.value);
-
-    let data = {
-      message: formRef.current?.value,
+  //for testing todo services
+  const [newTodo, setNewTodo] = useState<string>('')
+  const [todos, setTodos] = useState<Todo[]>([])
+  const handleNewTodo = (e: FormEvent) => {
+    e.preventDefault()
+    if (newTodo) {
+      const todo = new Todo(newTodo)
+      addTodo(todo)
+      setNewTodo('')
     }
-    try {
-      addDoc(ref, data)
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
-
   }
+
+  // useEffect(() => {
+  //   setTodos(getTodos())
+  // }, [])
+  //
 
   return (
     <div className="App">
       <h1>Everyday TODOs</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Something</label>
-        <input type="text" ref={formRef} />
-        <button type="submit">Submit</button>
-      </form>
+
+      {/* testing todo services */
+        <>
+          <form onSubmit={handleNewTodo} >
+            <label>
+              <p>add new Todo</p>
+              <input type="text" placeholder="new todo" value={newTodo}
+                onChange={(e: FormEvent<HTMLInputElement>) => setNewTodo(e.currentTarget.value)}
+              />
+              <button>add</button>
+            </label>
+          </form>
+          <ul>
+            {todos.map(todo => <li key={todo.id} >todo.content</li>)}
+          </ul>
+
+        </>
+      }
+
+
     </div>
   );
 }
