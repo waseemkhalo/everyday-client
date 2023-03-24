@@ -2,6 +2,7 @@ import React, { FormEvent, useEffect, useState } from "react";
 import { addTodo, getTodos, Todo } from "./services/todoService";
 import NavModal from "./Component/NavModal/NavModal";
 import NavPostAuth from "./Component/NavPostAuth/NavPostAuth";
+import QuoteBox from "./Component/QuoteBox/QuoteBox";
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
         <>
 
           <NavPostAuth/>
+          <QuoteBox />
           
           <form onSubmit={handleNewTodo} >
             <label>
