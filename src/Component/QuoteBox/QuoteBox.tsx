@@ -1,30 +1,27 @@
-import axios from 'axios'
-import React, { useState } from 'react'
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
 function QuoteBox() {
+  const [quote, setQuote] = useState({text: "", author : ""});
 
-    const [quote, setQuote] = useState([])
-
+  useEffect(() => {
     axios
-    .get('https://type.fit/api/quotes')
-    .then(res => {
-        const randomIndex = Math.floor(Math.random() * res.data.length)
-        setQuote(res.data[randomIndex])
-        console.log('sd')
-    }).catch(err => {
-        console.log(err)
-    })
+      .get("https://type.fit/api/quotes")
+      .then((res) => {
+        const randomIndex = Math.floor(Math.random() * res.data.length);
+        setQuote(res.data[randomIndex]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
-    
-  return (
-
-    <div className='w-full bg-red'>
-        <h1>asd</h1>
-        <span>This is a quote</span>
+  return ( 
+    <div className="w-full bg-smoke">
+      <span>"{quote.text}"</span>
+      <span> {quote.author}</span>
     </div>
-
-
-  )
+  );
 }
 
-export default QuoteBox
+export default QuoteBox;
