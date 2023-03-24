@@ -1,7 +1,7 @@
 import React, { FormEvent, useEffect, useRef, useState } from "react";
 import NavModal from "./Component/NavModal/NavModal";
 import NavPostAuth from "./Component/NavPostAuth/NavPostAuth";
-import { addTodo, editTodo, getTodos, Todo } from "./services/todoService";
+import { addTodo, editTodo, getTodos, removeTodo, Todo } from "./services/todoService";
 
 function App() {
 
@@ -29,6 +29,11 @@ function App() {
       await updateTodos()
       setEdit('')
     } else console.log('edited todo cannot be blank');
+  }
+
+  const handleDelete = async (id: Todo['id']) => {
+    await removeTodo(id)
+    updateTodos()
   }
 
   useEffect(() => {
@@ -69,7 +74,7 @@ function App() {
                     {todo.content}
                     <div className="flex gap-4">
                       <button onClick={() => setEdit(todo.id)} >edit</button>
-                      <button >delete</button>
+                      <button onClick={() => handleDelete(todo.id)} >delete</button>
                     </div>
                   </li>
               )

@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDocs, Timestamp, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getDocs, Timestamp, updateDoc } from "firebase/firestore";
 import { firestore } from "../firebase/firebase";
 
 //* TODO object constructor/type definition
@@ -42,6 +42,12 @@ export const editTodo = async (id: Todo['id'], content: Todo['content']) => {
   }
 }
 
-export const removeTodo = (id: Todo['id']) => {
+//* deletes a todo
+export const removeTodo = async (id: Todo['id']) => {
+  try {
+    await deleteDoc(doc(firestore, "todos", id));
+  } catch (e) {
+    console.error("Error deleting document: ", e);
 
+  }
 }
