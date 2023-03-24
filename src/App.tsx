@@ -1,6 +1,7 @@
 import React, { FormEvent, useEffect, useRef, useState } from "react";
 import NavModal from "./Component/NavModal/NavModal";
 import NavPostAuth from "./Component/NavPostAuth/NavPostAuth";
+import QuoteBox from "./Component/QuoteBox/QuoteBox";
 import { addTodo, checkTodo, editTodo, getTodos, removeTodo, Todo, uncheckTodo } from "./services/todoService";
 
 function App() {
@@ -55,9 +56,11 @@ function App() {
       <h1>Everyday TODOs</h1>
 
       <NavPostAuth />
+      <QuoteBox />
 
       {//* testing todo services */
         <>
+
           <form onSubmit={handleNewTodo} >
             <label>
               <p>add new Todo</p>
