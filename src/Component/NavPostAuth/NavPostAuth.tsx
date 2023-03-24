@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../../assets/logo/logo.png";
+import NavModal from "../NavModal/NavModal";
 
 function NavPostAuth() {
   return (
@@ -10,7 +11,7 @@ function NavPostAuth() {
           src={logo}
         ></img>
         <div className="HAMBURGER-ICON flex space-x-0 lg:ml-48">
-          
+          <NavModal/>
         </div>
       </div>
     </>
