@@ -10,7 +10,7 @@ module.exports = {
     },
     colors: {
       transparent: "transparent",
-      grey: "EFEFEF",
+      smoke: "#EFEFEF",
       black: "#000",
       orange: "#FC9B42",
       lightOrange: "#FFBA7A",
