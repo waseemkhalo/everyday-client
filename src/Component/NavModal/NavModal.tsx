@@ -1,7 +1,7 @@
 import React from "react";
-import logo from "../../assets/logo/logo.png";
-import hamburgerMenu from "../../assets/icons/hamburger-menu.png";
 import exit from "../../assets/icons/exit.png";
+import hamburgerMenu from "../../assets/icons/hamburger-menu.png";
+import logo from "../../assets/logo/logo.png";
 
 
 function NavModal() {
@@ -25,7 +25,7 @@ function NavModal() {
             <button onClick={toggleModal}>
               <h1 className='text-7xl'>X</h1>
             </button>
-            
+
             <img src={logo}></img>
 
             <ul className="flex flex-col justify-center space-y-12 items-center mb-8">
