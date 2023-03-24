@@ -2,7 +2,10 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 function QuoteBox() {
-  const [quote, setQuote] = useState({ text: "", author: "" });
+
+    //TODO find a way to have the quote save for the day and not change every time the page is refreshed. Only generate a new quote when the day changes.
+
+    const [quote, setQuote] = useState({ text: "", author: "" });
 
   useEffect(() => {
     axios
