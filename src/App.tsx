@@ -1,7 +1,7 @@
 import React, { FormEvent, useEffect, useRef, useState } from "react";
 import NavModal from "./Component/NavModal/NavModal";
 import NavPostAuth from "./Component/NavPostAuth/NavPostAuth";
-import { addTodo, editTodo, getTodos, removeTodo, Todo } from "./services/todoService";
+import { addTodo, checkTodo, editTodo, getTodos, removeTodo, Todo, uncheckTodo } from "./services/todoService";
 
 function App() {
 
@@ -29,6 +29,15 @@ function App() {
       await updateTodos()
       setEdit('')
     } else console.log('edited todo cannot be blank');
+  }
+
+  const handleCheck = async (id: Todo['id']) => {
+    if (todos.find(todo => todo.id === id)?.completed) {
+      await uncheckTodo(id)
+    } else {
+      await checkTodo(id)
+    }
+    updateTodos()
   }
 
   const handleDelete = async (id: Todo['id']) => {
@@ -71,14 +80,16 @@ function App() {
                   </li>
                   :
                   <li key={todo.id} className='flex justify-between w-1/2' >
-                    {todo.content}
+                    <span className={todo.completed ? 'line-through' : 'hover:line-through'}
+                      onClick={() => handleCheck(todo.id)} >
+                      {todo.content}
+                    </span>
                     <div className="flex gap-4">
                       <button onClick={() => setEdit(todo.id)} >edit</button>
                       <button onClick={() => handleDelete(todo.id)} >delete</button>
                     </div>
                   </li>
-              )
-              )
+              ))
             }
           </ul>
         </>

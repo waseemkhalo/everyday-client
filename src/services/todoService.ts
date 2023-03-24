@@ -42,12 +42,33 @@ export const editTodo = async (id: Todo['id'], content: Todo['content']) => {
   }
 }
 
+//* marks todo as complete
+export const checkTodo = async (id: Todo['id']) => {
+  try {
+    await updateDoc(doc(firestore, "todos", id), {
+      completed: true
+    });
+  } catch (e) {
+    console.error("Error updating document: ", e);
+  }
+}
+
+//* marks todo as incomplete
+export const uncheckTodo = async (id: Todo['id']) => {
+  try {
+    await updateDoc(doc(firestore, "todos", id), {
+      completed: false
+    });
+  } catch (e) {
+    console.error("Error updating document: ", e);
+  }
+}
+
 //* deletes a todo
 export const removeTodo = async (id: Todo['id']) => {
   try {
     await deleteDoc(doc(firestore, "todos", id));
   } catch (e) {
     console.error("Error deleting document: ", e);
-
   }
 }
