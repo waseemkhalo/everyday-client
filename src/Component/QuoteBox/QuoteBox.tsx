@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 function QuoteBox() {
-  const [quote, setQuote] = useState({text: "", author : ""});
+  const [quote, setQuote] = useState({ text: "", author: "" });
 
   useEffect(() => {
     axios
@@ -16,8 +16,8 @@ function QuoteBox() {
       });
   }, []);
 
-  return ( 
-    <div className="w-full bg-smoke">
+  return (
+    <div className="w-full h-32 flex flex-col space-y-2 justify-center sm:p-4 md:p-8 lg:p-10 align-middle bg-smoke">
       <span>"{quote.text}"</span>
       <span> {quote.author}</span>
     </div>
