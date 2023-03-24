@@ -15,6 +15,7 @@ function QuoteBox() {
         console.log(err)
     })
 
+    
   return (
 
     <div className='w-full bg-red'>
