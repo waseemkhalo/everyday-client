@@ -22,3 +22,4 @@ export const firestore = getFirestore(app);
 
 // Initialize Firebase Auth
 export const auth = getAuth(app);
+
