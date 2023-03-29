@@ -1,7 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -14,6 +16,17 @@ const firebaseConfig = {
   appId: "1:700852007715:web:1e1d20d89bc0bc16c4d296",
   measurementId: "G-ZZ514GQ2LT"
 };
+
+// config FirebaseUI
+export const uiConfig = {
+  signInFlow: 'popup',
+  signInSuccessUrl: '/',
+  signInOptions: [
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+  ],
+};
+
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

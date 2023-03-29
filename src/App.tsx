@@ -2,6 +2,7 @@ import React, { FormEvent, useEffect, useRef, useState } from "react";
 import NavModal from "./Component/NavModal/NavModal";
 import NavPostAuth from "./Component/NavPostAuth/NavPostAuth";
 import QuoteBox from "./Component/QuoteBox/QuoteBox";
+import Login from "./Component/Login/Login";
 import { addTodo, checkTodo, editTodo, getTodos, removeTodo, Todo, uncheckTodo } from "./services/todoService";
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
     <div className="App">
       <h1>Everyday TODOs</h1>
 
+      <Login />
       <NavPostAuth />
       <QuoteBox />
 
