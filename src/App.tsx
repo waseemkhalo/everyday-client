@@ -1,8 +1,8 @@
-import React, { FormEvent, useEffect, useRef, useState } from "react";
-import NavModal from "./Component/NavModal/NavModal";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import Login from "./Component/Login/Login";
 import NavPostAuth from "./Component/NavPostAuth/NavPostAuth";
 import QuoteBox from "./Component/QuoteBox/QuoteBox";
-import Login from "./Component/Login/Login";
+import { auth } from "./firebase/firebase";
 import {
   addTodo,
   checkTodo,
@@ -10,9 +10,8 @@ import {
   getTodos,
   removeTodo,
   Todo,
-  uncheckTodo,
+  uncheckTodo
 } from "./services/todoService";
-import { auth } from "./firebase/firebase";
 
 function App() {
   //* for testing todo services
@@ -107,7 +106,6 @@ function App() {
           </form>
           <ul>
             {todos
-              .sort((a, b) => a.timestamp.seconds - b.timestamp.seconds)
               .map((todo) =>
                 edit === todo.id ? (
                   <li key={todo.id} className="flex justify-between w-1/2">
