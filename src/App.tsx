@@ -1,8 +1,9 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Login from "./Component/Login/Login";
 import NavPostAuth from "./Component/NavPostAuth/NavPostAuth";
 import QuoteBox from "./Component/QuoteBox/QuoteBox";
 import { auth } from "./firebase/firebase";
+import List from "./Component/List/List";
 
 function App() {
   const [username, setUsername] = useState<string>("");
@@ -33,7 +34,7 @@ function App() {
         <div className="h-2 bg-black"> </div>
       </>
 
-      {}
+      <List />
     </div>
   );
 }

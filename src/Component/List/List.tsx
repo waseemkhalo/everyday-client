@@ -1,5 +1,4 @@
-import React from "react";
-// import edit from "../../src/assets/icons/pencil-light.svg";
+import edit from "../../assets/icons/pencil-light.svg";
 import {
   addTodo,
   checkTodo,
@@ -9,7 +8,6 @@ import {
   Todo,
   uncheckTodo,
 } from "../../services/todoService";
-
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 
