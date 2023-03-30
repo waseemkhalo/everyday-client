@@ -45,7 +45,6 @@ export const uiConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-
 // Initialize Firebase Auth
 export const auth = getAuth(app);
 
