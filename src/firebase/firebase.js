@@ -3,7 +3,8 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import { doc, getFirestore, setDoc } from "firebase/firestore";
+import { getFirestore } from "firebase/firestore";
+import { addUser } from "../services/userService";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -24,7 +25,7 @@ export const uiConfig = {
       // User successfully signed in.
       // this is a new user, add them to the firestore users collection
       if (authResult.additionalUserInfo.isNewUser) {
-
+        addUser(authResult.user.uid)
       }
       // Return type determines whether we continue the redirect automatically
       // or whether we leave that to developer to handle.
