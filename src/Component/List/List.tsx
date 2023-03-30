@@ -1,4 +1,4 @@
-import edit from "../../assets/icons/pencil-light.svg";
+import asd from "../../assets/icons/pencil-light.svg";
 import {
   addTodo,
   checkTodo,
@@ -59,7 +59,7 @@ function List() {
   return (
     //* testing todo services */
     <div className="m-8">
-      <div className="bg-smoke w-100 rounded-md justify-center align-middle">
+      <div className="bg-smoke rounded-md justify-center align-middle">
         <span>Daily list</span>
         <ul className="">
           {todos.map((todo) =>
@@ -85,7 +85,7 @@ function List() {
                 </span>
                 <div className="flex gap-4">
                   <button onClick={() => setEdit(todo.id)}>
-                    <img src={edit}></img>
+                    <img src={asd} className="w-10"></img>
                   </button>
                   <button onClick={() => handleDelete(todo.id)}>delete</button>
                 </div>
