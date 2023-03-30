@@ -3,13 +3,11 @@ import { db } from "../firebase/firebase";
 
 //* TODO object constructor/type definition
 export class Todo {
-  constructor(content: Todo['content'], order: Todo['order']) {
+  constructor(content: Todo['content']) {
     this.content = content;
-    this.order = order;
   }
   content: string
   completed: boolean = false;
-  order: number
   id: string = ''
 }
 
@@ -24,8 +22,7 @@ export const getTodos = async (): Promise<Todo[]> => {
 export const addTodo = async (todo: Todo['content']) => {
   try {
     const col = collection(db, "todos")
-    const count = await getCountFromServer(col)
-    const newTodo = new Todo(todo, count.data().count)
+    const newTodo = new Todo(todo)
     await addDoc(col,
       (({ id, ...rest }) => rest)(newTodo) //copy newTodo without id
     )
