@@ -10,7 +10,7 @@ import {
   getTodos,
   removeTodo,
   Todo,
-  uncheckTodo
+  uncheckTodo,
 } from "./services/todoService";
 
 function App() {
@@ -60,12 +60,11 @@ function App() {
   }, []);
   //* end of services testing
 
-
   //firebase onAuthStateChanged
 
   auth.onAuthStateChanged((user) => {
     if (user) {
-      setUsername(user.displayName!)
+      setUsername(user.displayName!);
       console.log("user signed in");
     } else {
       console.log("user signed out");
@@ -74,39 +73,25 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Everyday TODOs</h1>
-
-      <Login />
       <NavPostAuth />
       <QuoteBox />
+      <Login />
 
       <>
         <div className="h-2 bg-black"> </div>
         <span>Signed in as {username} </span>
-        <a href="/" onClick={() => auth.signOut()}>Sign-out</a>
+        <a href="/" onClick={() => auth.signOut()}>
+          Sign-out
+        </a>
         <div className="h-2 bg-black"> </div>
       </>
 
       {
         //* testing todo services */
-        <>
-          <form onSubmit={handleNewTodo}>
-            <label>
-              <p>add new Todo</p>
-              <input
-                type="text"
-                placeholder="new todo"
-                value={newTodo}
-                onChange={(e: FormEvent<HTMLInputElement>) =>
-                  setNewTodo(e.currentTarget.value)
-                }
-              />
-              <button>add</button>
-            </label>
-          </form>
-          <ul>
-            {todos
-              .map((todo) =>
+        <div className="m-8">
+          <div className="bg-smoke w-100 rounded-md">
+            <ul>
+              {todos.map((todo) =>
                 edit === todo.id ? (
                   <li key={todo.id} className="flex justify-between w-1/2">
                     <input
@@ -138,8 +123,22 @@ function App() {
                   </li>
                 )
               )}
-          </ul>
-        </>
+            </ul>
+          </div>
+          <form onSubmit={handleNewTodo}>
+            <label>
+              <input
+                type="text"
+                placeholder="new todo"
+                value={newTodo}
+                onChange={(e: FormEvent<HTMLInputElement>) =>
+                  setNewTodo(e.currentTarget.value)
+                }
+              />
+              <button>add</button>
+            </label>
+          </form>
+        </div>
       }
     </div>
   );
