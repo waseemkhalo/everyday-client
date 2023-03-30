@@ -6,7 +6,7 @@ function QuoteBox() {
   const [quote, setQuote] = useState<Quote | undefined>();
 
   useEffect(() => {
-    getQuote().then(quote => setQuote(quote))
+    getQuote(new Date().toDateString()).then(quote => setQuote(quote))
   }, []);
 
   return (
