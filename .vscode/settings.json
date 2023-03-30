@@ -4,7 +4,7 @@
   "scss.format.newlineBetweenSelectors": false,
   "scss.format.spaceAroundSelectorSeparator": true,
   "editor.codeActionsOnSave": {
-    "source.sortImports": true
+    "source.OrganizeImports": true
   },
   "editor.formatOnSave": true,
   "cSpell.words": [

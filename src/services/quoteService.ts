@@ -16,7 +16,7 @@ export const getQuote = async (dateString: string): Promise<Quote | undefined> =
     //grab the specified day's quote from db
     const q = query(collection(db, 'quotes'), where("date", "==", dateString))
     const { docs } = await getDocs(q)
-    if (docs) {
+    if (docs[0]) {
       const { date, text, author } = docs[0].data()
       if (date && date === new Date().toDateString()) {
         return { text, author }
