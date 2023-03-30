@@ -1,4 +1,5 @@
-import asd from "../../assets/icons/pencil-light.svg";
+import editIcon from "../../assets/icons/pencil-light.svg";
+import trashIcon from "../../assets/icons/trash-light.svg";
 import {
   addTodo,
   checkTodo,
@@ -59,8 +60,8 @@ function List() {
   return (
     //* testing todo services */
     <div className="m-8">
-      <div className="bg-smoke rounded-md justify-center align-middle">
-        <span>Daily list</span>
+      <div className="bg-smoke rounded-md justify-center align-middle px-6 py-2">
+        <p className="text-center">Daily list</p>
         <ul className="">
           {todos.map((todo) =>
             edit === todo.id ? (
@@ -68,45 +69,47 @@ function List() {
                 <input defaultValue={todo.content} ref={editRef} autoFocus />
                 <div className="flex gap-4">
                   <button className="" onClick={handleConfirmEdit}>
-                    confirm
+                    Confirm
                   </button>
-                  <button onClick={() => setEdit("")}>cancel</button>
+                  <button onClick={() => setEdit("")}>Cancel</button>
                 </div>
               </li>
             ) : (
-              <li key={todo.id} className="flex justify-between w-1/2">
-                <span
-                  className={
-                    todo.completed ? "line-through" : "hover:line-through"
-                  }
-                  onClick={() => handleCheck(todo.id)}
-                >
-                  {todo.content}
-                </span>
-                <div className="flex gap-4">
+              <li key={todo.id} className="flex mb-3 max-w-fit justify-between">
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => handleCheck(todo.id)}
+                />
+                <span>{todo.content}</span>
+                
+                <div className="flex gap-2">
                   <button onClick={() => setEdit(todo.id)}>
-                    <img src={asd} className="w-10"></img>
+                    <img src={editIcon} className="w-5 "></img>
                   </button>
-                  <button onClick={() => handleDelete(todo.id)}>delete</button>
+                  <button onClick={() => handleDelete(todo.id)}>
+                    <img src={trashIcon} className="w-5"></img>
+                  </button>
                 </div>
               </li>
             )
           )}
         </ul>
+        <form onSubmit={handleNewTodo}>
+          <label>
+            <input
+              className="bg-transparent border-b-2 border-black focus:outline-none"
+              type="text"
+              placeholder="Add Item"
+              value={newTodo}
+              onChange={(e: FormEvent<HTMLInputElement>) =>
+                setNewTodo(e.currentTarget.value)
+              }
+            />
+            <button className="justify-self-end">+</button>
+          </label>
+        </form>
       </div>
-      <form onSubmit={handleNewTodo}>
-        <label>
-          <input
-            type="text"
-            placeholder="new todo"
-            value={newTodo}
-            onChange={(e: FormEvent<HTMLInputElement>) =>
-              setNewTodo(e.currentTarget.value)
-            }
-          />
-          <button>add</button>
-        </label>
-      </form>
     </div>
   );
 }
