@@ -1,8 +1,8 @@
-import React, { FormEvent, useEffect, useRef, useState } from "react";
-import NavModal from "./Component/NavModal/NavModal";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import Login from "./Component/Login/Login";
 import NavPostAuth from "./Component/NavPostAuth/NavPostAuth";
 import QuoteBox from "./Component/QuoteBox/QuoteBox";
-import Login from "./Component/Login/Login";
+import { auth } from "./firebase/firebase";
 import {
   addTodo,
   checkTodo,
@@ -10,9 +10,8 @@ import {
   getTodos,
   removeTodo,
   Todo,
-  uncheckTodo,
+  uncheckTodo
 } from "./services/todoService";
-import { auth } from "./firebase/firebase";
 
 function App() {
   //* for testing todo services
@@ -20,7 +19,6 @@ function App() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [edit, setEdit] = useState<Todo["id"]>("");
   const editRef = useRef<HTMLInputElement>(null);
-  const [username, setUsername] = useState<string>("");
 
   //quick render todos
   const updateTodos = () => getTodos().then((todos) => setTodos(todos));
@@ -61,18 +59,6 @@ function App() {
   }, []);
   //* end of services testing
 
-
-  //firebase onAuthStateChanged
-
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      setUsername(user.displayName!)
-      console.log("user signed in");
-    } else {
-      console.log("user signed out");
-    }
-  });
-
   return (
     <div className="App">
       <h1>Everyday TODOs</h1>
@@ -83,7 +69,7 @@ function App() {
 
       <>
         <div className="h-2 bg-black"> </div>
-        <span>Signed in as {username} </span>
+        <span>Signed in as {auth.currentUser?.displayName} </span>
         <a href="/" onClick={() => auth.signOut()}>Sign-out</a>
         <div className="h-2 bg-black"> </div>
       </>
