@@ -3,7 +3,7 @@ import Login from "./Component/Login/Login";
 import NavPostAuth from "./Component/NavPostAuth/NavPostAuth";
 import QuoteBox from "./Component/QuoteBox/QuoteBox";
 import { auth } from "./firebase/firebase";
-import { DbUser, getUser } from "./services/userService";
+import { DbUser, getCurrentUser } from "./services/userService";
 
 function App() {
   //* for testing user services
@@ -13,7 +13,7 @@ function App() {
   auth.onAuthStateChanged(() => {
     const loadUser = async () => {
       if (auth.currentUser) {
-        const dbUser = await getUser(auth.currentUser.uid)
+        const dbUser = await getCurrentUser()
         setUser(dbUser)
       }
     }

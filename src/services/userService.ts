@@ -1,6 +1,6 @@
 import { User } from "firebase/auth";
 import { doc, FirestoreDataConverter, getDoc, setDoc } from "firebase/firestore";
-import { db } from "../firebase/firebase";
+import { auth, db } from "../firebase/firebase";
 import { Todo } from "./todoService";
 
 export class List {
@@ -48,12 +48,14 @@ export const addUser = async (userId: User['uid']) => {
   }
 }
 
-/** @param userId User.uid from auth */
-export const getUser = async (userId: User['uid']): Promise<DbUser | undefined> => {
-  try {
-    return (await getDoc(doc(db, 'users', userId))).data() as DbUser
-  } catch (e) {
-    console.log('error retrieving user data: ', e);
+export const getCurrentUser = async (): Promise<DbUser | undefined> => {
+  const currentUser = auth.currentUser?.uid
+  if (currentUser) {
+    try {
+      return (await getDoc(doc(db, 'users', currentUser))).data() as DbUser
+    } catch (e) {
+      console.log('error retrieving user data: ', e);
+    }
   }
 }
 
