@@ -24,10 +24,7 @@ export const uiConfig = {
       // User successfully signed in.
       // this is a new user, add them to the firestore users collection
       if (authResult.additionalUserInfo.isNewUser) {
-        console.log('new user added to db');
-        setDoc(doc(db, "users", authResult.user.uid), {
 
-        })
       }
       // Return type determines whether we continue the redirect automatically
       // or whether we leave that to developer to handle.

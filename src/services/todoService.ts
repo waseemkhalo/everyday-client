@@ -1,19 +1,20 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, Timestamp, updateDoc } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, getCountFromServer, getDocs, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
 //* TODO object constructor/type definition
 export class Todo {
-  constructor(content: Todo['content']) {
+  constructor(content: Todo['content'], order: Todo['order']) {
     this.content = content;
+    this.order = order;
   }
   content: string
   completed: boolean = false;
-  timestamp: Timestamp = Timestamp.now()
+  order: number
   id: string = ''
 }
 
 //* returns a promise of array of all Todo objects
-export const getTodos = async () => {
+export const getTodos = async (): Promise<Todo[]> => {
   const snapshot = await getDocs(collection(db, "todos"))
   //return snapshot array, mapped as Todo objects
   return snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id } as Todo))
@@ -21,9 +22,11 @@ export const getTodos = async () => {
 
 //* adds a new Todo object to the database.
 export const addTodo = async (todo: Todo['content']) => {
-  const newTodo = new Todo(todo)
   try {
-    await addDoc(collection(db, "todos"),
+    const col = collection(db, "todos")
+    const count = await getCountFromServer(col)
+    const newTodo = new Todo(todo, count.data().count)
+    await addDoc(col,
       (({ id, ...rest }) => rest)(newTodo) //copy newTodo without id
     )
   } catch (e) {

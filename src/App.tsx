@@ -92,40 +92,38 @@ function App() {
             </label>
           </form>
           <ul>
-            {todos
-              .sort((a, b) => a.timestamp.seconds - b.timestamp.seconds)
-              .map((todo) =>
-                edit === todo.id ? (
-                  <li key={todo.id} className="flex justify-between w-1/2">
-                    <input
-                      defaultValue={todo.content}
-                      ref={editRef}
-                      autoFocus
-                    />
-                    <div className="flex gap-4">
-                      <button onClick={handleConfirmEdit}>confirm</button>
-                      <button onClick={() => setEdit("")}>cancel</button>
-                    </div>
-                  </li>
-                ) : (
-                  <li key={todo.id} className="flex justify-between w-1/2">
-                    <span
-                      className={
-                        todo.completed ? "line-through" : "hover:line-through"
-                      }
-                      onClick={() => handleCheck(todo.id)}
-                    >
-                      {todo.content}
-                    </span>
-                    <div className="flex gap-4">
-                      <button onClick={() => setEdit(todo.id)}>edit</button>
-                      <button onClick={() => handleDelete(todo.id)}>
-                        delete
-                      </button>
-                    </div>
-                  </li>
-                )
-              )}
+            {todos.map((todo) =>
+              edit === todo.id ? (
+                <li key={todo.id} className="flex justify-between w-1/2">
+                  <input
+                    defaultValue={todo.content}
+                    ref={editRef}
+                    autoFocus
+                  />
+                  <div className="flex gap-4">
+                    <button onClick={handleConfirmEdit}>confirm</button>
+                    <button onClick={() => setEdit("")}>cancel</button>
+                  </div>
+                </li>
+              ) : (
+                <li key={todo.id} className="flex justify-between w-1/2">
+                  <span
+                    className={
+                      todo.completed ? "line-through" : "hover:line-through"
+                    }
+                    onClick={() => handleCheck(todo.id)}
+                  >
+                    {todo.content}
+                  </span>
+                  <div className="flex gap-4">
+                    <button onClick={() => setEdit(todo.id)}>edit</button>
+                    <button onClick={() => handleDelete(todo.id)}>
+                      delete
+                    </button>
+                  </div>
+                </li>
+              )
+            )}
           </ul>
         </>
       }
