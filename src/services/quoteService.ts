@@ -1,6 +1,8 @@
-import { doc, getDoc, setDoc, Timestamp } from "@firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "@firebase/firestore";
 import axios from "axios";
-import { firestore } from "../firebase/firebase";
+import { db } from "../firebase/firebase";
+
+// todo: if same were to exist twice in db, add new date to date collection
 
 //* quote object type declaration
 export interface Quote {
@@ -8,16 +10,16 @@ export interface Quote {
   author: string | null
 }
 
-//* returns a promise of todays quote
-export const getQuote = async () => {
+/** @param dateString Date().toDateString() */
+export const getQuote = async (dateString: string): Promise<Quote | undefined> => {
   try {
-    //grab todays quote from db
-    const docSnap = await getDoc(doc(firestore, 'quotes', 'dailyQuote'))
-    if (docSnap.exists()) {
-      const { text, author, timestamp } = docSnap.data()
-      //compare timestamp to local date
-      if (timestamp.toDate().getDate() === new Date().getDate()) {
-        return { text, author } as Quote
+    //grab the specified day's quote from db
+    const q = query(collection(db, 'quotes'), where("date", "==", dateString))
+    const { docs } = await getDocs(q)
+    if (docs) {
+      const { date, text, author } = docs[0].data()
+      if (date && date === new Date().toDateString()) {
+        return { text, author }
       }
     }
 
@@ -25,12 +27,11 @@ export const getQuote = async () => {
     const { data: quotes } = await axios.get<Quote[]>("https://type.fit/api/quotes")
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const newQuote = quotes[randomIndex];
-    console.log(newQuote);
 
-    await setDoc(doc(firestore, "quotes", "dailyQuote"), {
+    await addDoc(collection(db, "quotes"), {
       text: newQuote.text,
       author: newQuote.author,
-      timestamp: Timestamp.now()
+      date: new Date().toDateString()
     })
     return newQuote
   } catch (err) {
