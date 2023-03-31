@@ -61,7 +61,7 @@ function List() {
     //* testing todo services */
     <div className="m-8">
       <div className="bg-smoke rounded-md justify-center align-middle px-6 py-2">
-        <p className="text-center">Daily list</p>
+        <p className="text-center my-4">Daily list</p>
         <ul className="">
           {todos.map((todo) =>
             edit === todo.id ? (
@@ -75,7 +75,9 @@ function List() {
                 </div>
               </li>
             ) : (
-              <li key={todo.id} className="flex max-w-full mb-3">
+
+
+              <li key={todo.id} className="flex max-w-full p-2 rounded-md group/edit hover:bg-white">
                 <input
                   type="checkbox"
                   className="form-checkbox accent-pink-500 mr-2 "
@@ -85,16 +87,18 @@ function List() {
                 <div className="flex gap-24">
                   <span>{todo.content}</span>
 
-                  <div className="flex gap-2">
-                    <button className="" onClick={() => setEdit(todo.id)}>
+                  <div className="group/edit invisable hover:bg-white group-hover/edit:visable flex gap-2">
+                    <button className="invisible group-hover/edit:visible" onClick={() => setEdit(todo.id)}>
                       <img src={editIcon} className="w-5 "></img>
                     </button>
-                    <button onClick={() => handleDelete(todo.id)}>
+                    <button className="invisible group-hover/edit:visible" onClick={() => handleDelete(todo.id)}>
                       <img src={trashIcon} className="w-5"></img>
                     </button>
                   </div>
                 </div>
               </li>
+
+
             )
           )}
         </ul>
