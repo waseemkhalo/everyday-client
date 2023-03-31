@@ -1,29 +1,18 @@
 import { User } from "firebase/auth";
 import { doc, FirestoreDataConverter, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
-import { List } from "./listService";
+import { addDefaultLists } from "./listService";
 
 
 export class DbUser {
   preferences: {} = { colors: 'default' }
-  lists: List[] = [
-    {
-      title: 'daily',
-      todos: []
-    },
-    {
-      title: 'priority',
-      todos: []
-    }
-  ]
 }
 
 // Firestore data converter for DbUser objects
 const userConverter: FirestoreDataConverter<DbUser> = {
-  toFirestore: ({ preferences, lists }) => {
+  toFirestore: ({ preferences }) => {
     return {
       preferences,
-      lists
     }
   },
   fromFirestore: (_snapshot) => {
@@ -36,6 +25,7 @@ export const addUser = async (userId: User['uid']) => {
   try {
     const userDoc = doc(db, "users", userId).withConverter(userConverter)
     await setDoc(userDoc, new DbUser())
+    await addDefaultLists(userId)
   } catch (e) {
     console.error('error adding user: ', e);
   }
