@@ -75,21 +75,24 @@ function List() {
                 </div>
               </li>
             ) : (
-              <li key={todo.id} className="flex mb-3 max-w-fit justify-between">
+              <li key={todo.id} className="flex max-w-full mb-3">
                 <input
                   type="checkbox"
+                  className="form-checkbox accent-pink-500 mr-2 "
                   checked={todo.completed}
                   onChange={() => handleCheck(todo.id)}
                 />
-                <span>{todo.content}</span>
-                
-                <div className="flex gap-2">
-                  <button onClick={() => setEdit(todo.id)}>
-                    <img src={editIcon} className="w-5 "></img>
-                  </button>
-                  <button onClick={() => handleDelete(todo.id)}>
-                    <img src={trashIcon} className="w-5"></img>
-                  </button>
+                <div className="flex gap-24">
+                  <span>{todo.content}</span>
+
+                  <div className="flex gap-2">
+                    <button className="" onClick={() => setEdit(todo.id)}>
+                      <img src={editIcon} className="w-5 "></img>
+                    </button>
+                    <button onClick={() => handleDelete(todo.id)}>
+                      <img src={trashIcon} className="w-5"></img>
+                    </button>
+                  </div>
                 </div>
               </li>
             )
