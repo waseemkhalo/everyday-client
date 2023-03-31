@@ -4,6 +4,7 @@ import NavPostAuth from "./Component/NavPostAuth/NavPostAuth";
 import QuoteBox from "./Component/QuoteBox/QuoteBox";
 import { auth } from "./firebase/firebase";
 import List from "./Component/List/List";
+import Footer from "./Component/Footer/Footer";
 
 function App() {
   const [username, setUsername] = useState<string>("");
@@ -35,6 +36,7 @@ function App() {
       </>
 
       <List />
+      <Footer />
     </div>
   );
 }
