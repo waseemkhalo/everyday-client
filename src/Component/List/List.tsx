@@ -61,7 +61,7 @@ function List() {
     //* testing todo services */
     <div className="m-8">
       <div className="bg-smoke rounded-md justify-center align-middle px-6 py-2">
-        <p className="text-center my-4">Daily list</p>
+        <p className="text-center my-4">Daily Checklist</p>
         <ul className="">
           {todos.map((todo) =>
             edit === todo.id ? (
@@ -84,7 +84,7 @@ function List() {
                   checked={todo.completed}
                   onChange={() => handleCheck(todo.id)}
                 />
-                <div className="flex gap-24">
+                <div className="flex">
                   <span>{todo.content}</span>
 
                   <div className="group/edit invisable hover:bg-white group-hover/edit:visable flex gap-2">
