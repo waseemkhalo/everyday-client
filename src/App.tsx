@@ -5,6 +5,7 @@ import QuoteBox from "./Component/QuoteBox/QuoteBox";
 import { auth } from "./firebase/firebase";
 import List from "./Component/List/List";
 import Footer from "./Component/Footer/Footer";
+import NoteSection from "./Component/NoteSection/NoteSection";
 
 function App() {
   const [username, setUsername] = useState<string>("");
@@ -36,6 +37,7 @@ function App() {
       </>
 
       <List />
+      <NoteSection />
       <Footer />
     </div>
   );
