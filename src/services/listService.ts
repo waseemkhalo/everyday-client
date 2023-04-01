@@ -45,12 +45,10 @@ export const addList = async (title: string) => {
   if (currentUser) {
     try {
       const snapshot = await getCountFromServer(collection(db, 'users', currentUser, 'lists'))
-      const order = snapshot.data().count
+      const order = snapshot.data().count - 1
       const listDoc = doc(db, 'users', currentUser, 'lists', title).withConverter(listConverter)
       await setDoc(listDoc, new List(title, order))
-    }
-
-    catch (e) {
+    } catch (e) {
       console.error('error adding new todo: ', e);
     }
   }
@@ -64,9 +62,7 @@ export const getLists = async (): Promise<List[] | undefined> => {
       return snapshot.docs.map(doc => {
         return { title: doc.id, ...doc.data() }
       }) as List[];
-    }
-
-    catch (e) {
+    } catch (e) {
       console.error('error retrieving lists: ', e);
     }
   }
