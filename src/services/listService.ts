@@ -1,5 +1,5 @@
 import { User } from "@firebase/auth";
-import { collection, doc, FirestoreDataConverter, getCountFromServer, setDoc } from "@firebase/firestore";
+import { collection, doc, FirestoreDataConverter, getCountFromServer, setDoc, writeBatch } from "@firebase/firestore";
 import { auth, db } from "../firebase/firebase";
 import { Todo } from "./todoService";
 
@@ -28,8 +28,14 @@ const listConverter: FirestoreDataConverter<List> = {
 export const addDefaultLists = async (userId: User['uid']) => {
   const dailyDoc = doc(db, 'users', userId, 'lists', 'daily').withConverter(listConverter)
   const priorityDoc = doc(db, 'users', userId, 'lists', 'priority').withConverter(listConverter)
-  await setDoc(dailyDoc, new List(0))
-  await setDoc(priorityDoc, new List(0))
+  try {
+    await writeBatch(db)
+      .set(dailyDoc, new List(0))
+      .set(priorityDoc, new List(0))
+      .commit()
+  } catch (e) {
+    console.error('error adding adding default lists: ', e);
+  }
 }
 
 export const addList = async (title: string) => {
