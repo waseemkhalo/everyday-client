@@ -40,7 +40,8 @@ export const addDefaultLists = async (userId: User['uid']) => {
   }
 }
 
-export const addList = async (title: string) => {
+/** @param title title for new list */
+export const addList = async (title: List['title']) => {
   const currentUser = auth.currentUser?.uid
   if (currentUser) {
     try {

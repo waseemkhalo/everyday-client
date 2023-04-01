@@ -13,24 +13,35 @@ function App() {
 
   auth.onAuthStateChanged(async (authUser) => {
     if (authUser) {
-      const userLists = await getLists()
-      setLists(userLists)
+      try {
+        const userLists = await getLists()
+        setLists(userLists)
+      } catch (e) {
+        console.error(e)
+      }
     }
   })
 
   const handleNewTodo = async (e: FormEvent<HTMLFormElement>, title: List['title']) => {
     e.preventDefault()
     const target = e.target as typeof e.target & { todo: { value: Todo['content'] } }
-    await addTodo(title, target.todo.value);
-    (e.target as HTMLFormElement).reset();
+    try {
+      await addTodo(title, target.todo.value);
+      (e.target as HTMLFormElement).reset();
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   const handleNewList = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const target = e.target as typeof e.target & { title: { value: List['title'] } }
-    await addList(target.title.value);
-    (e.target as HTMLFormElement).reset();
-
+    try {
+      await addList(target.title.value);
+      (e.target as HTMLFormElement).reset();
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   //* end of services testing
