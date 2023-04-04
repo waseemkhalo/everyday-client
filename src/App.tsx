@@ -1,90 +1,48 @@
-import { FormEvent, useState } from "react";
+import { useState } from "react";
+import Footer from "./Component/Footer/Footer";
+import List from "./Component/List/List";
 import Login from "./Component/Login/Login";
 import NavPostAuth from "./Component/NavPostAuth/NavPostAuth";
+import NoteSection from "./Component/NoteSection/NoteSection";
 import QuoteBox from "./Component/QuoteBox/QuoteBox";
 import { auth } from "./firebase/firebase";
-import { List, addList, getLists } from "./services/listService";
-import { Todo, addTodo } from "./services/todoService";
+import { List as DBList, getLists } from './services/listService';
 
 function App() {
-  //* for testing user services
+  const [lists, setLists] = useState<DBList[]>()
 
-  const [lists, setLists] = useState<List[] | null>()
-
-  auth.onAuthStateChanged(async (authUser) => {
-    if (authUser) {
-      try {
-        const userLists = await getLists()
-        setLists(userLists)
-      } catch (e) {
-        console.error(e)
-      }
+  //firebase onAuthStateChanged
+  auth.onAuthStateChanged(async (user) => {
+    const lists = await getLists()
+    setLists(lists)
+    if (user) {
+      console.log("user signed in");
+    } else {
+      console.log("user signed out");
     }
-  })
-
-  const handleNewTodo = async (e: FormEvent<HTMLFormElement>, title: List['title']) => {
-    e.preventDefault()
-    const target = e.target as typeof e.target & { todo: { value: Todo['content'] } }
-    try {
-      await addTodo(title, target.todo.value);
-      (e.target as HTMLFormElement).reset();
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  const handleNewList = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const target = e.target as typeof e.target & { title: { value: List['title'] } }
-    try {
-      await addList(target.title.value);
-      (e.target as HTMLFormElement).reset();
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  //* end of services testing
+  });
 
   return (
     <div className="App">
-      <h1>Everyday TODOs</h1>
-
-      <Login />
       <NavPostAuth />
       <QuoteBox />
+      <Login />
 
-
-      {
-        //* testing user services */
-        lists &&
-        <>
-          <div className="h-2 bg-black"> </div>
-          <span>Signed in as {auth.currentUser?.displayName} </span>
-          <a href="/" onClick={() => auth.signOut()}>Sign-out</a>
-          <div className="h-2 bg-black"> </div>
-          <div className="flex flex-wrap gap-4 p-4">
-            <form onSubmit={handleNewList} >
-              <input name="title" className="border-b-2" />
-              <button>+ list</button>
-            </form>
-            {lists.sort((a, b) => a.order - b.order).map(({ title, todos }) =>
-              <article key={title} className='border-2 rounded p-4' >
-                <h3 className="text-lg font-bold underline">{title}</h3>
-                <form onSubmit={(e) => handleNewTodo(e, title)} >
-                  <input name="todo" className="border-b-2" />
-                  <button>+ todo</button>
-                </form>
-                <ul>
-                  {todos.map((todo, index) =>
-                    <li key={index} >{todo.content}</li>
-                  )}
-                </ul>
-              </article>
-            )}
-          </div>
-        </>
+      <div className="h-2 bg-black"> </div>
+      <span>Signed in as {auth.currentUser?.displayName} </span>
+      <a href="/" onClick={() => auth.signOut()}>
+        Sign-out
+      </a>
+      <div className="h-2 bg-black"> </div>
+      {lists &&
+        <ul className="flex flex-wrap gap-2 ">
+          {lists.sort((a, b) => a.order - b.order).map((list) =>
+            <List list={list} />
+          )}
+        </ul>
       }
+      <NoteSection />
+      <Footer />
     </div>
   );
 }

@@ -23,7 +23,7 @@ export const getQuote = async (dateString: string): Promise<Quote | undefined> =
       }
     }
 
-    //if dates dont match, fetch a new quote and store on db
+    //if dates don't match, fetch a new quote and store on db
     const { data: quotes } = await axios.get<Quote[]>("https://type.fit/api/quotes")
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const newQuote = quotes[randomIndex];

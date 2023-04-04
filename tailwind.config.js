@@ -22,7 +22,9 @@ module.exports = {
     fontFamily: {
       verdana: ["Verdana", "Roboto", "sans-serif"],
     },
-    extend: {},
+    extend: {
+      display: ["group-hover"]
+    },
   },
   plugins: [],
 };

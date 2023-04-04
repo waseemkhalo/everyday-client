@@ -1,8 +1,6 @@
-import React from "react";
-import StyledFirebaseAuth from "../StyledFirebaseAuth/StyledFirebaseAuth";
-import { uiConfig, auth } from "../../firebase/firebase";
-import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import { auth, uiConfig } from "../../firebase/firebase";
+import StyledFirebaseAuth from "../StyledFirebaseAuth/StyledFirebaseAuth";
 
 function Login() {
   return (

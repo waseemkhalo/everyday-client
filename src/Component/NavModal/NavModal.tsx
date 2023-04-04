@@ -1,11 +1,10 @@
-import React from "react";
-import exit from "../../assets/icons/exit.png";
+import { useState } from "react";
 import hamburgerMenu from "../../assets/icons/hamburger-menu.png";
 import logo from "../../assets/logo/logo.png";
 
 
 function NavModal() {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleModal = () => setIsOpen(!isOpen);
 
@@ -26,7 +25,7 @@ function NavModal() {
               <h1 className='text-7xl'>X</h1>
             </button>
 
-            <img src={logo}></img>
+            <img src={logo} alt="logo" />
 
             <ul className="flex flex-col justify-center space-y-12 items-center mb-8">
               <li>
