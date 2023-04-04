@@ -2,7 +2,7 @@ import editIcon from "../../assets/icons/pencil-light.svg";
 import trashIcon from "../../assets/icons/trash-light.svg";
 import { List as DBList } from '../../services/listService';
 
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { addTodo } from "../../services/todoService";
 
 function List({ list }: { list: DBList }) {
@@ -10,10 +10,17 @@ function List({ list }: { list: DBList }) {
   const [edit, setEdit] = useState<number>()
   const editRef = useRef<HTMLInputElement>(null)
 
+  useEffect(() => {
+    if (editRef.current) {
+      editRef.current.select()
+    }
+  }, [edit])
+
   const handleNewTodo = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const target = e.target as typeof e.target & { todo: { value: string } }
+    const target = e.target as HTMLFormElement & { todo: { value: string } }
     await addTodo(list.title, target.todo.value)
+    target.reset()
   }
 
   const handleConfirmEdit = async () => {
@@ -46,7 +53,7 @@ function List({ list }: { list: DBList }) {
             edit === index ? (
               <li key={index} >
                 <input
-                  name="todo"
+                  ref={editRef}
                   defaultValue={todo.content}
                   autoFocus
                 />
@@ -62,7 +69,7 @@ function List({ list }: { list: DBList }) {
                 <input
                   type="checkbox"
                   className="form-checkbox accent-pink-500 mr-2 "
-                  checked={todo.completed}
+                // checked={todo.completed}
                 /*onChange={() => handleCheck(todo.id)}*/
                 />
                 <div className="flex">
@@ -71,7 +78,7 @@ function List({ list }: { list: DBList }) {
                   <div className="group/edit invisable hover:bg-white group-hover/edit:visable flex gap-2">
                     <button className="invisible group-hover/edit:visible"
                       onClick={() => setEdit(index)} >
-                      <img src={editIcon} className="w-5 " alt="edit" />
+                      <img src={editIcon} className="w-5" alt="edit" />
                     </button>
                     <button className="invisible group-hover/edit:visible"
                     /*onClick={() => handleDelete(index)}*/ >

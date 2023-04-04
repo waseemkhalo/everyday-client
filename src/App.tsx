@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "./Component/Footer/Footer";
 import List from "./Component/List/List";
 import Login from "./Component/Login/Login";
@@ -12,15 +12,13 @@ function App() {
   const [lists, setLists] = useState<DBList[]>()
 
   //firebase onAuthStateChanged
-  auth.onAuthStateChanged(async (user) => {
-    const lists = await getLists()
-    setLists(lists)
-    if (user) {
-      console.log("user signed in");
-    } else {
-      console.log("user signed out");
-    }
-  });
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(async () => {
+      const lists = await getLists()
+      setLists(lists)
+    });
+    return () => unsubscribe();
+  }, [])
 
   return (
     <div className="App">
@@ -37,7 +35,7 @@ function App() {
       {lists &&
         <ul className="flex flex-wrap gap-2 ">
           {lists.sort((a, b) => a.order - b.order).map((list) =>
-            <List list={list} />
+            <List list={list} key={list.title} />
           )}
         </ul>
       }
