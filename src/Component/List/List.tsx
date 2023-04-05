@@ -44,6 +44,11 @@ function List({ list }: { list: DBList }) {
   //   updateTodos();
   // };
 
+  // delete a list 
+  const handleDeleteList = async () => {
+    
+  }
+
   return (
     <li className="m-8">
       <div className="bg-smoke rounded-md justify-center align-middle px-6 py-2">
