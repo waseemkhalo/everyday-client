@@ -1,8 +1,8 @@
+import { FormEvent, useEffect, useRef, useState } from "react";
 import editIcon from "../../assets/icons/pencil-light.svg";
 import trashIcon from "../../assets/icons/trash-light.svg";
 import { List as DBList, deleteList } from '../../services/listService';
-import { FormEvent, useEffect, useRef, useState } from "react";
-import { addTodo } from "../../services/todoService";
+import { addTodo, deleteTodo } from "../../services/todoService";
 
 function List({ list }: { list: DBList }) {
 
@@ -38,23 +38,12 @@ function List({ list }: { list: DBList }) {
   //   updateTodos();
   // };
 
-  // const handleDelete = async (id: Todo["id"]) => {
-  //   await removeTodo(id);
-  //   updateTodos();
-  // };
-
-  // delete a list 
-  const handleDeleteList = async () => {
-    await deleteList(list.title);
-
-  }
-
   return (
     <li className="m-8">
       <div className="bg-smoke rounded-md justify-center align-middle px-6 py-2">
         <p className="text-center my-4 capitalize">{list.title}</p>
-       {/* This button is for test purposes */}
-        <button onClick={handleDeleteList}>Delete List</button>
+        {/* This button is for test purposes */}
+        <button onClick={() => deleteList(list.title)}>Delete List</button>
         <ul>
           {list.todos.map((todo, index) =>
             edit === index ? (
@@ -79,7 +68,7 @@ function List({ list }: { list: DBList }) {
                 // checked={todo.completed}
                 /*onChange={() => handleCheck(todo.id)}*/
                 />
-                <div className="flex">
+                <div className="flex justify-between w-full">
                   <span>{todo.content}</span>
 
                   <div className="group/edit invisable hover:bg-white group-hover/edit:visable flex gap-2">
@@ -88,7 +77,7 @@ function List({ list }: { list: DBList }) {
                       <img src={editIcon} className="w-5" alt="edit" />
                     </button>
                     <button className="invisible group-hover/edit:visible"
-                    /*onClick={() => handleDelete(index)}*/ >
+                      onClick={() => deleteTodo(list.title, todo)} >
                       <img src={trashIcon} className="w-5" alt='delete' />
                     </button>
                   </div>
