@@ -1,47 +1,16 @@
-import { useEffect, useState } from "react";
-import Footer from "./Component/Footer/Footer";
-import List from "./Component/List/List";
-import Login from "./Component/Login/Login";
-import NavPostAuth from "./Component/NavPostAuth/NavPostAuth";
-import NoteSection from "./Component/NoteSection/NoteSection";
-import QuoteBox from "./Component/QuoteBox/QuoteBox";
-import { auth } from "./firebase/firebase";
-import { List as DBList, getLists } from './services/listService';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./Pages/HomePage/HomePage";
+import LandingPage from "./Pages/LandingPage/LandingPage";
 
 function App() {
-  const [lists, setLists] = useState<DBList[]>()
-
-  //firebase onAuthStateChanged
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async () => {
-      const lists = await getLists()
-      setLists(lists)
-    });
-    return () => unsubscribe();
-  }, [])
-
   return (
-    <div className="App">
-      <NavPostAuth />
-      <QuoteBox />
-      <Login />
-
-      <div className="h-2 bg-black"> </div>
-      <span>Signed in as {auth.currentUser?.displayName} </span>
-      <a href="/" onClick={() => auth.signOut()}>
-        Sign-out
-      </a>
-      <div className="h-2 bg-black"> </div>
-      {lists &&
-        <ul className="flex flex-wrap gap-2 ">
-          {lists.sort((a, b) => a.order - b.order).map((list) =>
-            <List list={list} key={list.title} />
-          )}
-        </ul>
-      }
-      <NoteSection />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      {/* <Header/> */}
+      <Routes>
+        <Route path="/" element={<LandingPage />}></Route>
+        <Route path="/home" element={<HomePage />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
