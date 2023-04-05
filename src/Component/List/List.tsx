@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import editIcon from "../../assets/icons/pencil-light.svg";
 import trashIcon from "../../assets/icons/trash-light.svg";
 import { List as DBList, deleteList } from '../../services/listService';
-import { addTodo, deleteTodo } from "../../services/todoService";
+import { addTodo, deleteTodo, editTodo } from "../../services/todoService";
 
 function List({ list }: { list: DBList }) {
 
@@ -23,8 +23,10 @@ function List({ list }: { list: DBList }) {
   }
 
   const handleConfirmEdit = async () => {
-    if (editRef.current && editRef.current.value && edit) {
-      // await editTodo(edit, editRef.current.value);
+    console.log(editRef, edit);
+
+    if (editRef.current && editRef.current.value && edit !== undefined) {
+      await editTodo(list, list.todos[edit], editRef.current.value);
       setEdit(undefined);
     } else console.log("edited todo cannot be blank");
   };

@@ -45,3 +45,21 @@ export const deleteTodo = async (list: List['title'], todo: Todo) => {
     }
   }
 }
+/**
+ * @param list object that the todo is from
+ * @param todo object to be edited
+ * @param newContent updated todo content
+ */
+export const editTodo = async (list: List, oldTodo: Todo, newContent: Todo['content']) => {
+  const currentUser = auth.currentUser?.uid
+  const newTodos = list.todos.map(todo => (todo === oldTodo ? { ...todo, content: newContent } : todo))
+  if (currentUser) {
+    try {
+      await updateDoc(doc(db, 'users', currentUser, 'lists', list.title), {
+        todos: newTodos
+      })
+    } catch (e) {
+      console.error('error adding new todo: ', e);
+    }
+  }
+}
