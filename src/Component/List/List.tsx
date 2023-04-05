@@ -53,6 +53,7 @@ function List({ list }: { list: DBList }) {
     <li className="m-8">
       <div className="bg-smoke rounded-md justify-center align-middle px-6 py-2">
         <p className="text-center my-4 capitalize">{list.title}</p>
+       {/* This button is for test purposes */}
         <button onClick={handleDeleteList}>Delete List</button>
         <ul>
           {list.todos.map((todo, index) =>
