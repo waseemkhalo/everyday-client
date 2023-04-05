@@ -1,7 +1,6 @@
 import editIcon from "../../assets/icons/pencil-light.svg";
 import trashIcon from "../../assets/icons/trash-light.svg";
-import { List as DBList } from '../../services/listService';
-
+import { List as DBList, deleteList } from '../../services/listService';
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { addTodo } from "../../services/todoService";
 
@@ -46,13 +45,15 @@ function List({ list }: { list: DBList }) {
 
   // delete a list 
   const handleDeleteList = async () => {
-    
+    await deleteList(list.title);
+
   }
 
   return (
     <li className="m-8">
       <div className="bg-smoke rounded-md justify-center align-middle px-6 py-2">
         <p className="text-center my-4 capitalize">{list.title}</p>
+        <button onClick={handleDeleteList}>Delete List</button>
         <ul>
           {list.todos.map((todo, index) =>
             edit === index ? (
