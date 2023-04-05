@@ -1,5 +1,5 @@
 import { User } from "@firebase/auth";
-import { FirestoreDataConverter, collection, doc, getCountFromServer, getDocs, setDoc, writeBatch } from "@firebase/firestore";
+import { FirestoreDataConverter, collection, doc, getCountFromServer, getDocs, setDoc, writeBatch, deleteDoc } from "@firebase/firestore";
 import { auth, db } from "../firebase/firebase";
 import { Todo } from "./todoService";
 
@@ -65,6 +65,19 @@ export const getLists = async (): Promise<List[] | undefined> => {
       }) as List[];
     } catch (e) {
       console.error('error retrieving lists: ', e);
+    }
+  }
+}
+
+//delete list service
+export const deleteList = async (title: List['title']) => {
+  const currentUser = auth.currentUser?.uid
+  if (currentUser) {
+    try {
+      const listDoc = doc(db, 'users', currentUser, 'lists', title)
+      await deleteDoc(listDoc)
+    } catch (e) {
+      console.error('error deleting list: ', e);
     }
   }
 }
