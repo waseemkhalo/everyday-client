@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { getQuote, Quote } from "../../services/quoteService";
+import { useEffect, useState } from "react";
+import { Quote, getQuote } from "../../services/quoteService";
 
 function QuoteBox() {
 

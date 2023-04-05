@@ -1,5 +1,6 @@
-import { addDoc, collection, deleteDoc, doc, getDocs, Timestamp, updateDoc } from "firebase/firestore";
-import { db } from "../firebase/firebase";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { auth, db } from "../firebase/firebase";
+import { List } from "./listService";
 
 //* TODO object constructor/type definition
 export class Todo {
@@ -8,67 +9,22 @@ export class Todo {
   }
   content: string
   completed: boolean = false;
-  timestamp: Timestamp = Timestamp.now()
-  id: string = ''
 }
 
-//* returns a promise of array of all Todo objects
-export const getTodos = async () => {
-  const snapshot = await getDocs(collection(db, "todos"))
-  //return snapshot array, mapped as Todo objects
-  return snapshot.docs.map(doc => ({ ...doc.data(), id: doc.id } as Todo))
-}
-
-//* adds a new Todo object to the database.
-export const addTodo = async (todo: Todo['content']) => {
+/**
+ * @param list title of list to add to
+ * @param todo content for new todo
+ */
+export const addTodo = async (list: List['title'], todo: Todo['content']) => {
+  const currentUser = auth.currentUser?.uid
   const newTodo = new Todo(todo)
-  try {
-    await addDoc(collection(db, "todos"),
-      (({ id, ...rest }) => rest)(newTodo) //copy newTodo without id
-    )
-  } catch (e) {
-    console.error("Error adding document: ", e);
-  }
-}
-
-//* edit the content of a todo
-export const editTodo = async (id: Todo['id'], content: Todo['content']) => {
-  try {
-    await updateDoc(doc(db, "todos", id), {
-      content: content
-    });
-  } catch (e) {
-    console.error("Error updating document: ", e);
-  }
-}
-
-//* marks todo as complete
-export const checkTodo = async (id: Todo['id']) => {
-  try {
-    await updateDoc(doc(db, "todos", id), {
-      completed: true
-    });
-  } catch (e) {
-    console.error("Error updating document: ", e);
-  }
-}
-
-//* marks todo as incomplete
-export const uncheckTodo = async (id: Todo['id']) => {
-  try {
-    await updateDoc(doc(db, "todos", id), {
-      completed: false
-    });
-  } catch (e) {
-    console.error("Error updating document: ", e);
-  }
-}
-
-//* deletes a todo
-export const removeTodo = async (id: Todo['id']) => {
-  try {
-    await deleteDoc(doc(db, "todos", id));
-  } catch (e) {
-    console.error("Error deleting document: ", e);
+  if (currentUser) {
+    try {
+      await updateDoc(doc(db, 'users', currentUser, 'lists', list), {
+        todos: arrayUnion({ ...newTodo })
+      })
+    } catch (e) {
+      console.error('error adding new todo: ', e);
+    }
   }
 }
