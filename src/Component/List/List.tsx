@@ -2,7 +2,9 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import editIcon from "../../assets/icons/pencil-light.svg";
 import trashIcon from "../../assets/icons/trash-light.svg";
 import { List as DBList, deleteList } from '../../services/listService';
-import { addTodo, deleteTodo, editTodo } from "../../services/todoService";
+import { addTodo, checkTodo, deleteTodo, editTodo } from "../../services/todoService";
+
+// todo: split todo and editable todo into their own components
 
 function List({ list }: { list: DBList }) {
 
@@ -23,22 +25,11 @@ function List({ list }: { list: DBList }) {
   }
 
   const handleConfirmEdit = async () => {
-    console.log(editRef, edit);
-
     if (editRef.current && editRef.current.value && edit !== undefined) {
       await editTodo(list, list.todos[edit], editRef.current.value);
       setEdit(undefined);
     } else console.log("edited todo cannot be blank");
   };
-
-  // const handleCheck = async (id: Todo["id"]) => {
-  //   if (todos.find((todo) => todo.id === id)?.completed) {
-  //     await uncheckTodo(id);
-  //   } else {
-  //     await checkTodo(id);
-  //   }
-  //   updateTodos();
-  // };
 
   return (
     <li className="m-8">
@@ -67,8 +58,8 @@ function List({ list }: { list: DBList }) {
                 <input
                   type="checkbox"
                   className="form-checkbox accent-pink-500 mr-2 "
-                // checked={todo.completed}
-                /*onChange={() => handleCheck(todo.id)}*/
+                  checked={todo.completed}
+                  onChange={() => checkTodo(list, todo)}
                 />
                 <div className="flex justify-between w-full">
                   <span>{todo.content}</span>
