@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { auth } from "../../firebase/firebase";
 import hamburgerMenu from "../../assets/icons/hamburger-menu.png";
 import logo from "../../assets/logo/logo.png";
 
@@ -38,8 +39,8 @@ function NavModal() {
                 <a className='text-3xl' href="#">Profile</a>
               </li>
               <li>
-                <a className='text-3xl' href="#">Logout</a>
-              </li>
+                <a className='text-3xl' href="/" onClick={() => auth.signOut()}>Logout</a>
+              </li>              
             </ul>
           </div>
         </div>
