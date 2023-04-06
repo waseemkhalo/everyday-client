@@ -2,14 +2,11 @@ import Login from "../../Component/Login/Login";
 import NavPreAuth from "../../Component/NavPreAuth/NavPreAuth";
 
 function LandingPage() {
-
   return (
-<>
-    <NavPreAuth />
-    <Login />
+    <>
+      <NavPreAuth />
     </>
-  )
-
+  );
 }
 
-export default LandingPage
+export default LandingPage;
