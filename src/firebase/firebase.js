@@ -29,11 +29,11 @@ export const uiConfig = {
       }
       // Return type determines whether we continue the redirect automatically
       // or whether we leave that to developer to handle.
-      return false;
+      return true;
     },
   },
   signInFlow: 'popup',
-  signInSuccessUrl: '/',
+  signInSuccessUrl: '/home',
   signInOptions: [
     firebase.auth.EmailAuthProvider.PROVIDER_ID,
   ],

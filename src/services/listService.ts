@@ -1,5 +1,6 @@
 import { User } from "@firebase/auth";
-import { FirestoreDataConverter, collection, doc, getCountFromServer, getDocs, setDoc, writeBatch } from "@firebase/firestore";
+import { FirestoreDataConverter, collection, deleteDoc, doc, getCountFromServer, onSnapshot, setDoc, writeBatch } from "@firebase/firestore";
+import { Dispatch, SetStateAction } from 'react';
 import { auth, db } from "../firebase/firebase";
 import { Todo } from "./todoService";
 
@@ -54,17 +55,28 @@ export const addList = async (title: List['title']) => {
     }
   }
 }
+/**
+ * subscribes to the users' lists collection, storing current array in state
+ * @param setState setState function to store lists from DB
+ */
+export const listenToLists = (setState: Dispatch<SetStateAction<List[] | undefined>>) => {
+  const currentUser = auth.currentUser?.uid
+  if (currentUser) {
+    return onSnapshot(collection(db, 'users', currentUser, 'lists'), (snapshot) => {
+      setState(snapshot.docs.map(doc => ({ title: doc.id, ...doc.data() } as List)))
+    }, e => console.error('error getting lists:', e))
+  }
+}
 
-export const getLists = async (): Promise<List[] | undefined> => {
+//delete list service
+export const deleteList = async (title: List['title']) => {
   const currentUser = auth.currentUser?.uid
   if (currentUser) {
     try {
-      const snapshot = await getDocs(collection(db, 'users', currentUser, 'lists'))
-      return snapshot.docs.map(doc => {
-        return { title: doc.id, ...doc.data() }
-      }) as List[];
+      const listDoc = doc(db, 'users', currentUser, 'lists', title)
+      await deleteDoc(listDoc)
     } catch (e) {
-      console.error('error retrieving lists: ', e);
+      console.error('error deleting list: ', e);
     }
   }
 }

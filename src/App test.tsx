@@ -6,19 +6,19 @@ import NavPostAuth from "./Component/NavPostAuth/NavPostAuth";
 import NoteSection from "./Component/NoteSection/NoteSection";
 import QuoteBox from "./Component/QuoteBox/QuoteBox";
 import { auth } from "./firebase/firebase";
-import { List as DBList, getLists } from './services/listService';
+import { List as DBList } from './services/listService';
 
 function App() {
   const [lists, setLists] = useState<DBList[]>()
 
   //firebase onAuthStateChanged
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async () => {
-      const lists = await getLists()
-      setLists(lists)
-    });
-    return () => unsubscribe();
-  }, [])
+  // useEffect(() => {
+  //   const unsubscribe = auth.onAuthStateChanged(async () => {
+  //     const lists = await getLists()
+  //     setLists(lists)
+  //   });
+  //   return () => unsubscribe();
+  // }, [])
 
   return (
     <div className="App">
