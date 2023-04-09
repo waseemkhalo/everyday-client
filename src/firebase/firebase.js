@@ -46,6 +46,19 @@ export const uiConfig = {
       loginHint: "+11234567890",
     },
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    {
+      provider: "microsoft.com",
+      providerName: "Microsoft",
+      // To override the full label of the button.
+      // fullLabel: 'Login with Microsoft',
+      buttonColor: "#2F2F2F",
+      iconUrl: "<icon-url-of-sign-in-button>",
+      loginHintKey: "login_hint",
+      scopes: ["mail.read"],
+      customParameters: {
+        prompt: "consent",
+      },
+    },
   ],
 };
 
