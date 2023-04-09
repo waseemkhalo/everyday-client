@@ -1,8 +1,28 @@
 .firebaseui-container {
-    width: 100%;
+  width: 1000rem;
 }
 
 .mdl-button--raised.mdl-button--colored {
-    background: #3f51b5;
-    color: #fff;
+  background: #ffba7a;
+  color: #000;
+  box-shadow: none;
+  border-radius: .5rem;
+}
+
+.mdl-button--raised.mdl-button--colored:hover {
+    background: #fc9b42;
+    color: #000;
+    box-shadow: none;
+    border-radius: .5rem;
+  }
+
+  .mdl-textfield__input:active {
+    border-bottom: 1px solid #ffba7a;
+    border-radius: 0;
+    color: #000;
+  }
+
+
+.firebaseui-textfield {
+  /* width: 100%; */
 }

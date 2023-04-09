@@ -32,9 +32,7 @@ function HomePage() {
               <>
                 <div className="h-2 bg-black" />
                 <span>Signed in as {auth.currentUser?.displayName} </span>
-                <a href="/" onClick={() => auth.signOut()}>
-                  Sign-out
-                </a>
+
                 <div className="h-2 bg-black" />
                 <Lists />
                 <NoteSection />
