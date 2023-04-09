@@ -36,6 +36,7 @@ export const uiConfig = {
   signInSuccessUrl: '/home',
   signInOptions: [
     firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
   ],
 };
 
