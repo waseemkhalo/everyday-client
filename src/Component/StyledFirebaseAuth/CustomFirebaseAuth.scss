@@ -1,27 +1,36 @@
+@use "../../styles/partials/mixins" as *;
+
 .firebaseui-container {
-  width: 1000rem;
+  @include sm {
+    width: 1000rem;
+    max-width: 25rem;
+
+  }
+
+  @include md {
+    max-width: 40rem;
+  }
 }
 
 .mdl-button--raised.mdl-button--colored {
   background: #ffba7a;
   color: #000;
   box-shadow: none;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 }
 
 .mdl-button--raised.mdl-button--colored:hover {
-    background: #fc9b42;
-    color: #000;
-    box-shadow: none;
-    border-radius: .5rem;
-  }
+  background: #fc9b42;
+  color: #000;
+  box-shadow: none;
+  border-radius: 0.5rem;
+}
 
-  .mdl-textfield__input:active {
-    border-bottom: 1px solid #ffba7a;
-    border-radius: 0;
-    color: #000;
-  }
-
+.mdl-textfield__input:active {
+  border-bottom: 1px solid #ffba7a;
+  border-radius: 0;
+  color: #000;
+}
 
 .firebaseui-textfield {
   /* width: 100%; */

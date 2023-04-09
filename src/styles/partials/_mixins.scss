@@ -1,15 +1,23 @@
 /* Media queries */
 
+$mobile-breakpoint: 480px;
 $tablet-breakpoint: 768px;
 $desktop-breakpoint: 1280px;
 
-@mixin tablet {
+
+@mixin sm {
+    @media (min-width: $mobile-breakpoint) {
+        @content;
+    }
+}
+
+@mixin md {
     @media (min-width: $tablet-breakpoint) {
         @content;
     }
 }
 
-@mixin desktop {
+@mixin lg {
     @media (min-width: $desktop-breakpoint) {
         @content;
     }
