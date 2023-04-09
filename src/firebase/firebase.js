@@ -87,12 +87,14 @@ signInWithPhoneNumber(auth, phoneNumber, appVerifier)
   });
 
 // sign in the user with verfiication code
-  const code = getCodeFromUserInput();
-  confirmationResult.confirm(code).then((result) => {
+const code = getCodeFromUserInput();
+confirmationResult
+  .confirm(code)
+  .then((result) => {
     // User signed in successfully.
     const user = result.user;
     // ...
-    }).catch((error) => {
+  })
+  .catch((error) => {
     // User couldn't sign in (bad verification code?)
-    });
-  
+  });
