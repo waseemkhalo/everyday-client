@@ -1,13 +1,7 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import {
-  getAuth,
-  RecaptchaVerifier,
-  signInWithPhoneNumber,
-} from "firebase/auth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import { getFirestore } from "firebase/firestore";
+import "firebase/compat/firestore";
 import { addUser } from "../services/userService";
 
 // Your web app's Firebase configuration
@@ -38,74 +32,26 @@ export const uiConfig = {
   },
   signInFlow: "popup",
   signInSuccessUrl: "/home",
-  signInOptions: [ 
+  signInOptions: [
     firebase.auth.EmailAuthProvider.PROVIDER_ID,
     {
-    provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
-    recaptchaParameters: {
-      type: "image", // 'audio'
-      size: "invisible", // 'invisible' or 'compact'
-      badge: "bottomleft", //' bottomright' or 'inline' applies to invisible.
+      provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+      recaptchaParameters: {
+        type: "image", // 'audio'
+        size: "invisible", // 'invisible' or 'compact'
+        badge: "bottomleft", //' bottomright' or 'inline' applies to invisible.
+      },
+      defaultCountry: "US",
+      defaultNationalNumber: "1234567890",
+      loginHint: "+11234567890",
     },
-    defaultCountry: "US",
-    defaultNationalNumber: "1234567890",
-    loginHint: "+11234567890",
-  },
-  firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
   ],
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+const app = firebase.initializeApp(firebaseConfig);
+export const db = firebase.firestore(app);
 
 // Initialize Firebase Auth
-export const auth = getAuth(app);
-
-// invisible reCAPTCHA (no user input) - needed for phone auth
-// window.recaptchaVerifier = new RecaptchaVerifier(
-//   "recaptcha-container",
-//   {
-//     size: "invisible",
-//     callback: (response) => {
-//       // reCAPTCHA solved, allow signInWithPhoneNumber.
-//       // ...
-//       onSignInSubmit();
-//     },
-//   },
-//   auth
-// );
-
-// // sign in with phone number
-// const phoneNumber = getPhoneNumberFromUserInput();
-// const appVerifier = window.recaptchaVerifier;
-
-// signInWithPhoneNumber(auth, phoneNumber, appVerifier)
-//   .then((confirmationResult) => {
-//     // SMS sent. Prompt user to type the code from the message, then sign the
-//     // user in with confirmationResult.confirm(code).
-//     window.confirmationResult = confirmationResult;
-//   })
-//   .catch((error) => {
-//     // Error; SMS not sent
-//     grecaptcha.reset(window.recaptchaWidgetId);
-
-//     // Or, if you haven't stored the widget ID:
-//     window.recaptchaVerifier.render().then(function (widgetId) {
-//       grecaptcha.reset(widgetId);
-//     });
-//   });
-
-// // sign in the user with verfiication code
-// const code = getCodeFromUserInput();
-// confirmationResult
-//   .confirm(code)
-//   .then((result) => {
-//     // User signed in successfully.
-//     const user = result.user;
-//     // ...
-//   })
-//   .catch((error) => {
-//     // User couldn't sign in (bad verification code?)
-//   });
+export const auth = firebase.auth(app);
