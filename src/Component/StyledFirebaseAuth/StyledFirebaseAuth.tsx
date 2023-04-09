@@ -1,6 +1,7 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
+import './CustomFirebaseAuth.scss'
 import { useEffect, useRef, useState } from 'react';
 
 interface Props {
