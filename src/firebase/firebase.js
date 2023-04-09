@@ -52,7 +52,7 @@ export const uiConfig = {
       // To override the full label of the button.
       // fullLabel: 'Login with Microsoft',
       buttonColor: "#2F2F2F",
-      iconUrl: "<icon-url-of-sign-in-button>",
+      iconUrl: "https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/78-microsoft-512.png",
       loginHintKey: "login_hint",
       scopes: ["mail.read"],
       customParameters: {
