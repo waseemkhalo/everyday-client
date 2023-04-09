@@ -4,7 +4,6 @@
   @include sm {
     width: 1000rem;
     max-width: 25rem;
-
   }
 
   @include md {
@@ -32,6 +31,14 @@
   color: #000;
 }
 
-.firebaseui-textfield {
-  /* width: 100%; */
+
+
+form {
+  @include md {
+    padding: 2rem;
+  }
+
+  @include lg {
+    padding: 4rem;
+  }
 }
