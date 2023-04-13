@@ -19,10 +19,11 @@ function FeedbackModal() {
       >
         <div className="bg-white w-6/12 h-fit rounded-md shadow-lg p-6">
           <button onClick={toggleModal}>
-            <h1 className="text-6xl">X</h1>
+            <h1 className="text-3xl">x</h1>
           </button>
 
           <form className="flex-col">
+            <h1 className="mb-6 text-2xl">Feedback</h1>
             <label htmlFor="survey">Are you enjoying your experiance?</label>
             <div className="flex items-center space-x-2">
               <input type="radio" name="survey" id="yes" value="yes" />
@@ -33,6 +34,7 @@ function FeedbackModal() {
 
             <label htmlFor="feedback"></label>
             <textarea
+              className="resize-none w-full h-fit mt-6"
               placeholder="Tell us about your experiance"
               name="feedback"
               id="feedback"
