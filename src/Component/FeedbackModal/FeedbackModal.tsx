@@ -13,24 +13,32 @@ function FeedbackModal() {
       <button onClick={toggleModal}>Feedback</button>
 
       <div
-        className={`fixed z-10 inset-5 overflow-y-auto ${isOpen ? "block" : "hidden"}`}
+        className={`fixed z-10 inset-0 overflow-y-auto flex items-center justify-center ${
+          isOpen ? "block" : "hidden"
+        }`}
       >
+        <div className="bg-white w-6/12 h-fit rounded-md shadow-lg p-6">
+          <button onClick={toggleModal}>
+            <h1 className="text-6xl">X</h1>
+          </button>
 
-          <div className="bg-white w-fit h-fit rounded-md shadow-lg p-6">
+          <form className="flex-col">
+            <label htmlFor="survey">Are you enjoying your experiance?</label>
+            <div className="flex items-center space-x-2">
+              <input type="radio" name="survey" id="yes" value="yes" />
+              <label htmlFor="yes">Yes</label>
+              <input type="radio" name="survey" id="no" value="no" />
+              <label htmlFor="no">No</label>
+            </div>
 
-            <button onClick={toggleModal}>
-              <h1 className='text-6xl'>X</h1>
-            </button>
-
-            <form>
-              <label htmlFor="feedback">Feedback</label>
-              <input type="text" name="feedback" id="feedback" />
-            </form>
-
-
-
-
-          </div>
+            <label htmlFor="feedback"></label>
+            <textarea
+              placeholder="Tell us about your experiance"
+              name="feedback"
+              id="feedback"
+            />
+          </form>
+        </div>
       </div>
     </>
   );
