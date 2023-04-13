@@ -24,4 +24,5 @@ export const storeFeedback = async (feedback: Feedback) => {
         console.error('error storing feedback: ', e);
         }
     }
-    }
+
+}
