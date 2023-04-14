@@ -8,7 +8,7 @@ import NoteSection from "../../Component/NoteSection/NoteSection";
 import QuoteBox from "../../Component/QuoteBox/QuoteBox";
 import StaticLists from "../../Component/StaticLists/StaticLists";
 import { auth } from "../../firebase/firebase";
-import { Day, Today, addDay, checkDay, getToday } from "../../services/dayService";
+import { Day, Today, addDay, checkDay, getToday, updateToday } from "../../services/dayService";
 
 function HomePage() {
 
@@ -25,11 +25,11 @@ function HomePage() {
         const saveDay = async () => {
           const check = await checkDay()
           if (check) {
-            await addDay()
+            const oldDay = await addDay()
+            if (oldDay) await updateToday(oldDay)
           }
         }
-        saveDay()
-        setSignedIn(true)
+        saveDay().then(() => setSignedIn(true))
       }
       setLoading(false)
     });
