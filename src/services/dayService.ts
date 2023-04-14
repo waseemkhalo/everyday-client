@@ -1,6 +1,6 @@
 import { addDoc, collection, doc, getDoc, getDocs, limit, orderBy, query, where } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
-import { List } from "./listService";
+import { GetLists, List } from "./listService";
 import { Quote } from "./quoteService";
 
 export class Day {
@@ -20,18 +20,44 @@ export class Day {
   notes: string
 }
 
-export const addDay = async (day: Day) => {
+export interface Today {
+  date: string,
+  time: string,
+  number: number
+}
+
+export const addDay = async () => {
   const currentUser = auth.currentUser?.uid
   if (currentUser) {
     try {
+      const dayDetails = await getToday()
+      const lists = await GetLists()
       await addDoc(collection(db, 'users', currentUser, 'days'), {
-        ...day
+        ...dayDetails,
+        lists
       })
+      return dayDetails
     } catch (e) {
       console.error('error adding day: ', e);
     }
   }
 }
+
+export const checkDay = async () => {
+  const currentUser = auth.currentUser?.uid
+  if (currentUser) {
+    try {
+      const today = await getDoc(doc(db, 'users', currentUser))
+      if (today.data()?.date !== new Date().toDateString()) {
+        return true
+      }
+      return false
+    } catch (e) {
+      console.error('error checking day: ', e);
+    }
+  }
+}
+
 
 export const getPreviousDay = async (number: Day['number'] | undefined): Promise<Day | undefined> => {
   const currentUser = auth.currentUser?.uid
@@ -70,7 +96,7 @@ export const getToday = async () => {
   if (currentUser) {
     try {
       const snap = await getDoc(doc(db, 'users', currentUser))
-      return snap.data()
+      return snap.data() as Today
     } catch (e) {
       console.error('error getting details: ', e);
     }

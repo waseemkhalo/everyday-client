@@ -8,22 +8,37 @@ import NoteSection from "../../Component/NoteSection/NoteSection";
 import QuoteBox from "../../Component/QuoteBox/QuoteBox";
 import StaticLists from "../../Component/StaticLists/StaticLists";
 import { auth } from "../../firebase/firebase";
-import { Day } from "../../services/dayService";
+import { Day, Today, addDay, checkDay, getToday } from "../../services/dayService";
 
 function HomePage() {
 
   const [loading, setLoading] = useState(true)
   const [signedIn, setSignedIn] = useState(false)
   const [day, setDay] = useState<Day | undefined>(undefined)
+  const [today, setToday] = useState<Today>()
+
 
   //firebase onAuthStateChanged
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) setSignedIn(true)
+      if (user) {
+        const saveDay = async () => {
+          const check = await checkDay()
+          if (check) {
+            await addDay()
+          }
+        }
+        saveDay()
+        setSignedIn(true)
+      }
       setLoading(false)
     });
     return () => unsubscribe();
   }, [])
+
+  useEffect(() => {
+    if (!day) getToday().then(data => setToday(data as Today))
+  }, [day, signedIn])
 
   return (
     <div className="App">
@@ -36,7 +51,7 @@ function HomePage() {
               <div className="h-2 bg-black" />
               <span>Signed in as {auth.currentUser?.displayName} </span>
               <div className="h-2 bg-black" />
-              <DayDetails day={day} setDay={setDay} />
+              <DayDetails day={day} setDay={setDay} today={today} />
               {day ?
                 <StaticLists lists={day.lists} />
                 :

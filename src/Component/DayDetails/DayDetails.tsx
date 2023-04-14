@@ -1,14 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Day, getNextDay, getPreviousDay, getToday } from "../../services/dayService";
+import { Day, Today, getNextDay, getPreviousDay } from "../../services/dayService";
 
-export default function DayDetails({ day, setDay }: { day: Day | undefined, setDay: React.Dispatch<React.SetStateAction<Day | undefined>> }) {
-
-  interface Today {
-    date: string,
-    time: string,
-    number: number
-  }
-  const [today, setToday] = useState<Today>()
+export default function DayDetails({ day, setDay, today }: { today: Today | undefined, day: Day | undefined, setDay: React.Dispatch<React.SetStateAction<Day | undefined>> }) {
 
   const handlePrevious = async () => {
     if ((day && day.number !== 1) || (!day && today?.number !== 1)) {
@@ -23,12 +15,6 @@ export default function DayDetails({ day, setDay }: { day: Day | undefined, setD
       setDay(newDay)
     }
   }
-
-  useEffect(() => {
-    if (!day) {
-      getToday().then(data => setToday(data as Today))
-    }
-  }, [day])
 
   return (
     <div className="py-1 px-4 border-b-2">

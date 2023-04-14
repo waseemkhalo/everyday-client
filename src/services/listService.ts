@@ -1,5 +1,5 @@
 import { User } from "@firebase/auth";
-import { FirestoreDataConverter, collection, deleteDoc, doc, getCountFromServer, onSnapshot, setDoc, writeBatch } from "@firebase/firestore";
+import { FirestoreDataConverter, collection, deleteDoc, doc, getCountFromServer, getDocs, onSnapshot, setDoc, writeBatch } from "@firebase/firestore";
 import { Dispatch, SetStateAction } from 'react';
 import { auth, db } from "../firebase/firebase";
 import { Todo } from "./todoService";
@@ -66,6 +66,18 @@ export const listenToLists = (setState: Dispatch<SetStateAction<List[] | undefin
     return onSnapshot(collection(db, 'users', currentUser, 'lists'), (snapshot) => {
       setState(snapshot.docs.map(doc => ({ title: doc.id, ...doc.data() } as List)))
     }, e => console.error('error getting lists:', e))
+  }
+}
+
+export const GetLists = async () => {
+  const currentUser = auth.currentUser?.uid
+  if (currentUser) {
+    try {
+      const snap = await getDocs(collection(db, 'users', currentUser, 'lists'))
+      return snap.docs.map(doc => ({ ...doc.data() } as List))
+    } catch (e) {
+      console.error('error deleting list: ', e);
+    }
   }
 }
 
