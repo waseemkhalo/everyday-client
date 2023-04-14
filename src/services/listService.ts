@@ -38,7 +38,6 @@ export const addDefaultLists = async (userId: User['uid']) => {
       .commit()
   } catch (e) {
     console.error('error adding adding default lists: ', e);
-    debugger
   }
 }
 
