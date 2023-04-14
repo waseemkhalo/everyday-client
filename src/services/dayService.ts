@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, limit, orderBy, query, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, limit, orderBy, query, where } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
 import { List } from "./listService";
 import { Quote } from "./quoteService";
@@ -65,3 +65,14 @@ export const getNextDay = async (number: Day['number']): Promise<Day | undefined
   }
 }
 
+export const getToday = async () => {
+  const currentUser = auth.currentUser?.uid
+  if (currentUser) {
+    try {
+      const snap = await getDoc(doc(db, 'users', currentUser))
+      return snap.data()
+    } catch (e) {
+      console.error('error getting details: ', e);
+    }
+  }
+}
