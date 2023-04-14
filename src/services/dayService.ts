@@ -33,12 +33,17 @@ export const addDay = async (day: Day) => {
   }
 }
 
-export const getPreviousDay = async (number: Day['number']): Promise<Day | undefined> => {
+export const getPreviousDay = async (number: Day['number'] | undefined): Promise<Day | undefined> => {
   const currentUser = auth.currentUser?.uid
   if (currentUser) {
     try {
-      //find the first day whose number is less than the provided number
-      const q = query(collection(db, 'users', currentUser, 'days'), where('number', '<', number), orderBy('number', "desc"), limit(1))
+      if (number) {
+        //find the first day whose number is less than the provided number
+        const q = query(collection(db, 'users', currentUser, 'days'), where('number', '<', number), orderBy('number', "desc"), limit(1))
+        const { docs } = await getDocs(q)
+        return docs[0].data() as Day
+      }
+      const q = query(collection(db, 'users', currentUser, 'days'), orderBy('number', "desc"), limit(1))
       const { docs } = await getDocs(q)
       return docs[0].data() as Day
     } catch (e) {

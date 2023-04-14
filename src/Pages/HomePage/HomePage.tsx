@@ -6,13 +6,15 @@ import Login from "../../Component/Login/Login";
 import NavPostAuth from "../../Component/NavPostAuth/NavPostAuth";
 import NoteSection from "../../Component/NoteSection/NoteSection";
 import QuoteBox from "../../Component/QuoteBox/QuoteBox";
+import StaticLists from "../../Component/StaticLists/StaticLists";
 import { auth } from "../../firebase/firebase";
+import { Day } from "../../services/dayService";
 
 function HomePage() {
 
   const [loading, setLoading] = useState(true)
   const [signedIn, setSignedIn] = useState(false)
-  const [day, setDay] = useState(0)
+  const [day, setDay] = useState<Day | undefined>(undefined)
 
   //firebase onAuthStateChanged
   useEffect(() => {
@@ -28,15 +30,19 @@ function HomePage() {
       {!loading &&
         <>
           <NavPostAuth />
-          <QuoteBox />
+          <QuoteBox oldQuote={day?.quote} />
           {signedIn ? (
             <>
               <div className="h-2 bg-black" />
               <span>Signed in as {auth.currentUser?.displayName} </span>
               <div className="h-2 bg-black" />
               <DayDetails day={day} setDay={setDay} />
-              <Lists />
-              <NoteSection />
+              {day ?
+                <StaticLists lists={day.lists} />
+                :
+                <Lists />
+              }
+              <NoteSection notes={day?.notes} />
             </>
           ) : (
             <Login />
