@@ -36,7 +36,7 @@ function List({ list }: { list: DBList }) {
       <div className="bg-smoke rounded-md justify-center align-middle px-6 py-2">
         <p className="text-center my-4 capitalize">{list.title}</p>
         {/* This button is for test purposes */}
-        <button onClick={() => deleteList(list.title)}>Delete List</button>
+        <button className='trigger-time' onClick={() => deleteList(list.title)}>Delete List</button>
         <ul>
           {list.todos.map((todo, index) =>
             edit === index ? (
@@ -47,7 +47,7 @@ function List({ list }: { list: DBList }) {
                   autoFocus
                 />
                 <div className="flex gap-4">
-                  <button onClick={handleConfirmEdit} >
+                  <button onClick={handleConfirmEdit} className='trigger-time' >
                     Confirm
                   </button>
                   <button onClick={() => setEdit(undefined)} >Cancel</button>
@@ -57,7 +57,7 @@ function List({ list }: { list: DBList }) {
               <li key={index} className="flex max-w-full p-2 rounded-md group/edit hover:bg-white">
                 <input
                   type="checkbox"
-                  className="form-checkbox accent-pink-500 mr-2 "
+                  className="form-checkbox accent-pink-500 mr-2 trigger-time"
                   checked={todo.completed}
                   onChange={() => checkTodo(list, todo)}
                 />
@@ -69,7 +69,7 @@ function List({ list }: { list: DBList }) {
                       onClick={() => setEdit(index)} >
                       <img src={editIcon} className="w-5" alt="edit" />
                     </button>
-                    <button className="invisible group-hover/edit:visible"
+                    <button className="invisible group-hover/edit:visible trigger-time"
                       onClick={() => deleteTodo(list.title, todo)} >
                       <img src={trashIcon} className="w-5" alt='delete' />
                     </button>
@@ -83,7 +83,7 @@ function List({ list }: { list: DBList }) {
           <label>
             <input
               className="bg-transparent border-b-2 border-black focus:outline-none" placeholder="Add Item" name="todo" />
-            <button className="justify-self-end">+</button>
+            <button className="justify-self-end trigger-time">+</button>
           </label>
         </form>
       </div>
