@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Quote, getQuote } from "../../services/quoteService";
 
-function QuoteBox() {
+function QuoteBox({ date }: { date: string | undefined }) {
 
   const [quote, setQuote] = useState<Quote | undefined>();
 
   useEffect(() => {
-    getQuote(new Date().toDateString()).then(quote => setQuote(quote))
-  }, []);
+    if (date) getQuote(date).then(quote => setQuote(quote))
+  }, [date]);
 
   return (
     <div className="w-full h-32 flex flex-col space-y-2 justify-center sm:p-4 md:p-8 lg:p-10 align-middle bg-smoke">

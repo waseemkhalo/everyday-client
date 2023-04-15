@@ -18,7 +18,7 @@ export class Todo {
 export const addTodo = async (list: List['title'], todo: Todo['content']) => {
   const currentUser = auth.currentUser?.uid
   const newTodo = new Todo(todo)
-  if (currentUser) {
+  if (currentUser && todo) {
     try {
       await updateDoc(doc(db, 'users', currentUser, 'lists', list), {
         todos: arrayUnion({ ...newTodo })
