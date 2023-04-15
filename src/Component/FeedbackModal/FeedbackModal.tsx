@@ -5,15 +5,17 @@ function FeedbackModal() {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleSubmit = 
-  
-  (e: React.FormEvent<HTMLFormElement>) => {
+  const  handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // console.log(e.currentTarget.survey.value);
+    // console.log(e.currentTarget.feedback.value);
 
-  //   await addFeedback({
-  //     survey: e.currentTarget.survey.value,
-  //     feedback: e.currentTarget.feedback.value,
-  //   });
+    await addFeedback({
+      survey: e.currentTarget.survey.value,
+      feedback: e.currentTarget.feedback.value,
+    });
+
+    console.log('feedback submitted')
 
   }
 
