@@ -1,10 +1,21 @@
 import { useState } from "react";
-import { auth } from "../../firebase/firebase";
-import hamburgerMenu from "../../assets/icons/hamburger-menu.png";
-import logo from "../../assets/logo/logo.png";
+import { addFeedback } from "../../services/feedbackService"
 
 function FeedbackModal() {
+
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleSubmit = 
+  
+  (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+  //   await addFeedback({
+  //     survey: e.currentTarget.survey.value,
+  //     feedback: e.currentTarget.feedback.value,
+  //   });
+
+  }
 
   const toggleModal = () => setIsOpen(!isOpen);
 
@@ -22,7 +33,7 @@ function FeedbackModal() {
             <h1 className="text-3xl">x</h1>
           </button>
 
-          <form className="flex-col">
+          <form className="flex-col" onSubmit={handleSubmit}>
             <h1 className="mb-6 text-2xl">Feedback</h1>
             <label htmlFor="survey">Are you enjoying your experiance?</label>
             <div className="flex items-center space-x-2">
@@ -39,6 +50,7 @@ function FeedbackModal() {
               name="feedback"
               id="feedback"
             />
+            <button className="mt-6" type="submit"> Submit</button>
           </form>
         </div>
       </div>

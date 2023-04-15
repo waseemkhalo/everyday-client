@@ -4,21 +4,23 @@ import { auth, db } from "../firebase/firebase";
 
 //class for feedback
 export class Feedback {
-    constructor(id: Feedback['id'], feedback: Feedback['feedback']) {
-        this.id = id
+    constructor(feedback: Feedback['feedback']) {
+        this.survey = false
         this.feedback = feedback
     }
-    id: string
     feedback: string
+    survey: boolean
 }
 
 //store feedback in firestore 
 
-export const storeFeedback = async (feedback: Feedback) => {
+export const addFeedback = async (feedback: Feedback) => {
+
     const currentUser = auth.currentUser?.uid
+
     if (currentUser) {
         try {
-        const feedbackDoc = doc(db, 'users', currentUser, 'feedback', feedback.id).withConverter(feedbackConverter)
+        const feedbackDoc = doc(db, 'Feedback')
         await setDoc(feedbackDoc, feedback)
         } catch (e) {
         console.error('error storing feedback: ', e);
