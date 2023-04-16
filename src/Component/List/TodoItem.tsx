@@ -15,7 +15,7 @@ export default function TodoItem({ todo, list, index, setEdit }: { todo: Todo, l
       <div className="flex justify-between w-full">
         <span className="break-all">{todo.content}</span>
 
-        <div className="group/edit invisable group-hover/edit:visable flex gap-2 min-w-fit">
+        <div className="group/edit hidden group-hover/edit:flex gap-2 min-w-fit">
           <button className="invisible group-hover/edit:visible hover:bg-white hover:bg-opacity-50"
             onClick={() => setEdit(index)} >
             <img src={editIcon} className="w-5" alt="edit" />
