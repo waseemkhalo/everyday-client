@@ -18,7 +18,7 @@ function List({ list }: { list: DBList }) {
 
   return (
     <li className="w-1/2 max-w-md min-w-[200px]">
-      <div className="flex flex-col h-full bg-smoke rounded-md px-4 py-2 shadow-lg">
+      <div className={`flex flex-col h-full ${list.title === 'daily' ? 'bg-lightOrange' : 'bg-smoke'} rounded-md px-4 py-2 shadow-lg`}>
         <h2 className="text-center my-4 capitalize relative">
           {list.title}
           {list.title !== 'daily' &&
@@ -40,7 +40,7 @@ function List({ list }: { list: DBList }) {
         <form onSubmit={handleNewTodo} className="p-0 mt-auto" >
           <label>
             <input
-              className="bg-transparent border-b-2 border-black w-5/6 max-w-[10rem] focus:outline-none" placeholder="Add Item" name="todo" />
+              className="bg-transparent border-b-2 border-black w-5/6 max-w-[10rem] focus:outline-none placeholder-black placeholder-opacity-50" placeholder="Add Item" name="todo" />
             <button className="justify-self-end trigger-time">+</button>
           </label>
         </form>

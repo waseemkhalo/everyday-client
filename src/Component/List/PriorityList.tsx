@@ -36,7 +36,7 @@ export default function PriorityList({ list }: { list: List | undefined }) {
         <form onSubmit={handleNewTodo} className="p-0" >
           <label>
             <input
-              className="bg-transparent border-b-2 border-black w-5/6 max-w-[10rem] focus:outline-none" placeholder="Add Item" name="todo" />
+              className="bg-transparent border-b-2 border-black w-5/6 max-w-[10rem] focus:outline-none placeholder-black placeholder-opacity-50" placeholder="Add Item" name="todo" />
             <button className="justify-self-end trigger-time">+</button>
           </label>
         </form>

@@ -33,7 +33,7 @@ function NoteSection({ day }: { day: Day | Today | undefined }) {
             {day.notes}
           </p>
           :
-          <textarea className="bg-transparent w-full h-96 resize-none" placeholder="Write something here..." value={notes} onChange={handleChange} />
+          <textarea className="bg-transparent w-full h-96 resize-none p-2 outline-none" placeholder="Write something here..." value={notes} onChange={handleChange} />
         }
       </div>
     </div>

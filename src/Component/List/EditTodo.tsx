@@ -22,7 +22,7 @@ export default function EditTodo({ list, todo, edit, setEdit }: { list: List, to
   return (
     <li >
       <input
-        className='w-full'
+        className='w-full bg-opacity-50 bg-white outline-none border border-black border-opacity-25 rounded-xl px-4'
         ref={editRef}
         defaultValue={todo.content}
         autoFocus
