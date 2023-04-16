@@ -1,4 +1,5 @@
 import { FormEvent, useState } from "react";
+import deleteIcon from '../../assets/icons/trash-light.svg';
 import { List as DBList, deleteList } from '../../services/listService';
 import { addTodo } from "../../services/todoService";
 import EditTodo from "./EditTodo";
@@ -17,13 +18,17 @@ function List({ list }: { list: DBList }) {
 
   return (
     <li className="w-1/2 max-w-md min-w-[200px]">
-      <div className="bg-smoke rounded-md justify-center align-middle px-4 py-2">
-        <p className="text-center my-4 capitalize">{list.title}</p>
-        {/* This button is for test purposes */}
-        {list.title !== 'daily' && list.title !== 'priority' &&
-          <button className='trigger-time mb-4' onClick={() => deleteList(list.title)}>Delete List</button>
-        }
-        <ul>
+      <div className="flex flex-col h-full bg-smoke rounded-md px-4 py-2 shadow-lg">
+        <h2 className="text-center my-4 capitalize relative">
+          {list.title}
+          {list.title !== 'daily' &&
+            <button className='trigger-time mb-4 absolute top-0 right-0' onClick={() => deleteList(list.title)}>
+              <img src={deleteIcon} alt="delete list" className="w-6" />
+            </button>
+          }
+        </h2>
+
+        <ul className="max-h-[50vh] overflow-y-auto list">
           {list.todos.map((todo, index) =>
             edit === index ? (
               <EditTodo key={index} list={list} setEdit={setEdit} todo={todo} edit={edit} />
@@ -32,7 +37,7 @@ function List({ list }: { list: DBList }) {
             )
           )}
         </ul>
-        <form onSubmit={handleNewTodo} className="p-0" >
+        <form onSubmit={handleNewTodo} className="p-0 mt-auto" >
           <label>
             <input
               className="bg-transparent border-b-2 border-black w-5/6 max-w-[10rem] focus:outline-none" placeholder="Add Item" name="todo" />

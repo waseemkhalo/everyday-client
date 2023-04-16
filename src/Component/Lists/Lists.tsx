@@ -19,8 +19,8 @@ export default function Lists() {
   }
 
   return (
-    <section className='p-4'>
-      <form onSubmit={handleNewList} className='p-0'>
+    <section className='py-4'>
+      <form onSubmit={handleNewList} className='px-4'>
         <label>
           <span>new list: </span>
           <input name='list' placeholder='title' className="bg-transparent border-b-2 border-black focus:outline-none" />
@@ -29,7 +29,7 @@ export default function Lists() {
       </form>
       {lists &&
         <>
-          <ul className="flex gap-4 overflow-x-scroll py-4">
+          <ul className="flex gap-4 overflow-x-auto py-4 lists-section px-4">
             {lists.filter(list => list.title !== 'priority').sort((a, b) => a.order - b.order).map((list) =>
               <List list={list} key={list.title} />
             )}
