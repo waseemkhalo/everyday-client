@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import DayDetails from "../../Component/DayDetails/DayDetails";
 import Footer from "../../Component/Footer/Footer";
 import Lists from "../../Component/Lists/Lists";
-import Login from "../../Component/Login/Login";
 import NavPostAuth from "../../Component/NavPostAuth/NavPostAuth";
 import NoteSection from "../../Component/NoteSection/NoteSection";
 import QuoteBox from "../../Component/QuoteBox/QuoteBox";
@@ -55,7 +54,7 @@ function HomePage() {
         <>
           <NavPostAuth />
           <QuoteBox date={day?.date ? day.date : today?.date} />
-          {signedIn ? (
+          {signedIn &&
             <>
               <DayDetails day={day} setDay={setDay} today={today} />
               {day ?
@@ -65,10 +64,9 @@ function HomePage() {
               }
               <NoteSection day={day || today} />
             </>
-          ) : (
-            <Login />
-          )}
-        </>}
+          }
+        </>
+      }
       <Footer />
     </div>
   );

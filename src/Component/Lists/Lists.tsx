@@ -18,19 +18,19 @@ export default function Lists() {
   }
 
   return (
-    <>
-      <form onSubmit={handleNewList}>
+    <section className='p-4'>
+      <form onSubmit={handleNewList} className='p-0'>
         <label>
           <span>new list: </span>
           <input name='list' placeholder='title' className="bg-transparent border-b-2 border-black focus:outline-none" />
           <button className='trigger-time'>+</button>
         </label>
       </form>
-      <ul className="flex flex-wrap gap-2 ">
+      <ul className="flex gap-4 overflow-x-scroll py-4">
         {lists?.sort((a, b) => a.order - b.order).map((list) =>
           <List list={list} key={list.title} />
         )}
       </ul>
-    </>
+    </section>
   )
 }

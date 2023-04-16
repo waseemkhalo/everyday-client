@@ -2,8 +2,6 @@ import { addDoc, arrayUnion, collection, doc, getDocs, limit, query, updateDoc, 
 import axios from "axios";
 import { db } from "../firebase/firebase";
 
-// todo: if same were to exist twice in db, add new date to date collection
-
 //* quote object type declaration
 export interface Quote {
   text: string
