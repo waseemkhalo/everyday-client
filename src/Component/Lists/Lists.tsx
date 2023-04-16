@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { List as DBList, addList, listenToLists } from '../../services/listService'
 import List from "../List/List"
+import PriorityList from './PriorityList'
 
 export default function Lists() {
   const [lists, setLists] = useState<DBList[]>()
@@ -26,11 +27,15 @@ export default function Lists() {
           <button className='trigger-time'>+</button>
         </label>
       </form>
-      <ul className="flex gap-4 overflow-x-scroll py-4">
-        {lists?.sort((a, b) => a.order - b.order).map((list) =>
-          <List list={list} key={list.title} />
-        )}
-      </ul>
+      {lists &&
+        <>
+          <ul className="flex gap-4 overflow-x-scroll py-4">
+            {lists.filter(list => list.title !== 'priority').sort((a, b) => a.order - b.order).map((list) =>
+              <List list={list} key={list.title} />
+            )}
+          </ul>
+          <PriorityList list={lists.find(list => list.title === 'priority')} />
+        </>}
     </section>
   )
 }
