@@ -30,6 +30,7 @@ function HomePage() {
         }
         saveDay().then(() => setSignedIn(true))
       }
+      else window.location.replace('/')
       setLoading(false)
     });
     return () => unsubscribe();
