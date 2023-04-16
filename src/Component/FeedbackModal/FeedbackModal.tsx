@@ -1,23 +1,21 @@
 import { useState } from "react";
-import { addFeedback } from "../../services/feedbackService"
+import { addFeedback, Feedback } from "../../services/feedbackService";
 
 function FeedbackModal() {
-
   const [isOpen, setIsOpen] = useState(false);
 
-  const  handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // console.log(e.currentTarget.survey.value);
-    // console.log(e.currentTarget.feedback.value);
 
-    await addFeedback({
-      survey: e.currentTarget.survey.value,
-      feedback: e.currentTarget.feedback.value,
-    });
+    const newFeedback = new Feedback (
+      e.currentTarget.feedback.value,
+      e.currentTarget.survey.value
+    );
 
-    console.log('feedback submitted')
+    await addFeedback(newFeedback);
 
-  }
+    toggleModal()
+  };
 
   const toggleModal = () => setIsOpen(!isOpen);
 
@@ -39,10 +37,14 @@ function FeedbackModal() {
             <h1 className="mb-6 text-2xl">Feedback</h1>
             <label htmlFor="survey">Are you enjoying your experiance?</label>
             <div className="flex items-center space-x-2">
-              <input type="radio" name="survey" id="yes" value="yes" />
-              <label htmlFor="yes">Yes</label>
-              <input type="radio" name="survey" id="no" value="no" />
-              <label htmlFor="no">No</label>
+              <label>
+                <input type="radio" name="survey" id="yes" value="yes" />
+                Yes
+              </label>
+              <label>
+                <input type="radio" name="survey" id="no" value="no" />
+                No
+              </label>
             </div>
 
             <label htmlFor="feedback"></label>
@@ -52,7 +54,10 @@ function FeedbackModal() {
               name="feedback"
               id="feedback"
             />
-            <button className="mt-6" type="submit"> Submit</button>
+            <button className="mt-6" type="submit">
+              {" "}
+              Submit
+            </button>
           </form>
         </div>
       </div>
