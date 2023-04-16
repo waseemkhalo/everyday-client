@@ -57,9 +57,6 @@ function HomePage() {
           <QuoteBox date={day?.date ? day.date : today?.date} />
           {signedIn ? (
             <>
-              <div className="h-2 bg-black" />
-              <span>Signed in as {auth.currentUser?.displayName} </span>
-              <div className="h-2 bg-black" />
               <DayDetails day={day} setDay={setDay} today={today} />
               {day ?
                 <StaticLists lists={day.lists} />
