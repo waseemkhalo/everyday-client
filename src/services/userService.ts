@@ -18,13 +18,13 @@ export const addUser = async (userId: User['uid']) => {
   }
 }
 
-export const updateNotes = async (notes: string) => {
+export const updateNotes = async (notes: string | undefined) => {
   const currentUser = auth.currentUser?.uid
   if (currentUser) {
     try {
       updateDoc(doc(db, 'users', currentUser), { notes })
     } catch (e) {
-      console.error('error getting details: ', e);
+      console.error('error updating notes: ', e);
     }
   }
 }

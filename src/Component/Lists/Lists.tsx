@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { List as DBList, addList, listenToLists } from '../../services/listService'
 import List from "../List/List"
-import PriorityList from './PriorityList'
+import PriorityList from '../List/PriorityList'
 
 export default function Lists() {
   const [lists, setLists] = useState<DBList[]>()

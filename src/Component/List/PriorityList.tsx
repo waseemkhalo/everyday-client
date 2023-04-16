@@ -1,8 +1,8 @@
 import { FormEvent, useState } from 'react'
 import { List } from '../../services/listService'
 import { addTodo } from '../../services/todoService'
-import EditTodo from '../List/EditTodo'
-import TodoItem from '../List/TodoItem'
+import EditTodo from './EditTodo'
+import TodoItem from './TodoItem'
 
 export default function PriorityList({ list }: { list: List | undefined }) {
   const [edit, setEdit] = useState<number>()
@@ -36,7 +36,7 @@ export default function PriorityList({ list }: { list: List | undefined }) {
         <form onSubmit={handleNewTodo} className="p-0" >
           <label>
             <input
-              className="bg-transparent border-b-2 border-black w-5/6 focus:outline-none" placeholder="Add Item" name="todo" />
+              className="bg-transparent border-b-2 border-black w-5/6 max-w-[10rem] focus:outline-none" placeholder="Add Item" name="todo" />
             <button className="justify-self-end trigger-time">+</button>
           </label>
         </form>
