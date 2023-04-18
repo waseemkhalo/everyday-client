@@ -45,7 +45,7 @@ export const addDefaultLists = async (userId: User['uid']) => {
 /** @param title title for new list */
 export const addList = async (title: List['title']) => {
   const currentUser = auth.currentUser?.uid
-  if (currentUser) {
+  if (currentUser && title) {
     try {
       const snapshot = await getCountFromServer(collection(db, 'users', currentUser, 'lists'))
       const order = snapshot.data().count - 1

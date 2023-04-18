@@ -23,7 +23,7 @@ export default function Lists() {
         <label>
           <span>new list: </span>
           <input name='list' placeholder='title' className="bg-transparent border-b-2 border-black focus:outline-none" />
-          <button>+</button>
+          <button className='trigger-time'>+</button>
         </label>
       </form>
       <ul className="flex flex-wrap gap-2 ">

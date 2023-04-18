@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getDoc, getDocs, limit, orderBy, query, setDoc, where } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, getDocs, limit, orderBy, query, setDoc, updateDoc, where } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
 import { GetLists, List } from "./listService";
 import { Quote } from "./quoteService";
@@ -47,8 +47,6 @@ export const updateToday = async (oldDay: Today) => {
         (new Date(todayDate).getTime() - new Date(oldDay.date).getTime())
         / (1000 * 60 * 60 * 24)
       ) + oldDay.number
-      console.log(newNumber);
-
       await setDoc(doc(db, 'users', currentUser), {
         date: new Date().toDateString(),
         time: '',
@@ -56,6 +54,24 @@ export const updateToday = async (oldDay: Today) => {
       })
     } catch (e) {
       console.error('error updating day: ', e);
+    }
+  }
+}
+
+export const updateTime = async () => {
+  const currentUser = auth.currentUser?.uid
+  if (currentUser) {
+    const newTime = new Date().toLocaleTimeString('en-US', { timeStyle: 'short' })
+    try {
+      await updateDoc(doc(db, 'users', currentUser), {
+        time: newTime
+      })
+      document.querySelectorAll('[class*="trigger-time"]').forEach(el =>
+        el.removeEventListener('click', updateTime)
+      )
+      return newTime
+    } catch (e) {
+      console.error('error adding day: ', e);
     }
   }
 }

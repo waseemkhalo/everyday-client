@@ -8,7 +8,7 @@ import NoteSection from "../../Component/NoteSection/NoteSection";
 import QuoteBox from "../../Component/QuoteBox/QuoteBox";
 import StaticLists from "../../Component/StaticLists/StaticLists";
 import { auth } from "../../firebase/firebase";
-import { Day, Today, addDay, checkDay, getToday, updateToday } from "../../services/dayService";
+import { Day, Today, addDay, checkDay, getToday, updateTime, updateToday } from "../../services/dayService";
 
 function HomePage() {
 
@@ -39,6 +39,15 @@ function HomePage() {
   useEffect(() => {
     if (!day) getToday().then(data => setToday(data as Today))
   }, [day, signedIn])
+
+  useEffect(() => {
+    if (today && !today.time)
+      document.querySelectorAll('[class*="trigger-time"]').forEach(el =>
+        el.addEventListener('click', () => updateTime().then(() => {
+          getToday().then(data => setToday(data as Today))
+        }))
+      )
+  }, [today])
 
   return (
     <div className="App">
