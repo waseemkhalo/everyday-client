@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from 'react-toastify';
 import { addFeedback, Feedback } from "../../services/feedbackService";
 
 function FeedbackModal() {
@@ -6,16 +7,19 @@ function FeedbackModal() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (e.currentTarget.feedback.value) {
 
-    const newFeedback = new Feedback(
-      e.currentTarget.feedback.value,
-      e.currentTarget.survey.value
-    );
+      const newFeedback = new Feedback(
+        e.currentTarget.feedback.value,
+        e.currentTarget.survey.value
+      );
 
-    await addFeedback(newFeedback);
-    toggleModal()
-    const target = e.target as HTMLFormElement
-    target.reset()
+      await addFeedback(newFeedback);
+      toggleModal()
+      toast.success('Feedback submitted, Thank you!')
+      const target = e.target as HTMLFormElement
+      target.reset()
+    }
   };
 
   const toggleModal = () => setIsOpen(!isOpen);
