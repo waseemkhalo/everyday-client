@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import hamburgerMenu from "../../assets/icons/hamburger-menu.png";
 import logo from "../../assets/logo/logo.png";
 import { auth } from "../../firebase/firebase";
+import FeedbackModal from "../FeedbackModal/FeedbackModal";
 
 
 function NavModal() {
@@ -37,7 +38,7 @@ function NavModal() {
                 <a href="/home">Home</a>
               </li>
               <li>
-                <button >Feedback</button>
+                <FeedbackModal />
               </li>
               <li>
                 {/* <a className='text-3xl' href="#">Profile</a> */}
