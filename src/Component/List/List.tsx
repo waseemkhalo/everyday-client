@@ -29,7 +29,7 @@ function List({ list }: { list: DBList }) {
           {list.title}
           {/* no delete button for daily list */}
           {list.title !== 'daily' &&
-            <button className='trigger-time mb-4 absolute top-0 right-0' onClick={() => handleDelete(list.title)}>
+            <button className='trigger-time mb-4 absolute top-0 right-0       ' onClick={() => handleDelete(list.title)}>
               <img src={deleteIcon} alt="delete list" className="w-6" />
             </button>
           }
