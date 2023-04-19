@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import editIcon from "../../assets/icons/pencil-light.svg";
 import trashIcon from "../../assets/icons/trash-light.svg";
 import { List } from "../../services/listService";
@@ -5,6 +6,12 @@ import { Todo, checkTodo, deleteTodo } from "../../services/todoService";
 
 /** regular todo item */
 export default function TodoItem({ todo, list, index, setEdit }: { todo: Todo, list: List, index: number, setEdit: React.Dispatch<React.SetStateAction<number | undefined>> }) {
+
+  const handleDelete = async (listTitle: List['title'], todo: Todo) => {
+    await deleteTodo(listTitle, todo)
+    toast.success(`deleted "${todo.content}" from "${listTitle}" list`)
+  }
+
   return (
     <li className={`flex max-w-full p-2 rounded-md group/edit hover:bg-opacity-${list.title !== 'daily' && list.title !== 'priority' ? '75' : '25'} hover:bg-white`}>
       <input
@@ -22,7 +29,7 @@ export default function TodoItem({ todo, list, index, setEdit }: { todo: Todo, l
             <img src={editIcon} className="w-5" alt="edit" />
           </button>
           <button className="invisible group-hover/edit:visible hover:bg-white hover:bg-opacity-50 trigger-time"
-            onClick={() => deleteTodo(list.title, todo)} >
+            onClick={() => handleDelete(list.title, todo)} >
             <img src={trashIcon} className="w-5" alt='delete' />
           </button>
         </div>

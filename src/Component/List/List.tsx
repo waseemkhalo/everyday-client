@@ -1,4 +1,5 @@
 import { FormEvent, useState } from "react";
+import { toast } from "react-toastify";
 import deleteIcon from '../../assets/icons/trash-light.svg';
 import { List as DBList, deleteList } from '../../services/listService';
 import { addTodo } from "../../services/todoService";
@@ -16,6 +17,11 @@ function List({ list }: { list: DBList }) {
     target.reset()
   }
 
+  const handleDelete = async (title: string) => {
+    await deleteList(title)
+    toast.success(`deleted list "${title}"`)
+  }
+
   return (
     <li className="w-1/2 max-w-md min-w-[200px]">
       <div className={`flex flex-col h-full ${list.title === 'daily' ? 'bg-lightOrange' : 'bg-smoke'} rounded-md px-4 py-2 shadow-lg`}>
@@ -23,7 +29,7 @@ function List({ list }: { list: DBList }) {
           {list.title}
           {/* no delete button for daily list */}
           {list.title !== 'daily' &&
-            <button className='trigger-time mb-4 absolute top-0 right-0' onClick={() => deleteList(list.title)}>
+            <button className='trigger-time mb-4 absolute top-0 right-0' onClick={() => handleDelete(list.title)}>
               <img src={deleteIcon} alt="delete list" className="w-6" />
             </button>
           }
