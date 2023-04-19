@@ -3,7 +3,7 @@ import { List } from "../../services/listService";
 /**similar to Lists component but with all the buttons stripped out */
 export default function StaticLists({ lists }: { lists: List[] }) {
   return (
-    <section className="py-4">
+    <section className="sm:py-4 sm:ml-4 md:ml-16 lg:ml-32">
       <ul className="flex gap-4 overflow-x-auto py-4 lists-section px-4">
         {lists.filter(list => list.title !== 'priority').sort((a, b) => a.order - b.order).map((list) =>
           <li key={list.title} className="w-1/2 max-w-md min-w-[200px]">
@@ -28,9 +28,9 @@ export default function StaticLists({ lists }: { lists: List[] }) {
           </li>
         )}
       </ul>
-      <div className='px-4'>
-        <p className="my-2 capitalize">Priority list</p>
-        <div className=" shadow-lg bg-red rounded-md justify-center align-middle px-4 py-2">
+      <div className='sm:pr-4 md:pr-16 lg:pr-32 sm:py-6 lg:py-10'>
+        <p className="my-2 capitalize md:font-bold">Priority list</p>
+        <div className=" shadow-lg bg-red rounded-md justify-center align-middle px-4 py-2 lg:py-6">
           <ul>
             {lists.find(list => list.title === 'priority')?.todos.map((todo, index) =>
               <li key={index} className={`flex max-w-full p-2 rounded-md group/edit hover:bg-opacity-75 hover:bg-white`}>
