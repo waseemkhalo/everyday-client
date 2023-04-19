@@ -37,7 +37,9 @@ export default function DayDetails({ day, setDay, today }: { today: Today | unde
       <div className="flex justify-between sm:pt-4 md:pt-3 lg:pt-4">
         <span className='md:font-bold'>ToDo - {day ? day.time : today?.time || 'Time to get started!'}</span>
         <span className='md:font-bold'>#{day ? day.number : today?.number}</span>
-        <span className='md:font-bold'>{day ? day.date : today?.date}</span>
+        <span className='md:font-bold'> 
+        {day ? (day.date ? new Date(day.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '') : (today?.date ? new Date(today.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '')}
+        </span>
       </div>
     </div>
   )
