@@ -29,22 +29,22 @@ function NavModal() {
           <div className="bg-white w-full h-screen rounded-md shadow-lg p-6">
 
             <button onClick={toggleModal}>
-              <h1 className='sm:text-4xl md:text-6xl lg:text-7xl'>X</h1>
+              <h1 className='sm:text-4xl md:text-6xl lg:text-6xl'>X</h1>          
             </button>
 
-            <img src={logo} alt="logo" className=" max-h-[40vh] m-auto" />
+            <img src={logo} alt="logo" className=" max-h-[44vh] m-auto" />
 
-            <ul className="text-2xl flex flex-col justify-center gap-4 items-center mb-8 ">
+            <ul className="text-2xl lg:text-3xl flex flex-col justify-center gap-8 lg:gap-12 items-center mb-8 ">
               <li>
                 <a href="/home">Home</a>
               </li>
               <li>
                 <FeedbackModal />
               </li>
-              <li>
+              {/* <li> */}
                 {/* currently have no profile page so no need for profile link */}
                 {/* <a className='text-3xl' href="#">Profile</a> */}
-              </li>
+              {/* </li> */}
               <li>
                 <a href="/" onClick={() => auth.signOut()}>Logout</a>
               </li>
