@@ -21,10 +21,10 @@ export default function Lists() {
   }
 
   return (
-    <section className='py-4 sm:ml-4 md:ml-16 lg:ml-32'>
-      <form onSubmit={handleNewList} className='px-4'>
+    <section className='sm:py-4 sm:ml-4 md:ml-16 lg:ml-32'>
+      <form onSubmit={handleNewList} className='px-4 sm:py-2 md:py-4'>
         <label>
-          <span>New List: </span>
+          <span className='md:mr-4'>New List: </span>
           <input name='list' placeholder='Title' className="bg-transparent border-b-2 border-black focus:outline-none" />
           <button className='trigger-time'>+</button>
         </label>

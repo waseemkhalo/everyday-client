@@ -20,10 +20,10 @@ function NoteSection({ day }: { day: Day | Today | undefined }) {
   if (!day) return <></>
   return (
     <div className="bg-smoke pb-10" >
-      <div className="sm:p-4 " >
-        <h1 className="pb-4 flex gap-6 items-center">
+      <div className="sm:p-4 md:px-16 md:py-8 lg:px-32 lg:py-10" >
+        <h1 className="pb-4 flex justify-between gap-6 items-center md:font-bold">
           Notes
-          <button className={`trigger-time bg-orange rounded-xl px-4 py-2 ${!saveVisible ? 'hidden' : ''}`}
+          <button className={`trigger-time bg-lightGrey rounded-xl px-6 py-1 font-normal ${!saveVisible ? 'hidden' : ''}`}
             onClick={() => {
               updateNotes(notes)
               setSaveVisible(false)
@@ -36,7 +36,7 @@ function NoteSection({ day }: { day: Day | Today | undefined }) {
             {day.notes}
           </p>
           :
-          <textarea className="bg-transparent w-full h-96 resize-none p-2 outline-none" placeholder="Write something here..." value={notes} onChange={handleChange} />
+          <textarea className="bg-transparent w-full h-96 resize-none lg:pt-4 outline-none text-ghostShade" placeholder="Write something here..." value={notes} onChange={handleChange} />
         }
       </div>
     </div>
