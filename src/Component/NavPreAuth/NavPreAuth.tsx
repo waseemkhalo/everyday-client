@@ -10,6 +10,10 @@ function NavPreAuth() {
     setOpenAuth(true);
   };
 
+  const handleCloseAuth = () => {
+    setOpenAuth(false);
+  };
+
   return (
     <>
       <div className="flex sm:mx-4 md:mx-16 lg:mx-32 justify-between items-center">
@@ -31,11 +35,23 @@ function NavPreAuth() {
         </div>
       </div>
 
-      {openAuth && (
-        <div
-          className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-500 bg-opacity-50"
-        >
+      <section>
+        <div className="flex justify-center items-center mt-6">
+          <div className="flex flex-col items-center">
+            <h1 className="text-6xl font-bold">Welcome to Everyday</h1>
+            <h1 className="text-4xl font-bold">ToDos ✅ Notes 📝 Progress Tracking 📈</h1>
+            <h1 className="text-2xl">Your accountability buddy</h1>
+            <button 
+            onClick={handleOpenAuth}
+            className="bg-lightOrange text-black rounded-xl p-2">Try EveryDay for free</button>
+          </div>
+        </div>
+      </section>
+
+      : {openAuth && (
+        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-500 bg-opacity-50">
           <div>
+            <button onClick={handleCloseAuth}>Close</button>
             <Login />
           </div>
         </div>
