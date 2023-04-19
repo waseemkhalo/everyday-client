@@ -19,8 +19,8 @@ export default function PriorityList({ list }: { list: List | undefined }) {
   }
 
   return (
-    <div className='px-4'>
-      <p className="my-2 capitalize">Priority list</p>
+    <div className='sm:pr-4 md:pr-16 lg:pr-32 sm:py-6 lg:py-10'>
+      <p className="my-2 capitalize md:font-bold">Priority list</p>
       <div className=" shadow-lg bg-red rounded-md justify-center align-middle px-4 py-2">
         {list &&
           <>

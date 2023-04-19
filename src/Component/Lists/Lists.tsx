@@ -21,7 +21,7 @@ export default function Lists() {
   }
 
   return (
-    <section className='py-4 sm:ml-4 md:ml-16 lg:pl-32'>
+    <section className='py-4 sm:ml-4 md:ml-16 lg:ml-32'>
       <form onSubmit={handleNewList} className='px-4'>
         <label>
           <span>New List: </span>
