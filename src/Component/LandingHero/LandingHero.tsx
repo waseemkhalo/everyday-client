@@ -1,6 +1,5 @@
-import {useState} from "react";
 
-function LandingHero({handleOpenAuth}: {handleOpenAuth: () => void}) {
+function LandingHero({ handleOpenAuth }: { handleOpenAuth: () => void }) {
 
   return (
     <div className="flex justify-center items-center mt-6">

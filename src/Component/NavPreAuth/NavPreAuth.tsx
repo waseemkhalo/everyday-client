@@ -1,10 +1,9 @@
 import logo from "../../assets/logo/logo.png";
 import Login from "../Login/Login";
-import Footer from "../Footer/Footer";
 
 /**top landing page header */
-function NavPreAuth({openAuth, handleOpenAuth, handleCloseAuth}: {openAuth: boolean, handleOpenAuth: () => void, handleCloseAuth: () => void}) {
-  
+function NavPreAuth({ openAuth, handleOpenAuth, handleCloseAuth }: { openAuth: boolean, handleOpenAuth: () => void, handleCloseAuth: () => void }) {
+
   return (
     <>
       <div className="flex sm:mx-4 md:mx-16 lg:mx-32 justify-between items-center">
