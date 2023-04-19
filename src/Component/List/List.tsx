@@ -19,7 +19,7 @@ function List({ list }: { list: DBList }) {
 
   const handleDelete = async (title: string) => {
     await deleteList(title)
-    toast.success(`deleted list "${title}"`)
+    toast.success(`Deleted List "${title}"`)
   }
 
   return (
