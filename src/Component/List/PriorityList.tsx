@@ -4,7 +4,9 @@ import { addTodo } from '../../services/todoService'
 import EditTodo from './EditTodo'
 import TodoItem from './TodoItem'
 
+// basically the same as List component, just styled a bit differently, and no delete button
 export default function PriorityList({ list }: { list: List | undefined }) {
+  //array index for todo selected for editing
   const [edit, setEdit] = useState<number>()
 
   const handleNewTodo = async (e: FormEvent<HTMLFormElement>) => {

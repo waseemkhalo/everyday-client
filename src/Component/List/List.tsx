@@ -6,7 +6,7 @@ import EditTodo from "./EditTodo";
 import TodoItem from "./TodoItem";
 
 function List({ list }: { list: DBList }) {
-
+  // array index of the todo selecting for editing
   const [edit, setEdit] = useState<number>()
 
   const handleNewTodo = async (e: FormEvent<HTMLFormElement>) => {
@@ -21,6 +21,7 @@ function List({ list }: { list: DBList }) {
       <div className={`flex flex-col h-full ${list.title === 'daily' ? 'bg-lightOrange' : 'bg-smoke'} rounded-md px-4 py-2 shadow-lg`}>
         <h2 className="text-center my-4 capitalize relative">
           {list.title}
+          {/* no delete button for daily list */}
           {list.title !== 'daily' &&
             <button className='trigger-time mb-4 absolute top-0 right-0' onClick={() => deleteList(list.title)}>
               <img src={deleteIcon} alt="delete list" className="w-6" />

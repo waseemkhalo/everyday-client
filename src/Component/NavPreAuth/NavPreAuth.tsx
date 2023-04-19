@@ -2,6 +2,7 @@ import { useState } from "react";
 import logo from "../../assets/logo/logo.png";
 import Login from "../Login/Login";
 
+/**top landing page header */
 function NavPreAuth() {
   const [openAuth, setOpenAuth] = useState(false);
 

@@ -1,5 +1,6 @@
 import { List } from "../../services/listService";
 
+/**similar to Lists component but with all the buttons stripped out */
 export default function StaticLists({ lists }: { lists: List[] }) {
   return (
     <section className="py-4">

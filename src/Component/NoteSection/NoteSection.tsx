@@ -10,11 +10,13 @@ function NoteSection({ day }: { day: Day | Today | undefined }) {
     if (day) setNotes(day.notes)
   }, [day])
 
+  //on notes change, display save button
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNotes(e.currentTarget.value)
     setSaveVisible(true)
   }
 
+  // wait for notes before rendering
   if (!day) return <></>
   return (
     <div className="bg-smoke pb-10" >
@@ -28,6 +30,7 @@ function NoteSection({ day }: { day: Day | Today | undefined }) {
             }}
           >Save</button>
         </h1>
+        {/* if the day object has a 'lists' property, (ie. is a prev day and not today) render notes as an uneditable paragraph */}
         {Object.hasOwn(day, 'lists') ?
           <p >
             {day.notes}

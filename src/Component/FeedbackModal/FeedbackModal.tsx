@@ -9,12 +9,14 @@ function FeedbackModal() {
     e.preventDefault();
     if (e.currentTarget.feedback.value) {
 
+      // create new feedback object
       const newFeedback = new Feedback(
         e.currentTarget.feedback.value,
         e.currentTarget.survey.value
       );
 
       await addFeedback(newFeedback);
+      //after sending feedback to db, close the modal, display toast and clear form
       toggleModal()
       toast.success('Feedback submitted, Thank you!')
       const target = e.target as HTMLFormElement

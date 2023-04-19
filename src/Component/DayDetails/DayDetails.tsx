@@ -4,6 +4,7 @@ import { Day, Today, getNextDay, getPreviousDay } from "../../services/dayServic
 
 export default function DayDetails({ day, setDay, today }: { today: Today | undefined, day: Day | undefined, setDay: React.Dispatch<React.SetStateAction<Day | undefined>> }) {
 
+  // get previous day unless current day being viewed is day #1
   const handlePrevious = async () => {
     if ((day && day.number !== 1) || (!day && today?.number !== 1)) {
       const newDay = await getPreviousDay(day?.number)
@@ -11,6 +12,7 @@ export default function DayDetails({ day, setDay, today }: { today: Today | unde
     }
   }
 
+  //if viewing a previous day, get next day
   const handleNext = async () => {
     if (day) {
       const newDay = await getNextDay(day.number)

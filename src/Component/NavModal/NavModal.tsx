@@ -4,12 +4,13 @@ import logo from "../../assets/logo/logo.png";
 import { auth } from "../../firebase/firebase";
 import FeedbackModal from "../FeedbackModal/FeedbackModal";
 
-
+/**hamburger button navigation modal */
 function NavModal() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleModal = () => setIsOpen(!isOpen);
 
+  //when open, disable scrollbar as content should fill the screen. when closed, reset scroll to auto
   useEffect(() => {
     if (isOpen) document.body.style.overflow = 'hidden'
     else document.body.style.overflow = 'auto'
@@ -41,6 +42,7 @@ function NavModal() {
                 <FeedbackModal />
               </li>
               <li>
+                {/* currently have no profile page so no need for profile link */}
                 {/* <a className='text-3xl' href="#">Profile</a> */}
               </li>
               <li>

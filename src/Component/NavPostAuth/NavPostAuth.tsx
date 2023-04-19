@@ -1,6 +1,7 @@
 import logo from "../../assets/logo/logo.png";
 import NavModal from "../NavModal/NavModal";
 
+/**top home page header */
 function NavPostAuth() {
   return (
     <>

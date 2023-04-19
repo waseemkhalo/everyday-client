@@ -18,6 +18,7 @@ export const addUser = async (userId: User['uid']) => {
   }
 }
 
+/** update today's notes on db */
 export const updateNotes = async (notes: string | undefined) => {
   const currentUser = auth.currentUser?.uid
   if (currentUser) {

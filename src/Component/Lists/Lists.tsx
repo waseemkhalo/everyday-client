@@ -3,9 +3,11 @@ import { List as DBList, addList, listenToLists } from '../../services/listServi
 import List from "../List/List"
 import PriorityList from '../List/PriorityList'
 
+/**today's lists */
 export default function Lists() {
   const [lists, setLists] = useState<DBList[]>()
 
+  //set up snapshot listener for today's lists, destroy listener on unmount
   useEffect(() => {
     const unsubscribe = listenToLists(setLists)
     if (unsubscribe) return () => unsubscribe()
@@ -30,6 +32,7 @@ export default function Lists() {
       {lists &&
         <>
           <ul className="flex gap-4 overflow-x-auto py-4 lists-section px-4">
+            {/* remove priority list from list array from bd, sort the rest by order */}
             {lists.filter(list => list.title !== 'priority').sort((a, b) => a.order - b.order).map((list) =>
               <List list={list} key={list.title} />
             )}

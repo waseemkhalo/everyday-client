@@ -3,6 +3,7 @@ import trashIcon from "../../assets/icons/trash-light.svg";
 import { List } from "../../services/listService";
 import { Todo, checkTodo, deleteTodo } from "../../services/todoService";
 
+/** regular todo item */
 export default function TodoItem({ todo, list, index, setEdit }: { todo: Todo, list: List, index: number, setEdit: React.Dispatch<React.SetStateAction<number | undefined>> }) {
   return (
     <li className={`flex max-w-full p-2 rounded-md group/edit hover:bg-opacity-${list.title !== 'daily' && list.title !== 'priority' ? '75' : '25'} hover:bg-white`}>

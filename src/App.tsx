@@ -7,6 +7,7 @@ import LandingPage from "./Pages/LandingPage/LandingPage";
 function App() {
   return (
     <BrowserRouter>
+      {/* react toastify container */}
       <ToastContainer
         position="top-right"
         autoClose={2500}
