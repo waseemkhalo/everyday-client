@@ -1,5 +1,6 @@
 import logo from "../../assets/logo/logo.png";
 import Login from "../Login/Login";
+import Footer from "../Footer/Footer";
 
 /**top landing page header */
 function NavPreAuth({openAuth, handleOpenAuth, handleCloseAuth}: {openAuth: boolean, handleOpenAuth: () => void, handleCloseAuth: () => void}) {
