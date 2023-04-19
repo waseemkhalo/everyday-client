@@ -12,10 +12,10 @@ export class Feedback {
   date: string = new Date().toDateString()
 }
 
-//store feedback in firestore
-
+/** write feedback to database with user's display name 
+ * @param feedback object containing user's feedback
+ */
 export const addFeedback = async (feedback: Feedback) => {
-
   try {
     await addDoc(collection(db, "feedback"), {
       ...feedback,

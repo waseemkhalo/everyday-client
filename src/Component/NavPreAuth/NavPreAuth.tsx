@@ -1,7 +1,8 @@
+import { useState } from "react";
 import logo from "../../assets/logo/logo.png";
 import Login from "../Login/Login";
-import { useState } from "react";
 
+/**top landing page header */
 function NavPreAuth() {
   const [openAuth, setOpenAuth] = useState(false);
 
@@ -33,7 +34,6 @@ function NavPreAuth() {
       {openAuth && (
         <div
           className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-500 bg-opacity-50"
-          // onClick={() => setOpenAuth(false)}
         >
           <div>
             <Login />

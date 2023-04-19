@@ -5,6 +5,7 @@ function QuoteBox({ date }: { date: string | undefined }) {
 
   const [quote, setQuote] = useState<Quote | undefined>();
 
+  //get the quote for the given date
   useEffect(() => {
     if (date) getQuote(date).then(quote => setQuote(quote))
   }, [date]);

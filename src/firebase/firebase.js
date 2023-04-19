@@ -25,11 +25,10 @@ export const uiConfig = {
       if (authResult.additionalUserInfo.isNewUser) {
         //for new user, don't redirect until done creating new db user
         addUser(authResult.user.uid).then(() => window.location.replace(window.location.href + 'home'))
-        return false
       }
       // Return type determines whether we continue the redirect automatically
       // or whether we leave that to developer to handle.
-      return true;
+      return false;
     },
   },
   signInFlow: "popup",

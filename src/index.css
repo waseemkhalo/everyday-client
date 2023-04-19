@@ -3,7 +3,35 @@
 @tailwind utilities;
 
 body {
-    background-color: white;
-    margin: 0;
-    box-sizing: border-box;
+  background-color: white;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* custom scrollbar stylings for lists section and list components */
+
+.lists-section::-webkit-scrollbar {
+  height: .25rem;
+}
+
+.lists-section::-webkit-scrollbar-track {
+  background-color: theme('colors.smoke');
+}
+
+.lists-section::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: theme('colors.ghost');
+}
+
+.list::-webkit-scrollbar {
+  width: .25rem;
+}
+
+.list::-webkit-scrollbar-track {
+  background-color: theme('colors.smoke');
+}
+
+.list::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: theme('colors.ghost');
 }

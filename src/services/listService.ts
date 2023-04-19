@@ -28,6 +28,9 @@ const listConverter: FirestoreDataConverter<List> = {
   }
 }
 
+/** add write the default lists for a new user. 'daily' and 'priority'
+ * @param userId new user's uid
+ */
 export const addDefaultLists = async (userId: User['uid']) => {
   const dailyDoc = doc(db, 'users', userId, 'lists', 'daily').withConverter(listConverter)
   const priorityDoc = doc(db, 'users', userId, 'lists', 'priority').withConverter(listConverter)
@@ -47,6 +50,7 @@ export const addList = async (title: List['title']) => {
   if (currentUser && title) {
     try {
       const snapshot = await getCountFromServer(collection(db, 'users', currentUser, 'lists'))
+      //assign order to new list based on number of current lists
       const order = snapshot.data().count - 1
       const listDoc = doc(db, 'users', currentUser, 'lists', title).withConverter(listConverter)
       await setDoc(listDoc, new List(title, order))
@@ -68,6 +72,7 @@ export const listenToLists = (setState: Dispatch<SetStateAction<List[] | undefin
   }
 }
 
+/** get lists from db */
 export const getLists = async () => {
   const currentUser = auth.currentUser?.uid
   if (currentUser) {
@@ -80,7 +85,9 @@ export const getLists = async () => {
   }
 }
 
-//delete list service
+/** delete list
+ * @param title title of list to be deleted
+ */
 export const deleteList = async (title: List['title']) => {
   const currentUser = auth.currentUser?.uid
   if (currentUser) {

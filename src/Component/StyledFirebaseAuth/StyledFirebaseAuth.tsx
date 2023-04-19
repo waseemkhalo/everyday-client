@@ -1,8 +1,8 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import * as firebaseui from 'firebaseui';
 import 'firebaseui/dist/firebaseui.css';
-import './CustomFirebaseAuth.scss'
 import { useEffect, useRef, useState } from 'react';
+import './CustomFirebaseAuth.scss';
 
 interface Props {
   // The Firebase UI Web UI Config object.
@@ -17,6 +17,8 @@ interface Props {
   className?: string;
 }
 
+//styled firebase ui fix for react 18+ from https://github.com/firebase/firebaseui-web-react/pull/173#issuecomment-1215648239
+// need this since firebaseUI-web-react seems to be unmaintained :/
 
 const StyledFirebaseAuth = ({ uiConfig, firebaseAuth, className, uiCallback }: Props) => {
   const [userSignedIn, setUserSignedIn] = useState(false);

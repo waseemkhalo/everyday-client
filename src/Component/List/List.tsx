@@ -1,21 +1,14 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
-import editIcon from "../../assets/icons/pencil-light.svg";
-import trashIcon from "../../assets/icons/trash-light.svg";
+import { FormEvent, useState } from "react";
+import { toast } from "react-toastify";
+import deleteIcon from '../../assets/icons/trash-light.svg';
 import { List as DBList, deleteList } from '../../services/listService';
-import { addTodo, checkTodo, deleteTodo, editTodo } from "../../services/todoService";
-
-// todo: split todo and editable todo into their own components
+import { addTodo } from "../../services/todoService";
+import EditTodo from "./EditTodo";
+import TodoItem from "./TodoItem";
 
 function List({ list }: { list: DBList }) {
-
+  // array index of the todo selecting for editing
   const [edit, setEdit] = useState<number>()
-  const editRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    if (editRef.current) {
-      editRef.current.select()
-    }
-  }, [edit])
 
   const handleNewTodo = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -24,65 +17,37 @@ function List({ list }: { list: DBList }) {
     target.reset()
   }
 
-  const handleConfirmEdit = async () => {
-    if (editRef.current && editRef.current.value && edit !== undefined) {
-      await editTodo(list, list.todos[edit], editRef.current.value);
-      setEdit(undefined);
-    } else console.log("edited todo cannot be blank");
-  };
+  const handleDelete = async (title: string) => {
+    await deleteList(title)
+    toast.success(`deleted list "${title}"`)
+  }
 
   return (
-    <li className="m-8">
-      <div className="bg-smoke rounded-md justify-center align-middle px-6 py-2">
-        <p className="text-center my-4 capitalize">{list.title}</p>
-        {/* This button is for test purposes */}
-        <button className='trigger-time' onClick={() => deleteList(list.title)}>Delete List</button>
-        <ul>
+    <li className="w-1/2 max-w-md min-w-[200px]">
+      <div className={`flex flex-col h-full ${list.title === 'daily' ? 'bg-lightOrange' : 'bg-smoke'} rounded-md px-4 py-2 shadow-lg`}>
+        <h2 className="text-center my-4 capitalize relative">
+          {list.title}
+          {/* no delete button for daily list */}
+          {list.title !== 'daily' &&
+            <button className='trigger-time mb-4 absolute top-0 right-0' onClick={() => handleDelete(list.title)}>
+              <img src={deleteIcon} alt="delete list" className="w-6" />
+            </button>
+          }
+        </h2>
+
+        <ul className="max-h-[50vh] overflow-y-auto list">
           {list.todos.map((todo, index) =>
             edit === index ? (
-              <li key={index} >
-                <input
-                  ref={editRef}
-                  defaultValue={todo.content}
-                  autoFocus
-                />
-                <div className="flex gap-4">
-                  <button onClick={handleConfirmEdit} className='trigger-time' >
-                    Confirm
-                  </button>
-                  <button onClick={() => setEdit(undefined)} >Cancel</button>
-                </div>
-              </li>
+              <EditTodo key={index} list={list} setEdit={setEdit} todo={todo} edit={edit} />
             ) : (
-              <li key={index} className="flex max-w-full p-2 rounded-md group/edit hover:bg-white">
-                <input
-                  type="checkbox"
-                  className="form-checkbox accent-pink-500 mr-2 trigger-time"
-                  checked={todo.completed}
-                  onChange={() => checkTodo(list, todo)}
-                />
-                <div className="flex justify-between w-full">
-                  <span>{todo.content}</span>
-
-                  <div className="group/edit invisable hover:bg-white group-hover/edit:visable flex gap-2">
-                    <button className="invisible group-hover/edit:visible"
-                      onClick={() => setEdit(index)} >
-                      <img src={editIcon} className="w-5" alt="edit" />
-                    </button>
-                    <button className="invisible group-hover/edit:visible trigger-time"
-                      onClick={() => deleteTodo(list.title, todo)} >
-                      <img src={trashIcon} className="w-5" alt='delete' />
-                    </button>
-                  </div>
-                </div>
-              </li>
+              <TodoItem key={index} index={index} list={list} setEdit={setEdit} todo={todo} />
             )
           )}
         </ul>
-        <form onSubmit={handleNewTodo} >
+        <form onSubmit={handleNewTodo} className="p-0 mt-auto" >
           <label>
             <input
-              className="bg-transparent border-b-2 border-black focus:outline-none" placeholder="Add Item" name="todo" />
+              className="bg-transparent border-b-2 border-black w-5/6 max-w-[10rem] focus:outline-none placeholder-black placeholder-opacity-50" placeholder="Add Item" name="todo" />
             <button className="justify-self-end trigger-time">+</button>
           </label>
         </form>

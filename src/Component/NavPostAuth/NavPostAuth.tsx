@@ -1,7 +1,7 @@
 import logo from "../../assets/logo/logo.png";
-import FeedbackModal from "../FeedbackModal/FeedbackModal";
 import NavModal from "../NavModal/NavModal";
 
+/**top home page header */
 function NavPostAuth() {
   return (
     <>
@@ -10,9 +10,8 @@ function NavPostAuth() {
           className="sm:w-28 sm:h-28 md:w-48 md:h-48 lg:mr-80"
           src={logo} alt="logo"
         />
-        
+
         <div className="flex space-x-0 lg:ml-48">
-          <FeedbackModal />
           <NavModal />
         </div>
       </div>
