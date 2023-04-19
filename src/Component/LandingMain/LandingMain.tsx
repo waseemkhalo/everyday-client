@@ -6,8 +6,8 @@ function LandingMain() {
     <section>
       <div className="flex justify-center items-center mt-6">
         <div className="flex flex-col items-center">
-          <h1 className="text-6xl font-bold">How it works</h1>
-          <div className="p-16">
+          <h1 className="sm:text-5xl md:text-6xl font-bold">How it works</h1>
+          <div className="sm:p-6 md:p-16">
             <span className="text-center">
               Hold yourself accountable for what you said you'd complete today.
               Each day is given an entry, and you have 24 hours to complete your
