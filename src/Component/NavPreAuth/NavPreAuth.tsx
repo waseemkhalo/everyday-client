@@ -40,7 +40,7 @@ function NavPreAuth() {
       <section>
         <div className="flex justify-center items-center mt-6">
           <div className="flex flex-col items-center">
-            <h1 className="text-6xl font-bold">Welcome to EveryDay</h1> 
+            <h1 className="text-6xl font-bold">Welcome to Everyday</h1> 
             {/* COOL IDEA - have the words below transition beside the word EveryDay... like Everyday Todos, Everyday Notes, etc */}
             <h1 className="text-4xl font-bold">
               ToDos ✅ Notes 📝 Progress Tracking 📈
@@ -50,7 +50,7 @@ function NavPreAuth() {
               onClick={handleOpenAuth}
               className=" shadow-lg bg-lightOrange hover:bg-orange text-black rounded-md p-2"
             >
-              Try EveryDay for free
+              Try Everyday for free
             </button>
           </div>
         </div>
@@ -81,7 +81,7 @@ function NavPreAuth() {
 
       {openAuth && (
         <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-gray-500 bg-opacity-50">
-          <div>
+          <div className="bg-white rounded-lg sm:h-screen sm:w-screen flex flex-col items-center justify-center">
             <button onClick={handleCloseAuth}>Close</button>
             <Login />
           </div>
