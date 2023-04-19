@@ -8,14 +8,14 @@ function LandingMain() {
         <div className="flex flex-col items-center">
           <h1 className="sm:text-5xl md:text-6xl font-bold">How it works</h1>
           <div className="sm:p-6 md:p-16">
-            <span className="text-center">
+            <p className="text-center max-w-4xl m-auto md:text-lg sm:text-base">
               Hold yourself accountable for what you said you'd complete today.
               Each day is given an entry, and you have 24 hours to complete your
               todo list ⏰. When you miss a day, you'll skip an entry, which
               means you'll have one less opportunity to complete your tasks.
               This feature encourages you to stay on track and not let your
               daily tasks fall behind.
-            </span>
+            </p>
           </div>
           <img
             className="w-8/12 rounded-lg shadow-xl"
