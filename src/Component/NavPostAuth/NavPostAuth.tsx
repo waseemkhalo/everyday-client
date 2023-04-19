@@ -7,7 +7,7 @@ function NavPostAuth() {
     <>
       <div className="flex sm:mx-4 md:mx-16 lg:mx-32 justify-between items-center">
         <img
-          className="sm:w-28 sm:h-28 md:w-48 md:h-48 lg:mr-80"
+          className="sm:w-32 sm:h-32 md:w-40 md:h-40 "
           src={logo} alt="logo"
         />
 

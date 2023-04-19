@@ -21,23 +21,25 @@ export default function DayDetails({ day, setDay, today }: { today: Today | unde
   }
 
   return (
-    <div className="py-1 px-4 border-b-2 border-ghost">
+    <div className="py-4 sm:px-4 md:px-16 lg:px-32 border-b-2 border-lightGrey">
       <div className="flex justify-between ">
         <button onClick={handlePrevious} className={`flex gap-1 items-center ${day?.number === 1 || today?.number === 1 ? 'opacity-50 cursor-default' : ''}`}>
           <img src={previous} alt="previous" className='pt-1' />
-          <span>previous day</span>
+          <span className='text-black'>Previous Day</span>
         </button>
         {day &&
           <button onClick={handleNext} className='flex gap-1 items-center'>
-            next day
+            Next day
             <img src={next} alt="next" className='pt-1' />
           </button>
         }
       </div>
-      <div className="flex justify-between">
-        <span>Todo - {day ? day.time : today?.time || 'Time to get started!'}</span>
-        <span>#{day ? day.number : today?.number}</span>
-        <span>{day ? day.date : today?.date}</span>
+      <div className="flex justify-between sm:pt-4 md:pt-3 lg:pt-4">
+        <span className='md:font-bold'>ToDo - {day ? day.time : today?.time || 'Time to get started!'}</span>
+        <span className='md:font-bold'>#{day ? day.number : today?.number}</span>
+        <span className='md:font-bold'> 
+        {day ? (day.date ? new Date(day.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '') : (today?.date ? new Date(today.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '')}
+        </span>
       </div>
     </div>
   )

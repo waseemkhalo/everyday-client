@@ -19,7 +19,7 @@ export default function EditTodo({ list, todo, edit, setEdit }: { list: List, to
     if (editRef.current && editRef.current.value && edit !== undefined) {
       await editTodo(list, list.todos[edit], editRef.current.value);
       setEdit(undefined);
-    } else toast.warning("edited todo cannot be blank");
+    } else toast.warning("Cannot be blank");
   };
 
   return (

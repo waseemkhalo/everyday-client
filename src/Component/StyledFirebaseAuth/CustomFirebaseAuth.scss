@@ -34,6 +34,10 @@
 
 
 form {
+  // background-color: white;
+  // border-radius: 0.5rem;
+  // box-shadow: 0.2rem 0.2rem 2rem slategray;
+
   @include md {
     padding: 2rem;
   }
