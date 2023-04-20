@@ -24,7 +24,7 @@ export const uiConfig = {
       // this is a new user, add them to the firestore users collection
       if (authResult.additionalUserInfo.isNewUser) {
         //for new user, don't redirect until done creating new db user
-        addUser(authResult.user.uid).then(() => window.location.replace(window.location.href + 'home'))
+        addUser(authResult.user.uid).then(() => window.location.replace('home'))
       }
       // Return type determines whether we continue the redirect automatically
       // or whether we leave that to developer to handle.
@@ -32,7 +32,7 @@ export const uiConfig = {
     },
   },
   signInFlow: "popup",
-  signInSuccessUrl: "/home",
+  // signInSuccessUrl: "/home",
   signInOptions: [
     firebase.auth.EmailAuthProvider.PROVIDER_ID,
     {
@@ -47,19 +47,19 @@ export const uiConfig = {
       loginHint: "+11234567890",
     },
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    {
-      provider: "microsoft.com",
-      providerName: "Microsoft",
-      // To override the full label of the button.
-      // fullLabel: 'Login with Microsoft',
-      buttonColor: "#2F2F2F",
-      iconUrl: "https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/78-microsoft-512.png",
-      loginHintKey: "login_hint",
-      scopes: ["mail.read"],
-      customParameters: {
-        prompt: "consent",
-      },
-    },
+    // {
+    //   provider: "microsoft.com",
+    //   providerName: "Microsoft",
+    //   // To override the full label of the button.
+    //   // fullLabel: 'Login with Microsoft',
+    //   buttonColor: "#2F2F2F",
+    //   iconUrl: "https://cdn4.iconfinder.com/data/icons/social-media-logos-6/512/78-microsoft-512.png",
+    //   loginHintKey: "login_hint",
+    //   scopes: ["mail.read"],
+    //   customParameters: {
+    //     prompt: "consent",
+    //   },
+    // },
   ],
 };
 
