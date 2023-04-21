@@ -1,6 +1,6 @@
 import { addDoc, collection, doc, getDoc, getDocs, limit, orderBy, query, setDoc, updateDoc, where } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
-import { GetLists, List } from "./listService";
+import { List, getLists } from "./listService";
 import { Quote } from "./quoteService";
 
 export class Day {
@@ -52,6 +52,20 @@ export const updateToday = async (oldDay: Today) => {
         time: '',
         number: newNumber
       })
+      const lists = await getLists()
+      lists?.forEach(list => {
+        if (list.title === 'daily') {
+          const newTodos = list.todos.map(todo => ({ ...todo, completed: false }))
+          updateDoc(doc(db, 'users', currentUser, 'lists', 'daily'), {
+            todos: newTodos
+          })
+        } else {
+          const newTodos = list.todos.filter(todo => !todo.completed)
+          updateDoc(doc(db, 'users', currentUser, 'lists', list.title), {
+            todos: newTodos
+          })
+        }
+      })
     } catch (e) {
       console.error('error updating day: ', e);
     }
@@ -82,7 +96,7 @@ export const addDay = async () => {
     try {
       const dayDetails = await getToday()
       if (dayDetails?.time) {
-        const lists = await GetLists()
+        const lists = await getLists()
         await addDoc(collection(db, 'users', currentUser, 'days'), {
           ...dayDetails,
           lists

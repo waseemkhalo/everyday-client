@@ -69,12 +69,12 @@ export const listenToLists = (setState: Dispatch<SetStateAction<List[] | undefin
   }
 }
 
-export const GetLists = async () => {
+export const getLists = async () => {
   const currentUser = auth.currentUser?.uid
   if (currentUser) {
     try {
       const snap = await getDocs(collection(db, 'users', currentUser, 'lists'))
-      return snap.docs.map(doc => ({ ...doc.data() } as List))
+      return snap.docs.map(doc => ({ title: doc.id, ...doc.data() } as List))
     } catch (e) {
       console.error('error deleting list: ', e);
     }
