@@ -1,6 +1,6 @@
 import { User } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "../firebase/firebase";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { auth, db } from "../firebase/firebase";
 import { addDefaultLists } from "./listService";
 
 /** @param userId User.uid from auth */
@@ -15,5 +15,16 @@ export const addUser = async (userId: User['uid']) => {
 
   } catch (e) {
     console.error('error adding user: ', e);
+  }
+}
+
+export const updateNotes = async (notes: string) => {
+  const currentUser = auth.currentUser?.uid
+  if (currentUser) {
+    try {
+      updateDoc(doc(db, 'users', currentUser), { notes })
+    } catch (e) {
+      console.error('error getting details: ', e);
+    }
   }
 }

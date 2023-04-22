@@ -3,15 +3,7 @@ import { auth, db } from "../firebase/firebase";
 import { List, getLists } from "./listService";
 import { Quote } from "./quoteService";
 
-export class Day {
-  constructor(number: Day['number'], date: Day['date'], time: Day['time'], quote: Day['quote'], lists: Day['lists'], notes: Day['notes']) {
-    this.number = number;
-    this.date = date;
-    this.time = time;
-    this.quote = quote;
-    this.lists = lists;
-    this.notes = notes
-  }
+export interface Day {
   number: number
   date: string
   time: string
@@ -21,9 +13,10 @@ export class Day {
 }
 
 export interface Today {
-  date: string,
-  time: string,
+  date: string
+  time: string
   number: number
+  notes: string
 }
 
 export const getToday = async () => {
@@ -50,7 +43,8 @@ export const updateToday = async (oldDay: Today) => {
       await setDoc(doc(db, 'users', currentUser), {
         date: new Date().toDateString(),
         time: '',
-        number: newNumber
+        number: newNumber,
+        notes: ''
       })
       const lists = await getLists()
       lists?.forEach(list => {

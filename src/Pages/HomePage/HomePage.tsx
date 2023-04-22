@@ -14,7 +14,7 @@ function HomePage() {
 
   const [loading, setLoading] = useState(true)
   const [signedIn, setSignedIn] = useState(false)
-  const [day, setDay] = useState<Day | undefined>(undefined)
+  const [day, setDay] = useState<Day>()
   const [today, setToday] = useState<Today>()
 
 
@@ -66,7 +66,7 @@ function HomePage() {
                 :
                 <Lists />
               }
-              <NoteSection notes={day?.notes} />
+              <NoteSection day={day || today} />
             </>
           ) : (
             <Login />
