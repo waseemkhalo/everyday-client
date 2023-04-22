@@ -54,7 +54,7 @@ function HomePage() {
       {!loading &&
         <>
           <NavPostAuth />
-          <QuoteBox oldQuote={day?.quote} />
+          <QuoteBox date={day?.date ? day.date : today?.date} />
           {signedIn ? (
             <>
               <div className="h-2 bg-black" />
