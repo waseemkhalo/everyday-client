@@ -6,19 +6,27 @@ import NavPostAuth from "../../Component/NavPostAuth/NavPostAuth";
 import NoteSection from "../../Component/NoteSection/NoteSection";
 import QuoteBox from "../../Component/QuoteBox/QuoteBox";
 import StaticLists from "../../Component/StaticLists/StaticLists";
+import { DragDropContext } from "react-beautiful-dnd";
+
 import { auth } from "../../firebase/firebase";
-import { Day, Today, addDay, checkDay, getToday, updateTime, updateToday } from "../../services/dayService";
+import {
+  Day,
+  Today,
+  addDay,
+  checkDay,
+  getToday,
+  updateTime,
+  updateToday,
+} from "../../services/dayService";
 
 function HomePage() {
-
-  const [loading, setLoading] = useState(true)
-  const [signedIn, setSignedIn] = useState(false)
+  const [loading, setLoading] = useState(true);
+  const [signedIn, setSignedIn] = useState(false);
   // some context for understanding day vs today:
   // today is defined if the user is viewing details for today. it only contains date, time, number and notes. lists come from the user's list sub collection
   // day is defined if the user is viewing a previous day. it is an object containing all details about that previous day, lists included.
-  const [day, setDay] = useState<Day>()
-  const [today, setToday] = useState<Today>()
-
+  const [day, setDay] = useState<Day>();
+  const [today, setToday] = useState<Today>();
 
   //firebase onAuthStateChanged
   useEffect(() => {
@@ -26,62 +34,65 @@ function HomePage() {
       if (user) {
         //when user signed in, check if today is a new day
         const saveDay = async () => {
-          const check = await checkDay()
+          const check = await checkDay();
           if (check) {
             // if so, store their last session to db, and update today's info
-            const oldDay = await addDay()
-            if (oldDay) await updateToday(oldDay)
+            const oldDay = await addDay();
+            if (oldDay) await updateToday(oldDay);
           }
-        }
-        saveDay().then(() => setSignedIn(true))
+        };
+        saveDay().then(() => setSignedIn(true));
       }
       // if not logged in, force redirect to landing page
-      else window.location.replace('/')
-      setLoading(false)
+      else window.location.replace("/");
+      setLoading(false);
     });
     //detach listener when unloaded
     return () => unsubscribe();
-  }, [])
+  }, []);
 
   //if current view is for today, load today's info
   useEffect(() => {
-    if (!day) getToday().then(data => setToday(data as Today))
-  }, [day, signedIn])
+    if (!day) getToday().then((data) => setToday(data as Today));
+  }, [day, signedIn]);
 
   // if today's time is not yet set, attach event listener's to trigger-time elements
   useEffect(() => {
     if (today && !today.time)
-      document.querySelectorAll('[class*="trigger-time"]').forEach(el =>
-        el.addEventListener('click', () => updateTime().then(() => {
-          getToday().then(data => setToday(data as Today))
-        }))
-      )
-  }, [today])
+      document.querySelectorAll('[class*="trigger-time"]').forEach((el) =>
+        el.addEventListener("click", () =>
+          updateTime().then(() => {
+            getToday().then((data) => setToday(data as Today));
+          })
+        )
+      );
+  }, [today]);
+
+  const onDragEnd = () => {
+    //todo
+  };
 
   return (
     <div className="App">
-      {!loading &&
+      {!loading && (
         <>
           <NavPostAuth />
           <QuoteBox date={day?.date ? day.date : today?.date} />
-          {signedIn &&
-            <>
-              <DayDetails day={day} setDay={setDay} today={today} />
-              {/* show lists for today, and static lists for any other day */}
-              {day ?
-                <StaticLists lists={day.lists} />
-                :
-                <Lists />
-              }
-              <NoteSection day={day || today} />
-            </>
-          }
+          {signedIn && (
+            <DragDropContext onDragEnd={onDragEnd}>
+              <>
+                <DayDetails day={day} setDay={setDay} today={today} />
+                {/* show lists for today, and static lists for any other day */}
+                {day ? <StaticLists lists={day.lists} /> : <Lists />}
+                <NoteSection day={day || today} />
+              </>
+            </DragDropContext>
+          )}
         </>
-      }
+      )}
       <Footer />
     </div>
   );
 }
 
-
-export default HomePage
+export default HomePage;

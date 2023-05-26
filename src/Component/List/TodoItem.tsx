@@ -12,7 +12,7 @@ export default function TodoItem({ todo, list, index, setEdit }: { todo: Todo, l
     toast.success(`deleted "${todo.content}" from "${listTitle}" list`)
   }
 
-  return (
+    return (
     <li className={`flex max-w-full p-2 rounded-md group/edit hover:bg-opacity-${list.title !== 'daily' && list.title !== 'priority' ? '75' : '25'} hover:bg-white`}>
       <input
         type="checkbox"
@@ -20,10 +20,10 @@ export default function TodoItem({ todo, list, index, setEdit }: { todo: Todo, l
         checked={todo.completed}
         onChange={() => checkTodo(list, todo)}
       />
-      <div className="flex justify-between w-full">
-        <span className="break-all">{todo.content}</span>
+      <div className="flex justify-between w-full" >
+        <span className="break-all">{todo.content} </span>
 
-        <div className="group/edit hidden group-hover/edit:flex gap-2 min-w-fit">
+        <div className="group/edit hidden group-hover/edit:flex gap-2 min-w-fit" >
           <button className="invisible group-hover/edit:visible hover:bg-white hover:bg-opacity-50"
             onClick={() => setEdit(index)} >
             <img src={editIcon} className="w-5" alt="edit" />

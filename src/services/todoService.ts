@@ -1,4 +1,4 @@
-import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { arrayRemove, arrayUnion, doc, updateDoc, getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
 import { List } from "./listService";
 
