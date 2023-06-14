@@ -6,7 +6,6 @@ import NavPostAuth from "../../Component/NavPostAuth/NavPostAuth";
 import NoteSection from "../../Component/NoteSection/NoteSection";
 import QuoteBox from "../../Component/QuoteBox/QuoteBox";
 import StaticLists from "../../Component/StaticLists/StaticLists";
-import { DragDropContext } from "react-beautiful-dnd";
 
 import { auth } from "../../firebase/firebase";
 import {
@@ -68,9 +67,6 @@ function HomePage() {
       );
   }, [today]);
 
-  const onDragEnd = () => {
-    //todo
-  };
 
   return (
     <div className="App">
@@ -79,14 +75,12 @@ function HomePage() {
           <NavPostAuth />
           <QuoteBox date={day?.date ? day.date : today?.date} />
           {signedIn && (
-            <DragDropContext onDragEnd={onDragEnd}>
-              <>
-                <DayDetails day={day} setDay={setDay} today={today} />
-                {/* show lists for today, and static lists for any other day */}
-                {day ? <StaticLists lists={day.lists} /> : <Lists />}
-                <NoteSection day={day || today} />
-              </>
-            </DragDropContext>
+            <>
+              <DayDetails day={day} setDay={setDay} today={today} />
+              {/* show lists for today, and static lists for any other day */}
+              {day ? <StaticLists lists={day.lists} /> : <Lists />}
+              <NoteSection day={day || today} />
+            </>
           )}
         </>
       )}
