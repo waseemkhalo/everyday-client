@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
+import facebookIcon from "../../assets/icons/facebook-icon.svg";
 import hamburgerMenu from "../../assets/icons/hamburger-menu.png";
+import instagramIcon from "../../assets/icons/instagram-icon.png";
 import logo from "../../assets/logo/logo.png";
 import { auth } from "../../firebase/firebase";
 import FeedbackModal from "../FeedbackModal/FeedbackModal";
-import instagramIcon from "../../assets/icons/instagram-icon.png";
-import facebookIcon from "../../assets/icons/facebook-icon.svg";
 
 /**hamburger button navigation modal */
 function NavModal() {
@@ -55,14 +55,14 @@ function NavModal() {
 
               <div className="flex-col">
                 <div className="flex gap-10 justify-center">
-                  <a target="_blank" href="https://www.instagram.com/tryeverydaytodo/">
+                  <a target="_blank" rel="noreferrer" href="https://www.instagram.com/tryeverydaytodo/">
                     <img
                       src={instagramIcon}
                       alt="Instagram"
                       className="w-8 pb-4"
                     />
                   </a>
-                  <a target="_blank" href="https://www.facebook.com/everydaytodo/">
+                  <a target="_blank" rel="noreferrer" href="https://www.facebook.com/everydaytodo/">
                     <img
                       src={facebookIcon}
                       alt="Facebook"
