@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react'
-import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable, OnDragEndResponder } from 'react-beautiful-dnd'
 import { List as DBList, addList, listenToLists } from '../../services/listService'
 import List from "../List/List"
 import PriorityList from '../List/PriorityList'
@@ -7,12 +7,17 @@ import PriorityList from '../List/PriorityList'
 /**today's lists */
 export default function Lists() {
   const [lists, setLists] = useState<DBList[]>()
+  const [listOrder, setListOrder] = useState<DBList['title'][]>()
 
   //set up snapshot listener for today's lists, destroy listener on unmount
   useEffect(() => {
     const unsubscribe = listenToLists(setLists)
     if (unsubscribe) return () => unsubscribe()
   }, [])
+
+  useEffect(() => {
+    //set list order from db
+  })
 
   const handleNewList = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -21,10 +26,10 @@ export default function Lists() {
     target.reset()
   }
 
-  const handleListDrop = () => {
-    // todo
+  const handleListDrop: OnDragEndResponder = (result) => {
     // code to update BE 
-    console.log('dropped');
+    console.log(result);
+    //update state while update request is processed.
 
   }
 
