@@ -43,8 +43,6 @@ export default function Lists() {
 
   }
 
-  console.log(listOrder);
-
   return (
     <section className='sm:py-4 sm:ml-4 md:ml-16 lg:ml-32'>
       <form onSubmit={handleNewList} className='px-4 sm:py-2 md:py-4'>
