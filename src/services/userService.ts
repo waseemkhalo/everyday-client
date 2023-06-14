@@ -32,7 +32,7 @@ export const updateNotes = async (notes: string | undefined) => {
 }
 
 /** update today's notes on db */
-export const updateListOrder = async (listOrder: List['title'][]) => {
+export const updateListOrder = async (listOrder: List['title'][] | undefined) => {
   const currentUser = auth.currentUser?.uid
   if (currentUser) {
     try {

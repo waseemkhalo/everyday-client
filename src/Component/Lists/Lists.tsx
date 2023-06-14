@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { DragDropContext, Droppable, OnDragEndResponder } from 'react-beautiful-dnd'
 import { List as DBList, addList, listenToLists } from '../../services/listService'
+import { getListOrder, updateListOrder } from '../../services/userService'
 import List from "../List/List"
 import PriorityList from '../List/PriorityList'
 
@@ -16,8 +17,17 @@ export default function Lists() {
   }, [])
 
   useEffect(() => {
-    //set list order from db
-  })
+    getListOrder().then(result => {
+      if (result) {
+        setListOrder(result)
+        return
+      }
+      //if no result, create list order based on order field
+      const newListOrder = lists?.filter(list => list.title !== 'priority').sort((a, b) => a.order - b.order).map(list => list.title)
+      setListOrder(newListOrder)
+      updateListOrder(newListOrder)
+    })
+  }, [lists])
 
   const handleNewList = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -32,6 +42,8 @@ export default function Lists() {
     //update state while update request is processed.
 
   }
+
+  console.log(listOrder);
 
   return (
     <section className='sm:py-4 sm:ml-4 md:ml-16 lg:ml-32'>
