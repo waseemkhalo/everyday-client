@@ -24,6 +24,8 @@ export default function Lists() {
   const handleListDrop = () => {
     // todo
     // code to update BE 
+    console.log('dropped');
+
   }
 
   return (
