@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react'
-import { DragDropContext } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { List as DBList, addList, listenToLists } from '../../services/listService'
 import List from "../List/List"
 import PriorityList from '../List/PriorityList'
@@ -37,12 +37,20 @@ export default function Lists() {
       </form>
       {lists &&
         <DragDropContext onDragEnd={handleListDrop}>
-          <ul className="flex gap-4 overflow-x-auto py-4 lists-section px-4">
-            {/* remove priority list from list array from bd, sort the rest by order */}
-            {lists.filter(list => list.title !== 'priority').sort((a, b) => a.order - b.order).map((list) =>
-              <List list={list} key={list.title} />
+          <Droppable droppableId='lists' direction='horizontal' >
+            {(provided, snapshot) => (
+              <ul className="flex gap-4 overflow-x-auto py-4 lists-section px-4"
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {/* remove priority list from list array from bd, sort the rest by order */}
+                {lists.filter(list => list.title !== 'priority').sort((a, b) => a.order - b.order).map((list) =>
+                  <List list={list} key={list.title} />
+                )}
+                {provided.placeholder}
+              </ul>
             )}
-          </ul>
+          </Droppable>
           <PriorityList list={lists.find(list => list.title === 'priority')} />
         </DragDropContext>}
     </section>
