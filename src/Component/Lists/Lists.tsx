@@ -52,7 +52,7 @@ export default function Lists() {
           <button className='trigger-time'>+</button>
         </label>
       </form>
-      {lists &&
+      {lists && listOrder &&
         <DragDropContext onDragEnd={handleListDrop}>
           <Droppable droppableId='lists' direction='horizontal' >
             {(provided, snapshot) => (
@@ -61,7 +61,7 @@ export default function Lists() {
                 {...provided.droppableProps}
               >
                 {/* remove priority list from list array from bd, sort the rest by order */}
-                {lists.filter(list => list.title !== 'priority').sort((a, b) => a.order - b.order).map((list) =>
+                {lists.filter(list => list.title !== 'priority').sort((a, b) => listOrder.indexOf(a.title) - listOrder.indexOf(b.title)).map((list) =>
                   <List list={list} key={list.title} />
                 )}
                 {provided.placeholder}
