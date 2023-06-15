@@ -34,7 +34,7 @@ export const updateNotes = async (notes: string | undefined) => {
 /** update today's notes on db */
 export const updateListOrder = async (listOrder: List['title'][] | undefined) => {
   const currentUser = auth.currentUser?.uid
-  if (currentUser) {
+  if (currentUser && listOrder) {
     try {
       updateDoc(doc(db, 'users', currentUser), { listOrder })
     } catch (e) {
