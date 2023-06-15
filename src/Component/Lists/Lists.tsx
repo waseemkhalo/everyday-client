@@ -17,22 +17,25 @@ export default function Lists() {
   }, [])
 
   useEffect(() => {
-    getListOrder().then(result => {
-      if (result) {
-        setListOrder(result)
-        return
-      }
-      //if no result, create list order based on order field
-      const newListOrder = lists?.filter(list => list.title !== 'priority').sort((a, b) => a.order - b.order).map(list => list.title)
-      setListOrder(newListOrder)
-      updateListOrder(newListOrder)
-    })
-  }, [lists, listOrder])
+    if (!listOrder) {
+      getListOrder().then(result => {
+        if (result) {
+          setListOrder(result)
+          return
+        }
+        //if no result, create list order based on order field
+        const newListOrder = lists?.filter(list => list.title !== 'priority').sort((a, b) => a.order - b.order).map(list => list.title)
+        setListOrder(newListOrder)
+        updateListOrder(newListOrder)
+      })
+    }
+  })
 
   const handleNewList = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const target = e.target as HTMLFormElement & { list: { value: string } }
     await addList(target.list.value)
+    getListOrder().then(result => setListOrder(result))
     target.reset()
   }
 
@@ -44,6 +47,14 @@ export default function Lists() {
       newOrder.splice(result.destination.index, 0, movedItem)
       setListOrder(newOrder)
       await updateListOrder(newOrder)
+    }
+  }
+
+  const removeFromListState = (list: string) => {
+    if (listOrder) {
+      const newOrder = [...listOrder]
+      newOrder.splice(newOrder.indexOf(list), 1)
+      setListOrder(newOrder)
     }
   }
 
@@ -66,7 +77,7 @@ export default function Lists() {
               >
                 {/* remove priority list from list array from bd, sort the rest by order */}
                 {lists.filter(list => list.title !== 'priority').sort((a, b) => listOrder.indexOf(a.title) - listOrder.indexOf(b.title)).map((list, index) =>
-                  <List list={list} key={list.title} index={index} />
+                  <List list={list} key={list.title} index={index} removeFromListState={removeFromListState} />
                 )}
                 {provided.placeholder}
               </ul>

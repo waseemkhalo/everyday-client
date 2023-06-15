@@ -8,7 +8,7 @@ import { addTodo } from "../../services/todoService";
 import EditTodo from "./EditTodo";
 import TodoItem from "./TodoItem";
 
-function List({ list, index }: { list: DBList, index: number }) {
+function List({ list, index, removeFromListState }: { removeFromListState: (list: string) => void, list: DBList, index: number }) {
   // array index of the todo selecting for editing
   const [edit, setEdit] = useState<number>();
 
@@ -21,11 +21,9 @@ function List({ list, index }: { list: DBList, index: number }) {
 
   const handleDelete = async (title: string) => {
     await deleteList(title);
+    removeFromListState(list.title)
     toast.success(`Deleted List "${title}"`);
   };
-
-
-
 
   return (
     <Draggable draggableId={list.title} index={index} >

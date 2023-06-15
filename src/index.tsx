@@ -9,5 +9,5 @@ root.render(
   // disable strict mode or else beautiful dnd fails
   // <React.StrictMode>
   <App />
-  // </React.StrictMode> 
+  // </React.StrictMode>
 );
