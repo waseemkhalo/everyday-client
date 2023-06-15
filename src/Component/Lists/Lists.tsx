@@ -34,8 +34,12 @@ export default function Lists() {
   const handleNewList = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const target = e.target as HTMLFormElement & { list: { value: string } }
+    if (listOrder) {
+      const newOrder = [...listOrder]
+      newOrder.push(target.list.value)
+      setListOrder(newOrder)
+    }
     await addList(target.list.value)
-    getListOrder().then(result => setListOrder(result))
     target.reset()
   }
 
