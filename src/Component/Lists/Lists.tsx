@@ -27,7 +27,7 @@ export default function Lists() {
       setListOrder(newListOrder)
       updateListOrder(newListOrder)
     })
-  }, [lists])
+  }, [lists, listOrder])
 
   const handleNewList = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -36,13 +36,14 @@ export default function Lists() {
     target.reset()
   }
 
-  const handleListDrop: OnDragEndResponder = (result) => {
+  const handleListDrop: OnDragEndResponder = async (result) => {
     // code to update BE 
     if (result.destination && listOrder) {
       const newOrder = [...listOrder]
       const movedItem = newOrder.splice(listOrder.indexOf(result.draggableId), 1)[0]
       newOrder.splice(result.destination.index, 0, movedItem)
       setListOrder(newOrder)
+      await updateListOrder(newOrder)
     }
   }
 
