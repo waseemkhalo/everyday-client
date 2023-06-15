@@ -1,11 +1,14 @@
 import { List } from "../../services/listService";
 
 /**similar to Lists component but with all the buttons stripped out */
-export default function StaticLists({ lists }: { lists: List[] }) {
+export default function StaticLists({ lists, listOrder }: { lists: List[], listOrder: string[] }) {
   return (
     <section className="sm:py-4 sm:ml-4 md:ml-16 lg:ml-32">
       <ul className="flex gap-4 overflow-x-auto py-4 lists-section px-4">
-        {lists.filter(list => list.title !== 'priority').sort((a, b) => a.order - b.order).map((list) =>
+        {lists.filter(list => list.title !== 'priority').sort((a, b) => (
+          listOrder ? (listOrder.indexOf(a.title) - listOrder.indexOf(b.title))
+            : a.order - b.order
+        )).map((list) =>
           <li key={list.title} className="w-1/2 max-w-md min-w-[200px]">
             <div className={`flex flex-col h-full ${list.title === 'daily' ? 'bg-lightOrange' : 'bg-smoke'} rounded-md px-4 py-2 shadow-lg`}>
               <h2 className="text-center my-4 capitalize">{list.title}</h2>

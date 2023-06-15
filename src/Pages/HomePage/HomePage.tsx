@@ -78,7 +78,7 @@ function HomePage() {
             <>
               <DayDetails day={day} setDay={setDay} today={today} />
               {/* show lists for today, and static lists for any other day */}
-              {day ? <StaticLists lists={day.lists} /> : <Lists />}
+              {day ? <StaticLists lists={day.lists} listOrder={day.listOrder} /> : <Lists />}
               <NoteSection day={day || today} />
             </>
           )}
