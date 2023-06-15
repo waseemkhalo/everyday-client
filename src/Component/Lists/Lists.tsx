@@ -38,9 +38,12 @@ export default function Lists() {
 
   const handleListDrop: OnDragEndResponder = (result) => {
     // code to update BE 
-    console.log(result);
-    //update state while update request is processed.
-
+    if (result.destination && listOrder) {
+      const newOrder = [...listOrder]
+      const movedItem = newOrder.splice(listOrder.indexOf(result.draggableId), 1)[0]
+      newOrder.splice(result.destination.index, 0, movedItem)
+      setListOrder(newOrder)
+    }
   }
 
   return (
@@ -56,13 +59,13 @@ export default function Lists() {
         <DragDropContext onDragEnd={handleListDrop}>
           <Droppable droppableId='lists' direction='horizontal' >
             {(provided, snapshot) => (
-              <ul className="flex gap-4 overflow-x-auto py-4 lists-section px-4"
+              <ul className="flex overflow-x-auto py-4 lists-section px-4"
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >
                 {/* remove priority list from list array from bd, sort the rest by order */}
-                {lists.filter(list => list.title !== 'priority').sort((a, b) => listOrder.indexOf(a.title) - listOrder.indexOf(b.title)).map((list) =>
-                  <List list={list} key={list.title} />
+                {lists.filter(list => list.title !== 'priority').sort((a, b) => listOrder.indexOf(a.title) - listOrder.indexOf(b.title)).map((list, index) =>
+                  <List list={list} key={list.title} index={index} />
                 )}
                 {provided.placeholder}
               </ul>

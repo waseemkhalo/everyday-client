@@ -8,7 +8,7 @@ import { addTodo } from "../../services/todoService";
 import EditTodo from "./EditTodo";
 import TodoItem from "./TodoItem";
 
-function List({ list }: { list: DBList }) {
+function List({ list, index }: { list: DBList, index: number }) {
   // array index of the todo selecting for editing
   const [edit, setEdit] = useState<number>();
 
@@ -28,9 +28,9 @@ function List({ list }: { list: DBList }) {
 
 
   return (
-    <Draggable draggableId={list.title} index={list.order} >
+    <Draggable draggableId={list.title} index={index} >
       {(provided, snapshot) => (
-        <li className="w-1/2 max-w-md min-w-[200px]"
+        <li className="w-1/2 max-w-md min-w-[200px] mx-2"
           ref={provided.innerRef}
           {...provided.draggableProps}
         >
