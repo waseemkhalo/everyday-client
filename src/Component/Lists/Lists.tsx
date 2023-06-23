@@ -1,12 +1,14 @@
 import { FormEvent, useEffect, useState } from 'react'
-import { DragDropContext } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable, OnDragEndResponder } from 'react-beautiful-dnd'
 import { List as DBList, addList, listenToLists } from '../../services/listService'
+import { getListOrder, updateListOrder } from '../../services/userService'
 import List from "../List/List"
 import PriorityList from '../List/PriorityList'
 
 /**today's lists */
 export default function Lists() {
   const [lists, setLists] = useState<DBList[]>()
+  const [listOrder, setListOrder] = useState<DBList['title'][]>()
 
   //set up snapshot listener for today's lists, destroy listener on unmount
   useEffect(() => {
@@ -14,16 +16,50 @@ export default function Lists() {
     if (unsubscribe) return () => unsubscribe()
   }, [])
 
+  useEffect(() => {
+    if (!listOrder) {
+      getListOrder().then(result => {
+        if (result) {
+          setListOrder(result)
+          return
+        }
+        //if no result, create list order based on order field
+        const newListOrder = lists?.filter(list => list.title !== 'priority').sort((a, b) => a.order - b.order).map(list => list.title)
+        setListOrder(newListOrder)
+        updateListOrder(newListOrder)
+      })
+    }
+  })
+
   const handleNewList = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const target = e.target as HTMLFormElement & { list: { value: string } }
+    if (listOrder) {
+      const newOrder = [...listOrder]
+      newOrder.push(target.list.value)
+      setListOrder(newOrder)
+    }
     await addList(target.list.value)
     target.reset()
   }
 
-  const handleListDrop = () => {
-    // todo
+  const handleListDrop: OnDragEndResponder = async (result) => {
     // code to update BE 
+    if (result.destination && listOrder) {
+      const newOrder = [...listOrder]
+      const movedItem = newOrder.splice(listOrder.indexOf(result.draggableId), 1)[0]
+      newOrder.splice(result.destination.index, 0, movedItem)
+      setListOrder(newOrder)
+      await updateListOrder(newOrder)
+    }
+  }
+
+  const removeFromListState = (list: string) => {
+    if (listOrder) {
+      const newOrder = [...listOrder]
+      newOrder.splice(newOrder.indexOf(list), 1)
+      setListOrder(newOrder)
+    }
   }
 
   return (
@@ -35,14 +71,22 @@ export default function Lists() {
           <button className='trigger-time'>+</button>
         </label>
       </form>
-      {lists &&
+      {lists && listOrder &&
         <DragDropContext onDragEnd={handleListDrop}>
-          <ul className="flex gap-4 overflow-x-auto py-4 lists-section px-4">
-            {/* remove priority list from list array from bd, sort the rest by order */}
-            {lists.filter(list => list.title !== 'priority').sort((a, b) => a.order - b.order).map((list) =>
-              <List list={list} key={list.title} />
+          <Droppable droppableId='lists' direction='horizontal' >
+            {(provided) => (
+              <ul className="flex overflow-x-auto py-4 lists-section px-4"
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                {/* remove priority list from list array from bd, sort the rest by order */}
+                {lists.filter(list => list.title !== 'priority').sort((a, b) => listOrder.indexOf(a.title) - listOrder.indexOf(b.title)).map((list, index) =>
+                  <List list={list} key={list.title} index={index} removeFromListState={removeFromListState} />
+                )}
+                {provided.placeholder}
+              </ul>
             )}
-          </ul>
+          </Droppable>
           <PriorityList list={lists.find(list => list.title === 'priority')} />
         </DragDropContext>}
     </section>

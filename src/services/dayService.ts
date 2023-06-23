@@ -8,6 +8,7 @@ export interface Day {
   time: string
   lists: List[]
   notes: string
+  listOrder: string[]
 }
 
 export interface Today {
