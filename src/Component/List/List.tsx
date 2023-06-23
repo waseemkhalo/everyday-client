@@ -27,7 +27,7 @@ function List({ list, index, removeFromListState }: { removeFromListState: (list
 
   return (
     <Draggable draggableId={list.title} index={index} >
-      {(provided, snapshot) => (
+      {(provided) => (
         <li className="w-1/2 max-w-md min-w-[200px] mx-2"
           ref={provided.innerRef}
           {...provided.draggableProps}
