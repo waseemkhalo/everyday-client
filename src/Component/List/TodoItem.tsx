@@ -13,6 +13,7 @@ export default function TodoItem({ todo, list, index, setEdit }: { todo: Todo, l
   }
 
     return (
+      // draggable 
     <li className={`flex max-w-full p-2 rounded-md group/edit hover:bg-opacity-${list.title !== 'daily' && list.title !== 'priority' ? '75' : '25'} hover:bg-white`}>
       <input
         type="checkbox"

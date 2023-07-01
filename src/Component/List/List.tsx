@@ -52,7 +52,7 @@ function List({ list, index, removeFromListState }: { removeFromListState: (list
                 </button>
               )}
             </h2>
-
+{/* drag drop content & droppabe */}
             <ul className="max-h-[50vh] overflow-y-auto list">
               {list.todos.map((todo, index) =>
                 edit === index ? (
