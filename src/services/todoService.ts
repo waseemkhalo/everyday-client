@@ -4,20 +4,24 @@ import { List } from "./listService";
 
 //* TODO object constructor/type definition
 export class Todo {
-  constructor(content: Todo['content']) {
+  constructor(content: Todo['content'], id: Todo['id']) {
     this.content = content;
+    this.id = id;
   }
   content: string
   completed: boolean = false;
+  id: string;
 }
 
 /**
  * @param list title of list to add to
  * @param todo content for new todo
  */
-export const addTodo = async (list: List['title'], todo: Todo['content']) => {
+ export const addTodo = async (list: List['title'], todo: Todo['content']) => {
   const currentUser = auth.currentUser?.uid
-  const newTodo = new Todo(todo)
+  // Generate a new id
+  const newId = db.collection('users').doc().id;
+  const newTodo = new Todo(todo, newId)  // Pass the id to the constructor
   if (currentUser && todo) {
     try {
       await updateDoc(doc(db, 'users', currentUser, 'lists', list), {
