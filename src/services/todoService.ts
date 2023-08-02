@@ -10,13 +10,14 @@ export class Todo {
   }
   content: string
   completed: boolean = false;
-  id: string;
+  id: string; 
 }
 
 /**
  * @param list title of list to add to
  * @param todo content for new todo
  */
+
  export const addTodo = async (list: List['title'], todo: Todo['content']) => {
   const currentUser = auth.currentUser?.uid
   // Generate a new id

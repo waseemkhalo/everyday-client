@@ -1,5 +1,5 @@
 import { FormEvent, useState } from "react";
-import { Draggable } from "react-beautiful-dnd";
+import { Draggable, Droppable } from "react-beautiful-dnd";
 import { toast } from "react-toastify";
 import dragIcon from '../../assets/icons/drag-horizontal-fill.svg';
 import deleteIcon from "../../assets/icons/trash-light.svg";
@@ -24,6 +24,8 @@ function List({ list, index, removeFromListState }: { removeFromListState: (list
     removeFromListState(list.title)
     toast.success(`Deleted List "${title}"`);
   };
+
+
 
   return (
     <Draggable draggableId={list.title} index={index} >
@@ -53,27 +55,40 @@ function List({ list, index, removeFromListState }: { removeFromListState: (list
               )}
             </h2>
             {/* drag drop content & droppabe */}
-            <ul className="max-h-[50vh] overflow-y-auto list">
-              {list.todos.map((todo, index) =>
-                edit === index ? (
-                  <EditTodo
-                    key={index}
-                    list={list}
-                    setEdit={setEdit}
-                    todo={todo}
-                    edit={edit}
-                  />
-                ) : (
-                  <TodoItem
-                    key={index}
-                    index={index}
-                    list={list}
-                    setEdit={setEdit}
-                    todo={todo}
-                  />
-                )
+            <Droppable droppableId={list.title}>
+              {(provided) => (
+                <ul className="max-h-[50vh] overflow-y-auto list"
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {list.todos.map((todo, todoIndex) => (
+                    <Draggable draggableId={`${todo.id}`} index={todoIndex} key={todo.id}>
+                      {(provided) => (
+                        edit === todoIndex ? (
+                          <EditTodo
+                            provided={provided}
+                            list={list}
+                            setEdit={setEdit}
+                            todo={todo}
+                            edit={edit}
+                          />
+                        ) : (
+                          <TodoItem
+                            provided={provided}
+                            key={todo.id}
+                            index={todoIndex}
+                            list={list}
+                            setEdit={setEdit}
+                            todo={todo}
+                          />
+                        )
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </ul>
               )}
-            </ul>
+            </Droppable>
             <form onSubmit={handleNewTodo} className="p-0 mt-auto">
               <label>
                 <input
