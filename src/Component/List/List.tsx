@@ -65,16 +65,17 @@ function List({ list, index, removeFromListState, dropDisabled }: { removeFromLi
                 >
                   {list.todos.map((todo, todoIndex) => (
 
-                    <Draggable draggableId={todo.content} index={todoIndex} key={todo.content}>
-                      {(provided) => (
-                        edit === todoIndex ? (
-                          <EditTodo
-                            list={list}
-                            setEdit={setEdit}
-                            todo={todo}
-                            edit={edit}
-                          />
-                        ) : (
+
+                    edit === todoIndex ? (
+                      <EditTodo
+                        list={list}
+                        setEdit={setEdit}
+                        todo={todo}
+                        edit={edit}
+                      />
+                    ) : (
+                      <Draggable draggableId={todo.content} index={todoIndex} key={todo.content} isDragDisabled={edit === undefined ? false : true}>
+                        {(provided) => (
                           <TodoItem
                             provided={provided}
                             // key={todo.id}
@@ -83,9 +84,9 @@ function List({ list, index, removeFromListState, dropDisabled }: { removeFromLi
                             setEdit={setEdit}
                             todo={todo}
                           />
-                        )
-                      )}
-                    </Draggable>
+                        )}
+                      </Draggable>
+                    )
                   ))}
                   {provided.placeholder}
                 </ul>
