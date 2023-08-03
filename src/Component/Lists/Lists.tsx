@@ -46,17 +46,15 @@ export default function Lists() {
 
   const handleListDrop: OnDragEndResponder = async (result) => {
     // code to update BE 
-    console.log(result)
     setCurrentDragging(undefined)
 
     const [type, id] = result.draggableId.split('-');
 
     if (type === 'todo') {
-      console.log('it worked')
+
 
 
     } else if (type === 'list') {
-      console.log('list worked')
 
       if (result.destination && listOrder) {
         const newOrder = [...listOrder]
