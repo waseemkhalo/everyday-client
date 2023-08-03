@@ -4,13 +4,13 @@ import { List } from "./listService";
 
 //* TODO object constructor/type definition
 export class Todo {
-  constructor(content: Todo['content'], id: Todo['id']) {
+  constructor(content: Todo['content']) {
     this.content = content;
-    this.id = id;
+    // this.id = id;
   }
   content: string
   completed: boolean = false;
-  id: string; 
+  // id: string; 
 }
 
 /**
@@ -21,8 +21,9 @@ export class Todo {
  export const addTodo = async (list: List['title'], todo: Todo['content']) => {
   const currentUser = auth.currentUser?.uid
   // Generate a new id
-  const newId = db.collection('users').doc().id;
-  const newTodo = new Todo(todo, newId)  // Pass the id to the constructor
+  // const newId = db.collection('users').doc().id;
+  // const newTodo = new Todo(todo, newId)  // Pass the id to the constructor
+  const newTodo = new Todo(todo )  // Pass the id to the constructor
   if (currentUser && todo) {
     try {
       await updateDoc(doc(db, 'users', currentUser, 'lists', list), {

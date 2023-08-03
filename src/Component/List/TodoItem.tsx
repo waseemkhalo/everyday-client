@@ -32,7 +32,6 @@ export default function TodoItem({
   return (
     <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
 
-      {/* // draggable */}
       <li className={`flex max-w-full p-2 rounded-md group/edit hover:bg-opacity-${list.title !== 'daily' && list.title !== 'priority' ? '75' : '25'} hover:bg-white`}>
         <input
           type="checkbox"

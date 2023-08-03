@@ -32,20 +32,20 @@ export default function PriorityList({ list }: { list: List | undefined }) {
                   ref={provided.innerRef}
                 >
                   {list.todos.map((todo, index) => (
-                    <Draggable key={todo.id} draggableId={todo.id} index={index}>
+
+                    <Draggable key={todo.content} draggableId={todo.content} index={index}>
                       {(provided) =>
                         edit === index ? (
                           <EditTodo
-                            key={index}
+                            key={todo.content}
                             list={list}
                             setEdit={setEdit}
                             todo={todo}
                             edit={edit}
-                            provided={provided}
                           />
                         ) : (
                           <TodoItem
-                            key={index}
+                            key={todo.content}
                             index={index}
                             list={list}
                             setEdit={setEdit}
@@ -54,6 +54,7 @@ export default function PriorityList({ list }: { list: List | undefined }) {
                           />
                         )
                       }
+
                     </Draggable>
                   ))}
                   {provided.placeholder}

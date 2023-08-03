@@ -8,9 +8,10 @@ import { addTodo } from "../../services/todoService";
 import EditTodo from "./EditTodo";
 import TodoItem from "./TodoItem";
 
-function List({ list, index, removeFromListState }: { removeFromListState: (list: string) => void, list: DBList, index: number }) {
+function List({ list, index, removeFromListState, dropDisabled }: { removeFromListState: (list: string) => void, list: DBList, index: number, dropDisabled: boolean}) {
   // array index of the todo selecting for editing
   const [edit, setEdit] = useState<number>();
+
 
   const handleNewTodo = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -28,7 +29,7 @@ function List({ list, index, removeFromListState }: { removeFromListState: (list
 
 
   return (
-    <Draggable draggableId={list.title} index={index} >
+    <Draggable draggableId={`list-${list.title}`} index={index} >
       {(provided) => (
         <li className="w-1/2 max-w-md min-w-[200px] mx-2"
           ref={provided.innerRef}
@@ -54,19 +55,20 @@ function List({ list, index, removeFromListState }: { removeFromListState: (list
                 </button>
               )}
             </h2>
-            {/* drag drop content & droppabe */}
-            <Droppable droppableId={list.title}>
+
+            <Droppable droppableId={list.title} type='todo' isDropDisabled={dropDisabled}>
+                
               {(provided) => (
                 <ul className="max-h-[50vh] overflow-y-auto list"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >
                   {list.todos.map((todo, todoIndex) => (
-                    <Draggable draggableId={`${todo.id}`} index={todoIndex} key={todo.id}>
+
+                    <Draggable draggableId={`todo-${todo.content}`} index={todoIndex} key={todo.content}>
                       {(provided) => (
                         edit === todoIndex ? (
                           <EditTodo
-                            provided={provided}
                             list={list}
                             setEdit={setEdit}
                             todo={todo}
@@ -75,7 +77,7 @@ function List({ list, index, removeFromListState }: { removeFromListState: (list
                         ) : (
                           <TodoItem
                             provided={provided}
-                            key={todo.id}
+                            // key={todo.id}
                             index={todoIndex}
                             list={list}
                             setEdit={setEdit}

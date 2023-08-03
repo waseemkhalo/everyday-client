@@ -11,7 +11,6 @@ type TodoItemProps = {
   list: List;
   edit: number;
   setEdit: React.Dispatch<React.SetStateAction<number | undefined>>;
-  provided: DraggableProvided;
 };
 
 /** todo item as editable input */
@@ -20,7 +19,7 @@ export default function EditTodo({
   list,
   edit,
   setEdit,
-  provided }: TodoItemProps) {
+  }: TodoItemProps) {
 
   const editRef = useRef<HTMLInputElement>(null)
 
@@ -39,7 +38,6 @@ export default function EditTodo({
   };
 
   return (
-    <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
       <li >
         <input
           className='w-full bg-opacity-50 bg-white outline-none border border-black border-opacity-25 rounded-xl px-4'
@@ -54,6 +52,5 @@ export default function EditTodo({
           <button onClick={() => setEdit(undefined)} >Cancel</button>
         </div>
       </li>
-    </div>
   )
 }
