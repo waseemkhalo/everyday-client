@@ -1,9 +1,9 @@
 import { FormEvent, useState } from 'react'
+import { Draggable, Droppable } from 'react-beautiful-dnd'
 import { List } from '../../services/listService'
 import { addTodo } from '../../services/todoService'
 import EditTodo from './EditTodo'
 import TodoItem from './TodoItem'
-import { Droppable, Draggable } from 'react-beautiful-dnd'
 
 // basically the same as List component, just styled a bit differently, and no delete button
 export default function PriorityList({ list }: { list: List | undefined }) {
@@ -25,7 +25,7 @@ export default function PriorityList({ list }: { list: List | undefined }) {
       <div className=" shadow-lg bg-red rounded-md justify-center align-middle px-4 py-2 lg:py-6">
         {list &&
           <>
-            <Droppable droppableId="droppable">
+            <Droppable droppableId="priority">
               {(provided) => (
                 <ul
                   {...provided.droppableProps}

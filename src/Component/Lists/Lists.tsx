@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react'
-import { DragDropContext, BeforeCapture, Droppable, OnDragEndResponder, OnBeforeCaptureResponder } from 'react-beautiful-dnd'
+import { BeforeCapture, DragDropContext, Droppable, OnBeforeCaptureResponder, OnDragEndResponder } from 'react-beautiful-dnd'
 import { List as DBList, addList, listenToLists } from '../../services/listService'
 import { getListOrder, updateListOrder } from '../../services/userService'
 import List from "../List/List"
@@ -48,7 +48,7 @@ export default function Lists() {
     // code to update BE 
     setCurrentDragging(undefined)
 
-    const [type, id] = result.draggableId.split('-');
+    const type = result.type;
 
     if (type === 'todo') {
 
@@ -102,7 +102,7 @@ export default function Lists() {
               >
                 {/* remove priority list from list array from bd, sort the rest by order */}
                 {lists.filter(list => list.title !== 'priority').sort((a, b) => listOrder.indexOf(a.title) - listOrder.indexOf(b.title)).map((list, index) =>
-                  <List list={list} key={list.title} index={index} removeFromListState={removeFromListState} dropDisabled={list.title === currentDragging?.split('-')[1] ? false:true}  />
+                  <List list={list} key={list.title} index={index} removeFromListState={removeFromListState} dropDisabled={list.title === currentDragging?.split('-')[1] ? false : true} />
                 )}
                 {provided.placeholder}
               </ul>

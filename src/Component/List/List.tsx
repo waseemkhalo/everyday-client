@@ -8,7 +8,7 @@ import { addTodo } from "../../services/todoService";
 import EditTodo from "./EditTodo";
 import TodoItem from "./TodoItem";
 
-function List({ list, index, removeFromListState, dropDisabled }: { removeFromListState: (list: string) => void, list: DBList, index: number, dropDisabled: boolean}) {
+function List({ list, index, removeFromListState, dropDisabled }: { removeFromListState: (list: string) => void, list: DBList, index: number, dropDisabled: boolean }) {
   // array index of the todo selecting for editing
   const [edit, setEdit] = useState<number>();
 
@@ -29,7 +29,7 @@ function List({ list, index, removeFromListState, dropDisabled }: { removeFromLi
 
 
   return (
-    <Draggable draggableId={`list-${list.title}`} index={index} >
+    <Draggable draggableId={list.title} index={index} >
       {(provided) => (
         <li className="w-1/2 max-w-md min-w-[200px] mx-2"
           ref={provided.innerRef}
@@ -57,7 +57,7 @@ function List({ list, index, removeFromListState, dropDisabled }: { removeFromLi
             </h2>
 
             <Droppable droppableId={list.title} type='todo' isDropDisabled={dropDisabled}>
-                
+
               {(provided) => (
                 <ul className="max-h-[50vh] overflow-y-auto list"
                   ref={provided.innerRef}
@@ -65,7 +65,7 @@ function List({ list, index, removeFromListState, dropDisabled }: { removeFromLi
                 >
                   {list.todos.map((todo, todoIndex) => (
 
-                    <Draggable draggableId={`todo-${todo.content}`} index={todoIndex} key={todo.content}>
+                    <Draggable draggableId={todo.content} index={todoIndex} key={todo.content}>
                       {(provided) => (
                         edit === todoIndex ? (
                           <EditTodo
