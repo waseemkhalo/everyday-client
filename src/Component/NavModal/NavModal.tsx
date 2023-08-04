@@ -23,7 +23,8 @@ function NavModal() {
 
   return (
     <>
-      <button onClick={toggleModal}>
+    <FeedbackModal />
+      <button className='pl-6' onClick={toggleModal}>
         <img src={hamburgerMenu} alt="hamburger menu" />
       </button>
 
