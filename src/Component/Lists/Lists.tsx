@@ -31,7 +31,7 @@ export default function Lists() {
         updateListOrder(newListOrder)
       })
     }
-  })
+  }, [lists, listOrder])
 
   const handleNewList = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -40,8 +40,9 @@ export default function Lists() {
       const newOrder = [...listOrder]
       newOrder.push(target.list.value)
       setListOrder(newOrder)
+      await addList(target.list.value)
+      await updateListOrder(newOrder) // <-- Add this line to update the list order with the new list
     }
-    await addList(target.list.value)
     target.reset()
   }
 
