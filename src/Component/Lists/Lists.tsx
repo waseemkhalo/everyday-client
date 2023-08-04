@@ -78,6 +78,8 @@ export default function Lists() {
 
   const handleDragStart: OnBeforeCaptureResponder = (start: BeforeCapture) => {
     setCurrentDragging(start.draggableId)
+    console.log(start.draggableId);
+
 
 
   }
@@ -103,7 +105,7 @@ export default function Lists() {
               >
                 {/* remove priority list from list array from bd, sort the rest by order */}
                 {lists.filter(list => list.title !== 'priority').sort((a, b) => listOrder.indexOf(a.title) - listOrder.indexOf(b.title)).map((list, index) =>
-                  <List list={list} key={list.title} index={index} removeFromListState={removeFromListState} dropDisabled={list.title === currentDragging?.split('-')[1] ? false : true} />
+                  <List list={list} key={list.title} index={index} removeFromListState={removeFromListState} dropDisabled={list.title === currentDragging?.split('-')[0] ? false : true} />
                 )}
                 {provided.placeholder}
               </ul>
