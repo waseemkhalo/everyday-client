@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react'
 import { BeforeCapture, DragDropContext, Droppable, OnBeforeCaptureResponder, OnDragEndResponder } from 'react-beautiful-dnd'
 import { List as DBList, addList, listenToLists } from '../../services/listService'
+import { reOrderTodos } from '../../services/todoService'
 import { getListOrder, updateListOrder } from '../../services/userService'
 import List from "../List/List"
 import PriorityList from '../List/PriorityList'
@@ -54,10 +55,11 @@ export default function Lists() {
 
       if (result.destination && lists) {
         const newLists = [...lists]
-        const listBeingChanged = newLists[newLists.findIndex(list => list.title === result.source.droppableId)]
-        const movedItem = listBeingChanged.todos.splice(result.source.index, 1)[0]
-        listBeingChanged.todos.splice(result.destination.index, 0, movedItem)
+        const todosBeingChanged = newLists[newLists.findIndex(list => list.title === result.source.droppableId)].todos
+        const movedItem = todosBeingChanged.splice(result.source.index, 1)[0]
+        todosBeingChanged.splice(result.destination.index, 0, movedItem)
         setLists(newLists)
+        await reOrderTodos(result.source.droppableId, todosBeingChanged)
       }
 
 
