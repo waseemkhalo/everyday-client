@@ -52,6 +52,13 @@ export default function Lists() {
 
     if (type === 'todo') {
 
+      if (result.destination && lists) {
+        const newLists = [...lists]
+        const listBeingChanged = newLists[newLists.findIndex(list => list.title === result.source.droppableId)]
+        const movedItem = listBeingChanged.todos.splice(result.source.index, 1)[0]
+        listBeingChanged.todos.splice(result.destination.index, 0, movedItem)
+        setLists(newLists)
+      }
 
 
     } else if (type === 'list') {
@@ -78,10 +85,6 @@ export default function Lists() {
 
   const handleDragStart: OnBeforeCaptureResponder = (start: BeforeCapture) => {
     setCurrentDragging(start.draggableId)
-    console.log(start.draggableId);
-
-
-
   }
 
   return (
