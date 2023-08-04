@@ -25,7 +25,7 @@ export default function PriorityList({ list }: { list: List | undefined }) {
       <div className=" shadow-lg bg-red rounded-md justify-center align-middle px-4 py-2 lg:py-6">
         {list &&
           <>
-            <Droppable droppableId="priority">
+            <Droppable droppableId="priority" type='todo'>
               {(provided) => (
                 <ul
                   {...provided.droppableProps}
