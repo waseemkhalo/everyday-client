@@ -6,18 +6,24 @@ import { List } from "./listService";
 export class Todo {
   constructor(content: Todo['content']) {
     this.content = content;
+    // this.id = id;
   }
   content: string
   completed: boolean = false;
+  // id: string; 
 }
 
 /**
  * @param list title of list to add to
  * @param todo content for new todo
  */
+
 export const addTodo = async (list: List['title'], todo: Todo['content']) => {
   const currentUser = auth.currentUser?.uid
-  const newTodo = new Todo(todo)
+  // Generate a new id
+  // const newId = db.collection('users').doc().id;
+  // const newTodo = new Todo(todo, newId)  // Pass the id to the constructor
+  const newTodo = new Todo(todo)  // Pass the id to the constructor
   if (currentUser && todo) {
     try {
       await updateDoc(doc(db, 'users', currentUser, 'lists', list), {
@@ -78,6 +84,19 @@ export const checkTodo = async (list: List, oldTodo: Todo) => {
       })
     } catch (e) {
       console.error('error modifying todo: ', e);
+    }
+  }
+}
+
+export const reOrderTodos = async (listTitle: List['title'], newTodos: Todo[]) => {
+  const currentUser = auth.currentUser?.uid
+  if (currentUser) {
+    try {
+      await updateDoc(doc(db, 'users', currentUser, 'lists', listTitle), {
+        todos: newTodos
+      })
+    } catch (e) {
+      console.error('error modifying todos: ', e);
     }
   }
 }

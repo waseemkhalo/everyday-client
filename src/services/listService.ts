@@ -1,5 +1,5 @@
 import { User } from "@firebase/auth";
-import { FirestoreDataConverter, collection, deleteDoc, doc, getCountFromServer, getDocs, onSnapshot, setDoc, writeBatch } from "@firebase/firestore";
+import { FirestoreDataConverter, arrayRemove, arrayUnion, collection, deleteDoc, doc, getCountFromServer, getDocs, onSnapshot, setDoc, updateDoc, writeBatch } from "@firebase/firestore";
 import { Dispatch, SetStateAction } from 'react';
 import { auth, db } from "../firebase/firebase";
 import { Todo } from "./todoService";
@@ -54,6 +54,9 @@ export const addList = async (title: List['title']) => {
       const order = snapshot.data().count - 1
       const listDoc = doc(db, 'users', currentUser, 'lists', title).withConverter(listConverter)
       await setDoc(listDoc, new List(title, order))
+      await updateDoc(doc(db, 'users', currentUser), {
+        listOrder: arrayUnion(title)
+      })
     } catch (e) {
       console.error('error adding new todo: ', e);
     }
@@ -94,6 +97,9 @@ export const deleteList = async (title: List['title']) => {
     try {
       const listDoc = doc(db, 'users', currentUser, 'lists', title)
       await deleteDoc(listDoc)
+      await updateDoc(doc(db, 'users', currentUser), {
+        listOrder: arrayRemove(title)
+      })
     } catch (e) {
       console.error('error deleting list: ', e);
     }
