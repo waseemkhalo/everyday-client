@@ -96,7 +96,8 @@ export default function Lists() {
         <DragDropContext onBeforeCapture={handleDragStart} onDragEnd={handleListDrop}>
           <Droppable droppableId='lists' direction='horizontal' type='list' >
             {(provided) => (
-              <ul className="flex overflow-x-auto py-4 lists-section px-4"
+              // overflow-x-auto
+              <ul className="flex py-4 overflow-x-auto lists-section px-4"
                 ref={provided.innerRef}
                 {...provided.droppableProps}
               >

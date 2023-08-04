@@ -59,6 +59,7 @@ function List({ list, index, removeFromListState, dropDisabled }: { removeFromLi
             <Droppable droppableId={list.title} type='todo' isDropDisabled={dropDisabled}>
 
               {(provided) => (
+                // overflow-y-auto
                 <ul className="max-h-[50vh] overflow-y-auto list"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
@@ -72,18 +73,19 @@ function List({ list, index, removeFromListState, dropDisabled }: { removeFromLi
                         setEdit={setEdit}
                         todo={todo}
                         edit={edit}
+                        key={todo.content}
                       />
                     ) : (
-                      <Draggable draggableId={todo.content} index={todoIndex} key={todo.content} isDragDisabled={edit === undefined ? false : true}>
+                      <Draggable draggableId={`${list.title}-${todo.content}`} index={todoIndex} key={todo.content} isDragDisabled={edit === undefined ? false : true}>
                         {(provided) => (
                           <TodoItem
                             provided={provided}
-                            // key={todo.id}
                             index={todoIndex}
                             list={list}
                             setEdit={setEdit}
                             todo={todo}
                           />
+
                         )}
                       </Draggable>
                     )

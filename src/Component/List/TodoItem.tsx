@@ -1,9 +1,9 @@
+import { DraggableProvided } from "react-beautiful-dnd";
 import { toast } from "react-toastify";
 import editIcon from "../../assets/icons/pencil-light.svg";
 import trashIcon from "../../assets/icons/trash-light.svg";
 import { List } from "../../services/listService";
 import { Todo, checkTodo, deleteTodo } from "../../services/todoService";
-import { DraggableProvided } from "react-beautiful-dnd";
 
 
 type TodoItemProps = {
