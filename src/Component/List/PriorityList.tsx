@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react'
+import { Draggable, Droppable } from 'react-beautiful-dnd'
 import { List } from '../../services/listService'
 import { addTodo } from '../../services/todoService'
 import EditTodo from './EditTodo'
@@ -24,15 +25,42 @@ export default function PriorityList({ list }: { list: List | undefined }) {
       <div className=" shadow-lg bg-red rounded-md justify-center align-middle px-4 py-2 lg:py-6">
         {list &&
           <>
-            <ul>
-              {list.todos.map((todo, index) =>
-                edit === index ? (
-                  <EditTodo key={index} list={list} setEdit={setEdit} todo={todo} edit={edit} />
-                ) : (
-                  <TodoItem key={index} index={index} list={list} setEdit={setEdit} todo={todo} />
-                )
+            <Droppable droppableId="priority" type='todo'>
+              {(provided) => (
+                <ul
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {list.todos.map((todo, index) => (
+
+
+                    edit === index ? (
+                      <EditTodo
+                        key={todo.content}
+                        list={list}
+                        setEdit={setEdit}
+                        todo={todo}
+                        edit={edit}
+                      />
+                    ) : (
+                      <Draggable key={todo.content} draggableId={`${list.title}-${todo.content}`} index={index} isDragDisabled={edit === undefined ? false : true}>
+                        {(provided) =>
+                          <TodoItem
+                            index={index}
+                            list={list}
+                            setEdit={setEdit}
+                            todo={todo}
+                            provided={provided}
+                          />
+                        }
+                      </Draggable>
+                    )
+                  ))}
+
+                  {provided.placeholder}
+                </ul>
               )}
-            </ul>
+            </Droppable>
           </>
         }
         <form onSubmit={handleNewTodo} className="p-0" >
