@@ -13,10 +13,13 @@ function NoteSection({ day }: { day: Day | Today | undefined }) {
   }, [day]);
 
   // on notes change, display save button
+  // how do get this to update the frontend without a refresh?
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNotes(e.currentTarget.value);
     setSaveVisible(true);
   }
+  
+
 
   const handleSaveClick = () => {
     updateNotes(notes);
@@ -80,9 +83,10 @@ function NoteSection({ day }: { day: Day | Today | undefined }) {
                   onChange={handleChange}
                 />
               </>
-
             ) : (
               <MarkdownPreview content={day.notes} />
+              // how to render the markdown preview component here without refreshing the page?
+              // do i pass the onChange function to the markdown preview component?
             )}
           </div>
         )}
