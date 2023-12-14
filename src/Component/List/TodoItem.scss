@@ -1,4 +1,10 @@
 .custom-checkbox {
   height: 20px;
   width: 20px;
+  border-radius: 50%;
+  accent-color: #18191f;
+}
+
+.custom-checkbox:hover {
+  accent-color: #6f7598;
 }

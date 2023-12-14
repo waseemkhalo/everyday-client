@@ -36,7 +36,7 @@ export default function TodoItem({
       <li className={`flex max-w-full p-2 rounded-md group/edit hover:bg-opacity-${list.title !== 'daily' && list.title !== 'priority' ? '75' : '25'} hover:bg-white`}>
         <input
           type="checkbox"
-          className="form-checkbox custom-checkbox accent-pink-500 mr-2 trigger-time"
+          className="form-checkbox custom-checkbox mr-2 trigger-time"
           checked={todo.completed}
           onChange={() => checkTodo(list, todo)}
         />
