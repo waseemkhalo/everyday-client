@@ -4,12 +4,8 @@
   "scss.format.newlineBetweenSelectors": false,
   "scss.format.spaceAroundSelectorSeparator": true,
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true
+    "source.organizeImports": "explicit"
   },
   "editor.formatOnSave": true,
-  "cSpell.words": [
-    "firebaseui",
-    "Toastify",
-    "Todos"
-  ]
+  "cSpell.words": ["firebaseui", "Toastify", "Todos"]
 }
