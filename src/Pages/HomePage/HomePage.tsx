@@ -71,23 +71,21 @@ function HomePage() {
 
   return (
     <div className="app">
-      <div className="app-glow">
-        {!loading && (
-          <>
-            <NavPostAuth />
-            <QuoteBox date={day?.date ? day.date : today?.date} />
-            {signedIn && (
-              <>
-                <DayDetails day={day} setDay={setDay} today={today} />
-                {/* show lists for today, and static lists for any other day */}
-                {day ? <StaticLists lists={day.lists} listOrder={day.listOrder} /> : <Lists />}
-                <NoteSection day={day || today} setToday={setToday} />
-              </>
-            )}
-          </>
-        )}
-        <Footer />
-      </div>
+      {!loading && (
+        <>
+          <NavPostAuth />
+          <QuoteBox date={day?.date ? day.date : today?.date} />
+          {signedIn && (
+            <>
+              <DayDetails day={day} setDay={setDay} today={today} />
+              {/* show lists for today, and static lists for any other day */}
+              {day ? <StaticLists lists={day.lists} listOrder={day.listOrder} /> : <Lists />}
+              <NoteSection day={day || today} setToday={setToday} />
+            </>
+          )}
+        </>
+      )}
+      <Footer />
     </div>
   );
 }

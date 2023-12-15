@@ -44,11 +44,11 @@ export default function TodoItem({
           <span className="break-all">{todo.content} </span>
 
           <div className="group/edit hidden group-hover/edit:flex gap-2 min-w-fit" >
-            <button className="invisible group-hover/edit:visible hover:bg-white hover:bg-opacity-50"
+            <button className="invisible group-hover/edit:visible hover:border-black hover:bg-opacity-50"
               onClick={() => setEdit(index)} >
               <img src={editIcon} className="w-5" alt="edit" />
             </button>
-            <button className="invisible group-hover/edit:visible hover:bg-white hover:bg-opacity-50 trigger-time"
+            <button className="invisible group-hover/edit:visible hover:border-black hover:bg-opacity-50 trigger-time"
               onClick={() => handleDelete(list.title, todo)} >
               <img src={trashIcon} className="w-5" alt='delete' />
             </button>

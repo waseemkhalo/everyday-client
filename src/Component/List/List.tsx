@@ -95,13 +95,14 @@ function List({ list, index, removeFromListState, dropDisabled }: { removeFromLi
               )}
             </Droppable>
             <form onSubmit={handleNewTodo} className="p-0 mt-auto">
-              <label>
+              <label className="p-2">
                 <input
-                  className="bg-transparent border-b-2 border-black w-5/6 max-w-[10rem] focus:outline-none placeholder-black placeholder-opacity-50"
+                  className="bg-transparent w-5/6 max-w-[6rem] focus:outline-none placeholder-black placeholder-opacity-50"
                   placeholder="Add Item"
                   name="todo"
                 />
-                <button className="justify-self-end trigger-time">+</button>
+                <button className="group-hover/edit:visible"> + </button>
+
               </label>
             </form>
           </div>
