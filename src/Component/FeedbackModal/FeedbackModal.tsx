@@ -28,7 +28,7 @@ function FeedbackModal() {
 
   return (
     <>
-      <button onClick={toggleModal}>Feedback</button>
+      <button onClick={toggleModal} className="text-black">Feedback</button>
 
       <div
         className={`fixed z-10 inset-0 overflow-y-auto flex items-center justify-center ${isOpen ? "block" : "hidden"
@@ -40,7 +40,7 @@ function FeedbackModal() {
           </button>
 
           <form className="flex-col" onSubmit={handleSubmit}>
-            <h1 className="mb-6 text-2xl">Feedback</h1>
+            <h1 className="mb-6 text-2xl text-black">Feedback</h1>
             <label htmlFor="survey">Are you enjoying your experience?</label>
             <div className="flex items-center space-x-2">
               <label>

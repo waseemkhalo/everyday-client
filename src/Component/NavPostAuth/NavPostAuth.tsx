@@ -1,4 +1,4 @@
-import logo from "../../assets/logo/everydayseasons.png";
+import logo from "../../assets/logo/everyday-seasons-white.png";
 import NavModal from "../NavModal/NavModal";
 
 /**top home page header */

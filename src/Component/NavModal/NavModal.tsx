@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import facebookIcon from "../../assets/icons/facebook-icon.svg";
-import hamburgerMenu from "../../assets/icons/hamburger-menu.png";
+import hamburgerMenu from "../../assets/icons/hamburger-menu.svg";
 import instagramIcon from "../../assets/icons/instagram-icon.png";
-import logos from "../../assets/logo/everydaynewlogo.png";
+import logos from "../../assets/logo/everydayseasons.png";
 import { auth } from "../../firebase/firebase";
 import FeedbackModal from "../FeedbackModal/FeedbackModal";
 

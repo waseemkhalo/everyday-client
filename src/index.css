@@ -7,7 +7,8 @@ body {
   z-index: 0;
   margin: 0;
   padding: 0;
-  background: radial-gradient(50% 50% at 50% 50%, #faf1f0 0%, #f6f9ff 100%);
+  background: radial-gradient(50% 50% at 50% 50%, #2E3040 5.21%, #18181F 82.81%);
+
 }
 
 /* custom scrollbar stylings for lists section and list components */
