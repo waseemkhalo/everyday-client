@@ -62,6 +62,11 @@
     width: 20rem;
     border-radius: 50%;
     filter: blur(8rem);
+
+    @include sm {
+      top: 75%;
+      right: 0%;
+    }
   }
 
   &-4 {
@@ -74,6 +79,11 @@
     width: 25rem;
     border-radius: 31% 69% 15% 85% / 58% 45% 55% 42%;
     filter: blur(8rem);
+
+    @include sm {
+      top: 45%;
+      right: 99%;
+    }
   }
 
   &-5 {
