@@ -1,0 +1,31 @@
+.list-box {
+  position: relative;
+  border-radius: 1.5rem;
+  border: 0.1px solid #b5b5b5;
+  background: #e6e6e6b9;
+  padding: 1rem 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+.list-box::before {
+  content: "";
+  position: absolute;
+  top: -1px; /* Adjust the distance from the top */
+  right: -1; /* Adjust the distance from the right */
+  bottom: -1; /* Adjust the distance from the bottom */
+  left: -1; /* Adjust the distance from the left */
+  border-radius: 1.5rem;
+  background: rgba(
+    33,
+    33,
+    33,
+    0.2
+  ); /* Adjust the opacity for the glow effect */
+  filter: blur(10px); /* Adjust the blur amount for the glow effect */
+  z-index: -1; /* Place the pseudo-element behind the main box */
+}
+
+.list-box:hover::before {
+  background: rgba(255, 255, 255, 0.3); /* Adjust the opacity on hover */
+}

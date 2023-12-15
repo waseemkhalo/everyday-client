@@ -6,6 +6,7 @@ import deleteIcon from "../../assets/icons/trash-light.svg";
 import { List as DBList, deleteList } from "../../services/listService";
 import { addTodo } from "../../services/todoService";
 import EditTodo from "./EditTodo";
+import "./List.scss";
 import TodoItem from "./TodoItem";
 
 function List({ list, index, removeFromListState, dropDisabled }: { removeFromListState: (list: string) => void, list: DBList, index: number, dropDisabled: boolean }) {
@@ -36,8 +37,7 @@ function List({ list, index, removeFromListState, dropDisabled }: { removeFromLi
           {...provided.draggableProps}
         >
           <div
-            className={`flex flex-col h-full ${list.title === "daily" ? "bg-lightOrange" : "bg-smoke"
-              } rounded-md px-4 py-2 shadow-lg`}
+            className={`flex flex-col h-full list-box shadow-lg`}
           >
             <h2 className="text-center my-4 capitalize relative">
               <img src={dragIcon} alt="drag"

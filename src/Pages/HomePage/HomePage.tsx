@@ -6,6 +6,7 @@ import NavPostAuth from "../../Component/NavPostAuth/NavPostAuth";
 import NoteSection from "../../Component/NoteSection/NoteSection";
 import QuoteBox from "../../Component/QuoteBox/QuoteBox";
 import StaticLists from "../../Component/StaticLists/StaticLists";
+import "./HomePage.scss";
 
 import { auth } from "../../firebase/firebase";
 import {
@@ -69,22 +70,24 @@ function HomePage() {
 
 
   return (
-    <div className="App">
-      {!loading && (
-        <>
-          <NavPostAuth />
-          <QuoteBox date={day?.date ? day.date : today?.date} />
-          {signedIn && (
-            <>
-              <DayDetails day={day} setDay={setDay} today={today} />
-              {/* show lists for today, and static lists for any other day */}
-              {day ? <StaticLists lists={day.lists} listOrder={day.listOrder} /> : <Lists />}
-              <NoteSection day={day || today} setToday={setToday} />
-            </>
-          )}
-        </>
-      )}
-      <Footer />
+    <div className="app">
+      <div className="app-glow">
+        {!loading && (
+          <>
+            <NavPostAuth />
+            <QuoteBox date={day?.date ? day.date : today?.date} />
+            {signedIn && (
+              <>
+                <DayDetails day={day} setDay={setDay} today={today} />
+                {/* show lists for today, and static lists for any other day */}
+                {day ? <StaticLists lists={day.lists} listOrder={day.listOrder} /> : <Lists />}
+                <NoteSection day={day || today} setToday={setToday} />
+              </>
+            )}
+          </>
+        )}
+        <Footer />
+      </div>
     </div>
   );
 }

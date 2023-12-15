@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 body {
-  background-color: white;
   margin: 0;
-  box-sizing: border-box;
+  padding: 0;
+
 }
 
 /* custom scrollbar stylings for lists section and list components */
