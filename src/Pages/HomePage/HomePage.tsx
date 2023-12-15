@@ -74,22 +74,26 @@ function HomePage() {
       <div className="circle-1"></div>
       <div className="circle-2"></div>
       <div className="circle-3"></div>
-      <div className="app-content">
-        {!loading && (
-          <>
-            <NavPostAuth />
-            <QuoteBox date={day?.date ? day.date : today?.date} />
-            {signedIn && (
-              <>
-                <DayDetails day={day} setDay={setDay} today={today} />
-                {/* show lists for today, and static lists for any other day */}
-                {day ? <StaticLists lists={day.lists} listOrder={day.listOrder} /> : <Lists />}
-                <NoteSection day={day || today} setToday={setToday} />
-              </>
-            )}
-          </>
-        )}
-        <Footer />
+      <div className="circle-4"></div>
+      <div className="circle-5"></div>
+      <div className="rectangle">
+        <div className="app-content">
+          {!loading && (
+            <>
+              <NavPostAuth />
+              <QuoteBox date={day?.date ? day.date : today?.date} />
+              {signedIn && (
+                <>
+                  <DayDetails day={day} setDay={setDay} today={today} />
+                  {/* show lists for today, and static lists for any other day */}
+                  {day ? <StaticLists lists={day.lists} listOrder={day.listOrder} /> : <Lists />}
+                  <NoteSection day={day || today} setToday={setToday} />
+                </>
+              )}
+            </>
+          )}
+          <Footer />
+        </div>
       </div>
     </div>
   );

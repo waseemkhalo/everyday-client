@@ -12,7 +12,7 @@ function QuoteBox({ date }: { date: string | undefined }) {
   }, [date]);
 
   return (
-    <div className="quote-box bg-smoke">
+    <div className="quote-box">
       {quote && //conditional in case quote fails to retrieve
         <>
           <span>"{quote.text}"</span>

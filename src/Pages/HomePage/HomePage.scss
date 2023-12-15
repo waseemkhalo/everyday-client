@@ -1,3 +1,5 @@
+@use "../../styles/partials/mixins" as *;
+
 .app {
   height: 100vh;
   width: 100%;
@@ -8,6 +10,16 @@
   position: relative;
   z-index: 1; /* Ensure that child components are rendered above the background */
 }
+
+// .rectangle {
+//   width: 100%;
+//   height: max-content;
+//   position: absolute;
+//   z-index: 1;
+//   background: #4776e6;
+//   @include glass-effect;
+//   border: none;
+// }
 
 .circle {
   &-1 {
@@ -42,7 +54,6 @@
     z-index: 1;
     top: 110%;
     right: 10%;
-    background-color: #ff3cac;
     background: #ff9966;
     background: -webkit-linear-gradient(to right, #ff5e62, #ff9966);
     background: linear-gradient(to right, #ff5e62, #ff9966);
@@ -50,24 +61,59 @@
     width: 20rem;
     border-radius: 31% 69% 15% 85% / 58% 45% 55% 42%;
   }
+
+  &-4 {
+    position: absolute;
+    z-index: 1;
+    top: 60%;
+    right: 95%;
+    background: #ff9966;
+    background: rgb(70, 226, 106)-linear-gradient(to right, #86ff5e, #66ff6e);
+    background: linear-gradient(to right, #69ff5e, #66ff66);
+    height: 45rem;
+    width: 20rem;
+    border-radius: 31% 69% 15% 85% / 58% 45% 55% 42%;
+  }
+
+  &-5 {
+    position: absolute;
+    z-index: 1;
+    top: 1%;
+    right: 6%;
+    background: #f2ff66;
+    background: -webkit-linear-gradient(to right, #ecff5e, #f2ff66);
+    background: linear-gradient(to right, #ecff5e, #f2ff66);
+    height: 20rem;
+    width: 20rem;
+    border-radius: 31% 69% 15% 85% / 58% 45% 55% 42%;
+  }
 }
 
-.circle-1 {
-  animation: bounce 4s linear infinite;
+.circle {
+  &-1 {
+    animation: bounce 8s linear infinite;
+  }
+  &-2 {
+    animation: bounce 8s linear infinite 1s;
+  }
+  &-3 {
+    animation: bounce 8s linear infinite 2s;
+  }
+  &-4 {
+    animation: bounce 8s linear infinite 3s;
+  }
+  &-5 {
+    animation: bounce 8s linear infinite 4s;
+  }
 }
-.circle-2 {
-  animation: bounce 4s linear infinite 1s;
-}
-.circle-3 {
-  animation: bounce 4s linear infinite 2s;
-}
+
 @keyframes bounce {
   0% {
-    transform: translateY(0px);
+    transform: translateY(0rem);
   }
 
   25% {
-    transform: translateY(10px);
+    transform: translateY(5rem);
   }
 
   50% {
@@ -75,7 +121,7 @@
   }
 
   75% {
-    transform: translateY(-10px);
+    transform: translateY(5rem);
   }
 
   100% {

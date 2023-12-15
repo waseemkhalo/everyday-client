@@ -1,6 +1,14 @@
 @use "../../styles/partials/mixins" as *;
 
 .quote-box {
+  @include glass-effect;
+  background: linear-gradient(
+    108deg,
+    rgba(255, 255, 255, 0.46) -16.26%,
+    rgba(255, 255, 255, 0) 100.97%
+  );
+  border: none;
+
   width: auto;
   height: 10rem;
   display: flex;
