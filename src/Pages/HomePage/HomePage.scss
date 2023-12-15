@@ -1,9 +1,7 @@
 .app {
+  height: 100vh;
+  width: 100%;
   position: relative;
-  z-index: 0;
-  margin: 0;
-  padding: 0;
-  background: radial-gradient(50% 50% at 50% 50%, #faf1f0 0%, #f6f9ff 100%);
 }
 
 .app-content {
@@ -11,4 +9,76 @@
   z-index: 1; /* Ensure that child components are rendered above the background */
 }
 
-// Add your other styles for child components here
+.circle {
+  &-1 {
+    position: absolute;
+    z-index: 1;
+    top: 20%;
+    left: 20%;
+    background: #4776e6;
+    background: -webkit-linear-gradient(to right, #8e54e9, #4776e6);
+    background: linear-gradient(to right, #8e54e9, #4776e6);
+    height: 350px;
+    width: 350px;
+    border-radius: 67% 33% 38% 62% / 58% 30% 70% 42%;
+  }
+
+  &-2 {
+    position: absolute;
+    top: 50%;
+    bottom: 5%;
+    right: 25%;
+    z-index: 1;
+    background: #bc4e9c;
+    background: -webkit-linear-gradient(to right, #f80759, #bc4e9c);
+    background: linear-gradient(to right, #f80759, #bc4e9c);
+    height: 40rem;
+    width: 40rem;
+    border-radius: 53% 47% 75% 25% / 48% 30% 70% 52%;
+  }
+
+  &-3 {
+    position: absolute;
+    z-index: 1;
+    top: 110%;
+    right: 10%;
+    background-color: #ff3cac;
+    background: #ff9966;
+    background: -webkit-linear-gradient(to right, #ff5e62, #ff9966);
+    background: linear-gradient(to right, #ff5e62, #ff9966);
+    height: 20rem;
+    width: 20rem;
+    border-radius: 31% 69% 15% 85% / 58% 45% 55% 42%;
+  }
+}
+
+.circle-1 {
+  animation: bounce 4s linear infinite;
+}
+.circle-2 {
+  animation: bounce 4s linear infinite 1s;
+}
+.circle-3 {
+  animation: bounce 4s linear infinite 2s;
+}
+@keyframes bounce {
+  0% {
+    transform: translateY(0px);
+  }
+
+  25% {
+    transform: translateY(10px);
+  }
+
+  50% {
+    transform: translateY(0px);
+  }
+
+  75% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}

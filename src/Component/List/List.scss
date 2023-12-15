@@ -1,9 +1,9 @@
+@use "../../styles/partials/mixins" as *;
+
 .list-box {
   border-radius: 1.5rem;
-  border: 0.1px solid #b5b5b5;
-  background: #e6e6e6b9;
   padding: 1rem 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   color: black;
   overflow-x: auto;
+  @include glass-effect;
 }

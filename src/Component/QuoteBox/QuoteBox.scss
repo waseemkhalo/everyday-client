@@ -1,0 +1,21 @@
+@use "../../styles/partials/mixins" as *;
+
+.quote-box {
+  width: auto;
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+
+  @include sm {
+    padding: 1rem;
+  }
+  @include md {
+    padding: 4rem;
+  }
+  @include lg {
+    padding: 6rem;
+    padding-left: 8rem;
+  }
+}
