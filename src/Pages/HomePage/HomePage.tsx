@@ -76,6 +76,7 @@ function HomePage() {
       <div className="circle-3"></div>
       <div className="circle-4"></div>
       <div className="circle-5"></div>
+      <div className="circle-6"></div>
       <div className="rectangle">
         <div className="app-content">
           {!loading && (
