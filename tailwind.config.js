@@ -19,12 +19,14 @@ module.exports = {
       ghost: "#bbbbbb",
       ghostShade: "#747474",
       red: "#FFC1C1",
+      blue: "#565FD8",
+      lightBlue: "#7B84FF",
     },
     fontFamily: {
       verdana: ["Verdana", "Roboto", "sans-serif"],
     },
     extend: {
-      display: ["group-hover"]
+      display: ["group-hover"],
     },
   },
   plugins: [],

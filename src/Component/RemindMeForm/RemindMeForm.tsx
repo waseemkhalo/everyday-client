@@ -22,7 +22,7 @@ const RemindMeForm: React.FC = () => {
       {isModalOpen && (
         <div className='modal'>
           <div className="modal-content">
-            <button onClick={() => setIsModalOpen(false)}>X</button>
+            <button className="modal-close" onClick={() => setIsModalOpen(false)}>X</button>
 
             <form className='modal-form' onSubmit={handleSubmit}>
               <label className='modal-form__title'>
@@ -31,6 +31,7 @@ const RemindMeForm: React.FC = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  className='modal-form__input ml-4'
                 />
               </label>
               <br />
@@ -39,6 +40,7 @@ const RemindMeForm: React.FC = () => {
                 <select
                   value={frequency}
                   onChange={(e) => setFrequency(e.target.value)}
+                  className='modal-form__input ml-4'
                 >
                   <option value="daily">Select...</option>
                   <option value="12:00">12:00 AM</option>
@@ -70,12 +72,11 @@ const RemindMeForm: React.FC = () => {
 
               <button
                 type="submit"
-                className='modal-form__button'
-
+                className='modal-form__button border-solid rounded-md p-3 mt-4 bg-blue hover:bg-lightBlue text-white '
               >Submit
               </button>
 
-              <span>This feature is exclusively designed to dispatch daily reminders at your specified time, ensuring timely and personalized notifications.</span>
+              <span className='mt-6'>This feature is exclusively designed to dispatch daily reminders at your specified time, ensuring timely and personalized notifications.</span>
 
             </form>
           </div>
