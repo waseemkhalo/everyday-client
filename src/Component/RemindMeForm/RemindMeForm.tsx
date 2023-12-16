@@ -22,9 +22,10 @@ const RemindMeForm: React.FC = () => {
       {isModalOpen && (
         <div className='modal'>
           <div className="modal-content">
-            <button onClick={() => setIsModalOpen(false)}>Close</button>
-            <form onSubmit={handleSubmit}>
-              <label>
+            <button onClick={() => setIsModalOpen(false)}>X</button>
+
+            <form className='modal-form' onSubmit={handleSubmit}>
+              <label className='modal-form__title'>
                 Email:
                 <input
                   type="email"
@@ -33,7 +34,7 @@ const RemindMeForm: React.FC = () => {
                 />
               </label>
               <br />
-              <label>
+              <label className='modal-form__title'>
                 Time:
                 <select
                   value={frequency}
@@ -66,7 +67,16 @@ const RemindMeForm: React.FC = () => {
                   <option value="11:00">11:00 PM</option>
                 </select>
               </label>
-              <button type="submit">Submit</button>
+
+              <button
+                type="submit"
+                className='modal-form__button'
+
+              >Submit
+              </button>
+
+              <span>This feature is exclusively designed to dispatch daily reminders at your specified time, ensuring timely and personalized notifications.</span>
+
             </form>
           </div>
         </div >
