@@ -33,7 +33,7 @@ export default function TodoItem({
   return (
     <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
 
-      <li className={`flex max-w-full p-2 rounded-md group/edit hover:bg-opacity-${list.title !== 'daily' && list.title !== 'priority' ? '75' : '25'} hover:bg-white`}>
+      <li className={`flex max-w-full p-2 rounded-md group/edit hover:bg-opacity-${list.title !== 'daily' && list.title !== 'priority' ? '75' : '25'} hover:border-inherit hover:border-2`}>
         <input
           type="checkbox"
           className="form-checkbox custom-checkbox mr-2 trigger-time"
