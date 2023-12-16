@@ -88,7 +88,6 @@ export default function Lists() {
 
   const handleDragStart: OnBeforeCaptureResponder = (start: BeforeCapture) => {
     setCurrentDragging(start.draggableId)
-
   }
 
   return (
