@@ -1,27 +1,36 @@
 import 'firebase/firestore';
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { Reminder, addReminder } from '../../services/reminderService';
 import './RemindMeForm.scss';
 
-interface UserReminder {
-  email: string;
-  reminderTime: string;
-}
-
-
-const RemindMeForm: React.FC = () => {
+function RemindMeForm() {
   const [email, setEmail] = useState('');
   const [reminderTime, setReminderTime] = useState('daily');
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
+    if (email && reminderTime) {
 
+      // create new reminder object
+      const newReminder = new Reminder(
+        email,
+        reminderTime
+      );
 
-  };
+      await addReminder(newReminder);
+      //after sending reminder to db, close the modal, display toast and clear form
+      toggleModal()
+      toast.success('Reminder set, Thank you!')
+      const target = e.target as HTMLFormElement
+      target.reset()
+    }
+  }
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
-
 
 
 
@@ -86,9 +95,10 @@ const RemindMeForm: React.FC = () => {
               >Submit
               </button>
 
-              <span className='mt-6'>This feature is exclusively designed to dispatch daily reminders at your specified time, ensuring timely and personalized notifications.</span>
+              <span className='mt-6'>This feature is exclusively created to dispatch daily reminders at your specified time, ensuring timely and personalized notifications.</span>
 
             </form>
+
           </div>
         </div >
       )}
