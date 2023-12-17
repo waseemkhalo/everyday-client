@@ -1,19 +1,29 @@
+import 'firebase/firestore';
 import React, { useState } from 'react';
 import './RemindMeForm.scss';
 
+interface UserReminder {
+  email: string;
+  reminderTime: string;
+}
+
+
 const RemindMeForm: React.FC = () => {
   const [email, setEmail] = useState('');
-  const [frequency, setFrequency] = useState('daily');
+  const [reminderTime, setReminderTime] = useState('daily');
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log('Email:', email);
-    console.log('Frequency:', frequency);
+  const handleSubmit = async () => {
+
+
+
   };
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
+
+
+
 
   return (
     <>
@@ -38,8 +48,8 @@ const RemindMeForm: React.FC = () => {
               <label className='modal-form__title'>
                 Time:
                 <select
-                  value={frequency}
-                  onChange={(e) => setFrequency(e.target.value)}
+                  value={reminderTime}
+                  onChange={(e) => setReminderTime(e.target.value)}
                   className='modal-form__input ml-4'
                 >
                   <option value="daily">Select...</option>
