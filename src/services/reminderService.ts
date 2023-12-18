@@ -1,4 +1,4 @@
-import { addDoc, collection } from "firebase/firestore";
+import { setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase/firebase";
 
 export class Reminder {
@@ -13,6 +13,15 @@ export class Reminder {
   email: string;
   reminderTime: string;
   date: string = new Date().toDateString();
+
+  toObject(): Record<string, any> {
+    return {
+      email: this.email,
+      reminderTime: this.reminderTime,
+      date: this.date,
+    };
+  }
+
 }
 
 /** writes reminder to database with users set settings
@@ -20,16 +29,15 @@ export class Reminder {
  */
 
 export const addReminder = async (reminder: Reminder) => {
+  const userId = auth.currentUser?.uid;
+
   try {
-    const userId = auth.currentUser?.uid;
+    const reminderRef = db.collection("reminder").doc(userId);
 
-    await addDoc(collection(db, "reminder"), {
-      ...reminder,
-      user: userId,
+    await setDoc(reminderRef, reminder.toObject(), {
+      merge: true,
     });
-
-    console.log(addReminder);
-    console.log("reminder added");
+    
   } catch (e) {
     console.error("error storing reminder: ", e);
   }

@@ -1,34 +1,41 @@
 import 'firebase/firestore';
 import React, { useState } from 'react';
-import { toast } from 'react-toastify';
 import { Reminder, addReminder } from '../../services/reminderService';
 import './RemindMeForm.scss';
 
 function RemindMeForm() {
   const [email, setEmail] = useState('');
-  const [reminderTime, setReminderTime] = useState('daily');
+  const [reminderTime, setReminderTime] = useState('');
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (email && reminderTime) {
+      try {
+        // create new reminder object
+        const newReminder = new Reminder(
+          email,
+          reminderTime
+        );
 
-      // create new reminder object
-      const newReminder = new Reminder(
-        email,
-        reminderTime
-      );
+        await addReminder(newReminder);
 
-      await addReminder(newReminder);
-      //after sending reminder to db, close the modal, display toast and clear form
-      toggleModal()
-      toast.success('Reminder set, Thank you!')
-      const target = e.target as HTMLFormElement
-      target.reset()
+        // After sending reminder to the database, close the modal, display toast, and clear the form
+        console.log('Reminder set, Thank you!');
+        // toggleModal();
+        // toast.success('Reminder set, Thank you!');
+        // const target = e.target as HTMLFormElement;
+        // target.reset();
+      } catch (error) {
+        console.error('Error in handleSubmit:', error);
+        // Handle the error or display an error message to the user
+      }
     }
   }
+
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
@@ -48,6 +55,9 @@ function RemindMeForm() {
                 Email:
                 <input
                   type="email"
+                  id='email'
+                  name='email'
+
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className='modal-form__input ml-4'
@@ -58,34 +68,35 @@ function RemindMeForm() {
                 Time:
                 <select
                   value={reminderTime}
+                  id='reminderTime'
+                  name='reminderTime'
                   onChange={(e) => setReminderTime(e.target.value)}
                   className='modal-form__input ml-4'
                 >
                   <option value="daily">Select...</option>
-                  <option value="12:00">12:00 AM</option>
-                  <option value="1:00">1:00 AM</option>
-                  <option value="2:00">2:00 AM</option>
-                  <option value="3:00">3:00 AM</option>
-                  <option value="4:00">4:00 AM</option>
-                  <option value="5:00">5:00 AM</option>
-                  <option value="6:00">6:00 AM</option>
-                  <option value="7:00">7:00 AM</option>
-                  <option value="8:00">8:00 AM</option>
-                  <option value="9:00">9:00 AM</option>
-                  <option value="10:00">10:00 AM</option>
-                  <option value="11:00">11:00 AM</option>
-                  <option value="12:00">12:00 PM</option>
-                  <option value="1:00">1:00 PM</option>
-                  <option value="2:00">2:00 PM</option>
-                  <option value="3:00">3:00 PM</option>
-                  <option value="4:00">4:00 PM</option>
-                  <option value="5:00">5:00 PM</option>
-                  <option value="6:00">6:00 PM</option>
-                  <option value="7:00">7:00 PM</option>
-                  <option value="8:00">8:00 PM</option>
-                  <option value="9:00">9:00 PM</option>
-                  <option value="10:00">10:00 PM</option>
-                  <option value="11:00">11:00 PM</option>
+                  <option value="01:00">01:00</option>
+                  <option value="02:00">02:00</option>
+                  <option value="03:00">03:00</option>
+                  <option value="04:00">04:00</option>
+                  <option value="05:00">05:00</option>
+                  <option value="06:00">06:00</option>
+                  <option value="07:00">07:00</option>
+                  <option value="08:00">08:00</option>
+                  <option value="09:00">09:00</option>
+                  <option value="10:00">10:00</option>
+                  <option value="11:00">11:00</option>
+                  <option value="12:00">12:00</option>
+                  <option value="13:00">13:00</option>
+                  <option value="14:00">14:00</option>
+                  <option value="15:00">15:00</option>
+                  <option value="16:00">16:00</option>
+                  <option value="17:00">17:00</option>
+                  <option value="18:00">18:00</option>
+                  <option value="19:00">19:00</option>
+                  <option value="20:00">20:00</option>
+                  <option value="21:00">21:00</option>
+                  <option value="22:00">22:00</option>
+                  <option value="23:00">23:00</option>
                 </select>
               </label>
 

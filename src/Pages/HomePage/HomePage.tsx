@@ -27,11 +27,12 @@ function HomePage() {
   // day is defined if the user is viewing a previous day. it is an object containing all details about that previous day, lists included.
   const [day, setDay] = useState<Day>();
   const [today, setToday] = useState<Today>();
+  // const [user, setUser] = useState<any>();
 
   //firebase onAuthStateChanged
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
         //when user signed in, check if today is a new day
         const saveDay = async () => {
           const check = await checkDay();
@@ -42,7 +43,9 @@ function HomePage() {
           }
         };
         saveDay().then(() => setSignedIn(true));
+        // setUser(authUser);
       }
+
       // if not logged in, force redirect to landing page
       else window.location.replace("/");
       setLoading(false);
@@ -69,6 +72,9 @@ function HomePage() {
   }, [today]);
 
 
+
+
+
   return (
     <div className="app">
       <div className="circle-1"></div>
@@ -82,6 +88,7 @@ function HomePage() {
           {!loading && (
             <>
               <NavPostAuth />
+{/* <h1>{user.email}</h1> for testing... find user email*/} 
               <QuoteBox date={day?.date ? day.date : today?.date} />
               {signedIn && (
                 <>

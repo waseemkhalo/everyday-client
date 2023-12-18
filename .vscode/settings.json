@@ -3,9 +3,6 @@
   "css.format.newlineBetweenSelectors": true,
   "scss.format.newlineBetweenSelectors": false,
   "scss.format.spaceAroundSelectorSeparator": true,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit"
-  },
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "cSpell.words": ["firebaseui", "Toastify", "Todos"]
 }
