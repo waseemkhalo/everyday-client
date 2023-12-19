@@ -27,7 +27,6 @@ function HomePage() {
   // day is defined if the user is viewing a previous day. it is an object containing all details about that previous day, lists included.
   const [day, setDay] = useState<Day>();
   const [today, setToday] = useState<Today>();
-  // const [user, setUser] = useState<any>();
 
   //firebase onAuthStateChanged
   useEffect(() => {

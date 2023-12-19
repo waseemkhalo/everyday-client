@@ -1,77 +1,91 @@
-import 'firebase/firestore';
-import React, { useState } from 'react';
-import { Reminder, addReminder } from '../../services/reminderService';
-import './RemindMeForm.scss';
+import { auth } from "../../firebase/firebase";
+import React, { useEffect, useState } from "react";
+import { Reminder, addReminder } from "../../services/reminderService";
+import { toast } from "react-toastify";
+import "./RemindMeForm.scss";
 
 function RemindMeForm() {
-  const [email, setEmail] = useState('');
-  const [reminderTime, setReminderTime] = useState('');
-
+  const [email, setEmail] = useState("");
+  const [reminderTime, setReminderTime] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [user, setUser] = useState<any>();
 
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        setUser(authUser);
+        // If the user is signed in with an email, set the email field in the form
+        if (authUser.email) {
+          setEmail(authUser.email);
+        }
+      }
+    });
+
+
+    return () => unsubscribe();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (email && reminderTime) {
       try {
-        // create new reminder object
-        const newReminder = new Reminder(
-          email,
-          reminderTime
-        );
+        // Create a new reminder object
+        const newReminder = new Reminder(email, reminderTime);
 
         await addReminder(newReminder);
 
-        // After sending reminder to the database, close the modal, display toast, and clear the form
-        console.log('Reminder set, Thank you!');
-        // toggleModal();
-        // toast.success('Reminder set, Thank you!');
-        // const target = e.target as HTMLFormElement;
-        // target.reset();
+        // After sending the reminder to the database, close the modal, display a toast, and clear the form
+        toggleModal();
+        toast.success("Reminder set, Thank you!");
+        const target = e.target as HTMLFormElement;
+        target.reset();
       } catch (error) {
-        console.error('Error in handleSubmit:', error);
+        console.error("Error in handleSubmit:", error);
         // Handle the error or display an error message to the user
       }
     }
-  }
-
+  };
 
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
-
-
   return (
     <>
-      <button onClick={toggleModal} className='text-white' >Set Reminder</button>
+      <button onClick={toggleModal} className="text-white">
+        Set Reminder
+      </button>
 
       {isModalOpen && (
-        <div className='modal'>
+        <div className="modal">
           <div className="modal-content">
-            <button className="modal-close" onClick={() => setIsModalOpen(false)}>X</button>
+            <button
+              className="modal-close"
+              onClick={() => setIsModalOpen(false)}
+            >
+              X
+            </button>
 
-            <form className='modal-form' onSubmit={handleSubmit}>
-              <label className='modal-form__title'>
+            <form className="modal-form" onSubmit={handleSubmit}>
+              <label className="modal-form__title">
                 Email:
                 <input
                   type="email"
-                  id='email'
-                  name='email'
-
-                  value={email}
+                  id="email"
+                  name="email"
+                  value={user.email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className='modal-form__input ml-4'
+                  className="modal-form__input ml-4"
                 />
               </label>
               <br />
-              <label className='modal-form__title'>
+              <label className="modal-form__title">
                 Time:
                 <select
                   value={reminderTime}
-                  id='reminderTime'
-                  name='reminderTime'
+                  id="reminderTime"
+                  name="reminderTime"
                   onChange={(e) => setReminderTime(e.target.value)}
-                  className='modal-form__input ml-4'
+                  className="modal-form__input ml-4"
                 >
                   <option value="daily">Select...</option>
                   <option value="01:00">01:00</option>
