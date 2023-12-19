@@ -12,7 +12,7 @@ const sgAPIKEY = process.env.SENDGRID_API_KEY;
 sgMail.setApiKey(sgAPIKEY);
 
 exports.sendReminderEmail = functions.firestore
-    .document("reminders/{reminderId}")
+    .document("reminder/{reminderId}")
     .onCreate((snapshot, context) => {
     // Retrieve the reminder data from the snapshot
       const reminder = snapshot.data();
