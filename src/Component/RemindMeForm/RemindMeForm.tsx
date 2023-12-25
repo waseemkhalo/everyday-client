@@ -1,37 +1,48 @@
 import { auth } from "../../firebase/firebase";
 import React, { useEffect, useState } from "react";
 import { Reminder, addReminder } from "../../services/reminderService";
+import { getUser } from "../../services/userService";
 import { toast } from "react-toastify";
 import "./RemindMeForm.scss";
 
 function RemindMeForm() {
-  const [email, setEmail] = useState("");
-  const [reminderTime, setReminderTime] = useState("");
+  const [email, setEmail] = useState<any>();
+  const [emailOnProfile, setEmailOnProfile] = useState("");
+  const [optIn, setOptIn] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [user, setUser] = useState<any>();
+  // const [user, setUser] = useState<any>();
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        setUser(authUser);
-        // If the user is signed in with an email, set the email field in the form
-        if (authUser.email) {
-          setEmail(authUser.email);
+
+useEffect(() => {
+  const unsubscribe = auth.onAuthStateChanged((authUser) => {
+    if (authUser && authUser.email) {
+      setEmailOnProfile(authUser.email);
+    } else {
+      // If authUser is falsy or doesn't exist, try to get the email from another source (e.g., getUser)
+      const userBackupPromise = getUser(); // Make sure getUser returns a Promise
+
+      userBackupPromise.then((userBackup) => {
+        console.log(userBackup);
+        if (userBackup && userBackup.email) {
+          setEmailOnProfile(userBackup.email);
+        } else {
+          console.log("No email found");
         }
-      }
-    });
+      });
+    }
+  });
 
+  return () => unsubscribe();
+}, []);
 
-    return () => unsubscribe();
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (email && reminderTime) {
+    if (email && optIn) {
       try {
         // Create a new reminder object
-        const newReminder = new Reminder(email, reminderTime);
+        const newReminder = new Reminder(email, optIn);
 
         await addReminder(newReminder);
 
@@ -47,7 +58,13 @@ function RemindMeForm() {
     }
   };
 
+  const handleOptIn = (value: string) => {
+    setOptIn(value || "");
+    localStorage.setItem("optIn", value || "");
+  }
+
   const toggleModal = () => setIsModalOpen(!isModalOpen);
+
 
   return (
     <>
@@ -72,46 +89,33 @@ function RemindMeForm() {
                   type="email"
                   id="email"
                   name="email"
-                  value={user.email}
+                  value={email || emailOnProfile}
                   onChange={(e) => setEmail(e.target.value)}
                   className="modal-form__input ml-4"
                 />
               </label>
               <br />
-              <label className="modal-form__title">
-                Time:
-                <select
-                  value={reminderTime}
-                  id="reminderTime"
-                  name="reminderTime"
-                  onChange={(e) => setReminderTime(e.target.value)}
-                  className="modal-form__input ml-4"
-                >
-                  <option value="daily">Select...</option>
-                  <option value="01:00">01:00</option>
-                  <option value="02:00">02:00</option>
-                  <option value="03:00">03:00</option>
-                  <option value="04:00">04:00</option>
-                  <option value="05:00">05:00</option>
-                  <option value="06:00">06:00</option>
-                  <option value="07:00">07:00</option>
-                  <option value="08:00">08:00</option>
-                  <option value="09:00">09:00</option>
-                  <option value="10:00">10:00</option>
-                  <option value="11:00">11:00</option>
-                  <option value="12:00">12:00</option>
-                  <option value="13:00">13:00</option>
-                  <option value="14:00">14:00</option>
-                  <option value="15:00">15:00</option>
-                  <option value="16:00">16:00</option>
-                  <option value="17:00">17:00</option>
-                  <option value="18:00">18:00</option>
-                  <option value="19:00">19:00</option>
-                  <option value="20:00">20:00</option>
-                  <option value="21:00">21:00</option>
-                  <option value="22:00">22:00</option>
-                  <option value="23:00">23:00</option>
-                </select>
+              <label
+                className="modal-form__title pr-3">
+                Opt In:
+                <input
+                  type="radio"
+                  name="survey"
+                  id="yes"
+                  value="yes"
+                  onChange={() => handleOptIn('true')}
+                  checked={optIn === 'true'}
+                />
+                Yes
+                <input
+                  type="radio"
+                  name="survey"
+                  id="no"
+                  value="no"
+                  onChange={() => handleOptIn('false')}
+                  checked={optIn === 'false'}
+                />
+                No
               </label>
 
               <button
@@ -119,9 +123,7 @@ function RemindMeForm() {
                 className='modal-form__button border-solid rounded-md p-3 mt-4 bg-blue hover:bg-lightBlue text-white '
               >Submit
               </button>
-
-              <span className='mt-6'>This feature is exclusively created to dispatch daily reminders at your specified time, ensuring timely and personalized notifications.</span>
-
+              <span className='mt-6 flex justify-center'>By clicking submit, you agree to receive daily reminders from us. You can opt out at anytime.</span>
             </form>
 
           </div>

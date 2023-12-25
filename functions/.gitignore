@@ -2,4 +2,8 @@ node_modules/sendgrid.env
 
 /node_modules
 sendgrid.env
+.runtimeconfig.json
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
 ```
