@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import HomePage from "./Pages/HomePage/HomePage";
 import LandingPage from "./Pages/LandingPage/LandingPage";
+import Blog from "./Pages/Blog/Blog";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
         <Route path="/home" element={<HomePage />}></Route>
+        <Route path="/blog" element={<Blog />}></Route>
       </Routes>
     </BrowserRouter>
   );
