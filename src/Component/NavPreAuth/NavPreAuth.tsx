@@ -1,4 +1,4 @@
-import logo from "../../assets/logo/logo.png";
+import logo from "../../assets/logo/everyday-seasons-white.png";
 import Login from "../Login/Login";
 
 /**top landing page header */
@@ -8,7 +8,7 @@ function NavPreAuth({ openAuth, handleOpenAuth, handleCloseAuth }: { openAuth: b
     <>
       <div className="flex sm:mx-4 md:mx-16 lg:mx-32 justify-between items-center">
         <img
-          className="sm:w-32 sm:h-32 md:w-40 md:h-40 lg:mr-80"
+          className="sm:w-60 sm:h-34 md:w-64 md:h-40 "
           src={logo}
           alt="logo"
         />
@@ -19,7 +19,7 @@ function NavPreAuth({ openAuth, handleOpenAuth, handleCloseAuth }: { openAuth: b
           >
             Sign Up
           </button>
-          <button className="w-20 h-10" onClick={handleOpenAuth}>
+          <button className="w-20 h-10 text-white" onClick={handleOpenAuth}>
             Sign In
           </button>
         </div>
