@@ -26,11 +26,22 @@ function LandingPage() {
 
   return (
     <>
-      <NavPreAuth openAuth={openAuth} handleOpenAuth={handleOpenAuth} handleCloseAuth={handleCloseAuth} />
-      <LandingHero handleOpenAuth={handleOpenAuth} />
-      <LandingMain />
-      <Footer />
-
+      <div className="app">
+        <div className="circle-1"></div>
+        <div className="circle-2"></div>
+        <div className="circle-3"></div>
+        <div className="circle-4"></div>
+        <div className="circle-5"></div>
+        <div className="circle-6"></div>
+        <div className="rectangle">
+          <div className="app-content">
+            <NavPreAuth openAuth={openAuth} handleOpenAuth={handleOpenAuth} handleCloseAuth={handleCloseAuth} />
+            <LandingHero handleOpenAuth={handleOpenAuth} />
+            <LandingMain />
+            <Footer />
+          </div>
+        </div>
+      </div>
     </>
   );
 }

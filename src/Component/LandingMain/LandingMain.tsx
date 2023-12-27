@@ -1,4 +1,4 @@
-import screenshot from "../../assets/icons/screencapture-localhost-3000-home-2023-04-19-08_27_37.png";
+import screenshot from "../../assets/background/screencapture-everyday-dec27-425pm.png";
 
 
 function LandingMain() {
@@ -6,9 +6,9 @@ function LandingMain() {
     <section>
       <div className="flex justify-center items-center mt-6">
         <div className="flex flex-col items-center">
-          <h1 className="sm:text-5xl md:text-6xl font-bold">How it works</h1>
+          <h1 className="sm:text-5xl md:text-6xl font-bold text-white">How it works</h1>
           <div className="sm:p-6 md:p-16">
-            <p className="text-center max-w-4xl m-auto md:text-lg sm:text-base">
+            <p className="text-center max-w-4xl m-auto md:text-lg sm:text-base text-white">
               Hold yourself accountable for what you said you'd complete today.
               Each day is given an entry, and you have 24 hours to complete your
               todo list ⏰. When you miss a day, you'll skip an entry, which

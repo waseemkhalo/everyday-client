@@ -55,3 +55,16 @@ export const getListOrder = async () => {
     }
   }
 }
+
+//get current user
+export const getUser = async () => {
+  const currentUser = auth.currentUser?.uid
+  if (currentUser) {
+    try {
+      const snap = await getDoc(doc(db, 'users', currentUser))
+      return snap.data()
+    } catch (e) {
+      console.error('error getting details: ', e);
+    }
+  }
+}

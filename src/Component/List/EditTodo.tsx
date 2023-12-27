@@ -19,7 +19,7 @@ export default function EditTodo({
   list,
   edit,
   setEdit,
-  }: TodoItemProps) {
+}: TodoItemProps) {
 
   const editRef = useRef<HTMLInputElement>(null)
 
@@ -38,19 +38,19 @@ export default function EditTodo({
   };
 
   return (
-      <li >
-        <input
-          className='w-full bg-opacity-50 bg-white outline-none border border-black border-opacity-25 rounded-xl px-4'
-          ref={editRef}
-          defaultValue={todo.content}
-          autoFocus
-        />
-        <div className="flex gap-4">
-          <button onClick={handleConfirmEdit} className='trigger-time' >
-            Confirm
-          </button>
-          <button onClick={() => setEdit(undefined)} >Cancel</button>
-        </div>
-      </li>
+    <li >
+      <input
+        className='w-full bg-opacity-50 bg-white outline-none border border-black border-opacity-25 rounded-xl px-4 py-2'
+        ref={editRef}
+        defaultValue={todo.content}
+        autoFocus
+      />
+      <div className="flex gap-4">
+        <button onClick={handleConfirmEdit} className='trigger-time' >
+          Confirm
+        </button>
+        <button onClick={() => setEdit(undefined)} >Cancel</button>
+      </div>
+    </li>
   )
 }

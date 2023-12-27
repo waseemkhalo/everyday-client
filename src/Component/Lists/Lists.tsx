@@ -5,6 +5,7 @@ import { reOrderTodos } from '../../services/todoService'
 import { getListOrder, updateListOrder } from '../../services/userService'
 import List from "../List/List"
 import PriorityList from '../List/PriorityList'
+import RemindMeForm from '../RemindMeForm/RemindMeForm'
 
 /**today's lists */
 export default function Lists() {
@@ -90,15 +91,26 @@ export default function Lists() {
     setCurrentDragging(start.draggableId)
   }
 
+
   return (
     <section className='sm:py-4 sm:ml-4 md:ml-16 lg:ml-32'>
-      <form onSubmit={handleNewList} className='px-4 sm:py-2 md:py-4'>
-        <label>
-          <span className='md:mr-4'>New List: </span>
-          <input name='list' placeholder='Title' className="bg-transparent border-b-2 border-black focus:outline-none" />
-          <button className='trigger-time'>+</button>
-        </label>
-      </form>
+      <div className='flex align-middle items-center'>
+        <form onSubmit={handleNewList} className='px-4 sm:py-2 md:py-4'>
+          <label>
+            <span className='md:mr-4 md:font-bold text-white'>New List: </span>
+            <input name='list' placeholder='Title' className="bg-transparent border-b-2 sm:w-6/12 border-white focus:outline-none" />
+            <button className='trigger-time text-white'>+</button>
+          </label>
+        </form>
+
+        <div className="">
+          <RemindMeForm />
+        </div>
+
+
+      </div>
+
+
 
       {lists && listOrder &&
         <DragDropContext onBeforeCapture={handleDragStart} onDragEnd={handleListDrop}>

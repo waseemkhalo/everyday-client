@@ -3,7 +3,7 @@ import { Day, Today, getToday } from "../../services/dayService";
 import { updateNotes } from '../../services/userService';
 // import MarkdownPreview from '../MarkdownPreview/MarkdownPreview';
 import ReactMarkdown from 'react-markdown';
-import './NoteSection.css';
+import './NoteSection.scss';
 
 
 function NoteSection({ day, setToday }: { day: Day | Today | undefined, setToday: React.Dispatch<React.SetStateAction<Today | undefined>> }) {
@@ -46,7 +46,7 @@ function NoteSection({ day, setToday }: { day: Day | Today | undefined, setToday
   if (!day) return <></>;
 
   return (
-    <div className="bg-smoke pb-10">
+    <div className="notes-box pb-10">
       <div className="sm:p-4 md:px-16 md:py-8 lg:px-32 lg:py-10">
         <h1 className="pb-4 flex justify-between gap-6 items-center md:font-bold">
           Notes

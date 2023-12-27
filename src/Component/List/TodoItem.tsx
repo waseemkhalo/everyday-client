@@ -4,6 +4,7 @@ import editIcon from "../../assets/icons/pencil-light.svg";
 import trashIcon from "../../assets/icons/trash-light.svg";
 import { List } from "../../services/listService";
 import { Todo, checkTodo, deleteTodo } from "../../services/todoService";
+import "./TodoItem.scss";
 
 
 type TodoItemProps = {
@@ -32,10 +33,10 @@ export default function TodoItem({
   return (
     <div {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
 
-      <li className={`flex max-w-full p-2 rounded-md group/edit hover:bg-opacity-${list.title !== 'daily' && list.title !== 'priority' ? '75' : '25'} hover:bg-white`}>
+      <li className={`flex max-w-full p-2 rounded-md group/edit hover:bg-opacity-${list.title !== 'daily' && list.title !== 'priority' ? '75' : '25'} hover:border-inherit hover:border-2`}>
         <input
           type="checkbox"
-          className="form-checkbox accent-pink-500 mr-2 trigger-time"
+          className="form-checkbox custom-checkbox mr-2 trigger-time"
           checked={todo.completed}
           onChange={() => checkTodo(list, todo)}
         />
@@ -43,11 +44,11 @@ export default function TodoItem({
           <span className="break-all">{todo.content} </span>
 
           <div className="group/edit hidden group-hover/edit:flex gap-2 min-w-fit" >
-            <button className="invisible group-hover/edit:visible hover:bg-white hover:bg-opacity-50"
+            <button className="invisible group-hover/edit:visible hover:border-black hover:bg-opacity-50"
               onClick={() => setEdit(index)} >
               <img src={editIcon} className="w-5" alt="edit" />
             </button>
-            <button className="invisible group-hover/edit:visible hover:bg-white hover:bg-opacity-50 trigger-time"
+            <button className="invisible group-hover/edit:visible hover:border-black hover:bg-opacity-50 trigger-time"
               onClick={() => handleDelete(list.title, todo)} >
               <img src={trashIcon} className="w-5" alt='delete' />
             </button>
