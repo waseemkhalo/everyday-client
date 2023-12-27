@@ -22,7 +22,6 @@ useEffect(() => {
       const userBackupPromise = getUser(); // Make sure getUser returns a Promise
 
       userBackupPromise.then((userBackup) => {
-        console.log(userBackup);
         if (userBackup && userBackup.email) {
           setEmailOnProfile(userBackup.email);
         } else {
