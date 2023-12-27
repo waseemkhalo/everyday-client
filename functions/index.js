@@ -1,43 +1,51 @@
-// using Twilio SendGrid's v3 Node.js Library
-// https://github.com/sendgrid/sendgrid-nodejs
 const functions = require("firebase-functions");
+const admin = require("firebase-admin");
+const sgMail = require("@sendgrid/mail");
+require("dotenv").config();
 
+// Initialize the Firebase Admin SDK
+admin.initializeApp();
+
+// sendgrid config
 const sendgridConfig = functions.config().sendgrid;
 const API_KEY = sendgridConfig.key;
+const TEMPLATE_ID = sendgridConfig.template;
 
-const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey(API_KEY);
+if (sendgridConfig && API_KEY) {
+  sgMail.setApiKey(API_KEY);
+} else {
+  console.error("SendGrid API key is undefined. Check your Firebase config.");
+}
 
-// if (!API_KEY) {
-//   console.error("SendGrid API key is not configured");
-//   throw new Error("SendGrid API key not found in function config");
-// }
+// sendgrid email template
 
+exports.sendReminder = functions.pubsub
+    .schedule("0 19 * * *")
+    .timeZone("America/New_York")
+    .onRun(async () => {
+      const remindersSnap = await admin
+          .firestore()
+          .collection("reminder")
+          .where("optIn", "==", "true")
+          .get();
 
-exports.sendEmail = functions.https.onRequest((req, res) => {
-  const msg = {
-    to: "waseemkhalo@gmail.com", // Change to your recipient
-    from: "waseemkhalo@gmail.com", // Change to your verified sender
-    subject: "Sending with SendGrid is Fun",
-    text: "and easy to do anywhere, even with Node.js",
-    html: "<strong>and easy to do anywhere, even with Node.js</strong>",
-  };
-  sgMail
-      .send(msg)
-      .then(() => {
-        console.log("Email sent");
-      })
-      .catch((error) => {
-        console.error(error);
+      remindersSnap.forEach((doc) => {
+        const reminder = doc.data();
+        if (reminder.optIn === "true") {
+          const msg = {
+            to: reminder.email,
+            from: "waseemkhalo@gmail.com",
+            templateId: TEMPLATE_ID,
+          };
+          sgMail
+              .send(msg)
+              .then(() => {
+                console.log("Reminder email sent");
+              })
+              .catch((error) => {
+                console.error("Error sending email:", error);
+              });
+        }
       });
-});
-
-
-// test function to add numbers together
-exports.addNumbers = functions.https.onRequest((req, res) => {
-  const num1 = req.body.num1;
-  const num2 = req.body.num2;
-  const total = num1 + num2;
-  res.send(total.toString());
-});
+    });
 
