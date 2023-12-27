@@ -1,0 +1,13 @@
+@use "../../styles/partials/mixins" as *;
+
+.priority-box {
+  @include glass-effect;
+  border-radius: 1.5rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(
+    108deg,
+    rgba(0, 204, 255, 0.46) -16.26%,
+    rgba(230, 255, 10, 0) 100.97%
+  );
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}

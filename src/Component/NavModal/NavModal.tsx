@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import facebookIcon from "../../assets/icons/facebook-icon.svg";
-import hamburgerMenu from "../../assets/icons/hamburger-menu.png";
+import hamburgerMenu from "../../assets/icons/hamburger-menu.svg";
 import instagramIcon from "../../assets/icons/instagram-icon.png";
-import logo from "../../assets/logo/logo.png";
+import logos from "../../assets/logo/everydayseasons.png";
 import { auth } from "../../firebase/firebase";
 import FeedbackModal from "../FeedbackModal/FeedbackModal";
 
@@ -23,7 +23,7 @@ function NavModal() {
 
   return (
     <>
-    <FeedbackModal />
+      <FeedbackModal />
       <button className='pl-6' onClick={toggleModal}>
         <img src={hamburgerMenu} alt="hamburger menu" />
       </button>
@@ -35,7 +35,7 @@ function NavModal() {
               <h1 className="sm:text-4xl md:text-6xl lg:text-6xl">X</h1>
             </button>
 
-            <img src={logo} alt="logo" className=" max-h-[44vh] m-auto" />
+            <img src={logos} alt="logo" className=" max-h-[44vh] m-auto" />
 
             <ul className="text-2xl lg:text-3xl flex flex-col justify-center gap-8 lg:gap-12 items-center mb-8 ">
               <li>

@@ -6,6 +6,7 @@ import NavPostAuth from "../../Component/NavPostAuth/NavPostAuth";
 import NoteSection from "../../Component/NoteSection/NoteSection";
 import QuoteBox from "../../Component/QuoteBox/QuoteBox";
 import StaticLists from "../../Component/StaticLists/StaticLists";
+import "./HomePage.scss";
 
 import { auth } from "../../firebase/firebase";
 import {
@@ -29,8 +30,8 @@ function HomePage() {
 
   //firebase onAuthStateChanged
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
         //when user signed in, check if today is a new day
         const saveDay = async () => {
           const check = await checkDay();
@@ -41,7 +42,9 @@ function HomePage() {
           }
         };
         saveDay().then(() => setSignedIn(true));
+        // setUser(authUser);
       }
+
       // if not logged in, force redirect to landing page
       else window.location.replace("/");
       setLoading(false);
@@ -68,23 +71,37 @@ function HomePage() {
   }, [today]);
 
 
+
+
+
   return (
-    <div className="App">
-      {!loading && (
-        <>
-          <NavPostAuth />
-          <QuoteBox date={day?.date ? day.date : today?.date} />
-          {signedIn && (
+    <div className="app">
+      <div className="circle-1"></div>
+      <div className="circle-2"></div>
+      <div className="circle-3"></div>
+      <div className="circle-4"></div>
+      <div className="circle-5"></div>
+      <div className="circle-6"></div>
+      <div className="rectangle">
+        <div className="app-content">
+          {!loading && (
             <>
-              <DayDetails day={day} setDay={setDay} today={today} />
-              {/* show lists for today, and static lists for any other day */}
-              {day ? <StaticLists lists={day.lists} listOrder={day.listOrder} /> : <Lists />}
-              <NoteSection day={day || today} setToday={setToday} />
+              <NavPostAuth />
+{/* <h1>{user.email}</h1> for testing... find user email*/} 
+              <QuoteBox date={day?.date ? day.date : today?.date} />
+              {signedIn && (
+                <>
+                  <DayDetails day={day} setDay={setDay} today={today} />
+                  {/* show lists for today, and static lists for any other day */}
+                  {day ? <StaticLists lists={day.lists} listOrder={day.listOrder} /> : <Lists />}
+                  <NoteSection day={day || today} setToday={setToday} />
+                </>
+              )}
             </>
           )}
-        </>
-      )}
-      <Footer />
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 }

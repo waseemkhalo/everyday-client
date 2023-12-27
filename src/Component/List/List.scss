@@ -1,0 +1,14 @@
+@use "../../styles/partials/mixins" as *;
+
+.list-box {
+  border-radius: 1.5rem;
+  padding: 1rem 2rem;
+  color: black;
+  overflow-x: auto;
+  @include glass-effect;
+  background: linear-gradient(
+    108deg,
+    rgba(255, 255, 255, 0.46) -16.26%,
+    rgba(255, 255, 255, 0) 100.97%
+  );
+}
