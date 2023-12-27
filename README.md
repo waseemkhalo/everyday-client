@@ -11,6 +11,8 @@ Hold yourself accountable for what you said you'd complete today. Each day is gi
 - Firebase DB, BaaS, & Hosting
 - React w TypeScript
 - TailwindCSS
+- Google Cloud Functions
+- Sendgrid
 
 ## features
 - daily inspirational quote
@@ -18,6 +20,7 @@ Hold yourself accountable for what you said you'd complete today. Each day is gi
 - each day's number is the number of days since day 1
 - daily items stay each day, only being checked off
 - other tasks with be removed the next day after being checked off
+- enroll in reminder notifications - sent once per day at 7 PM. 
 
 ---
 
