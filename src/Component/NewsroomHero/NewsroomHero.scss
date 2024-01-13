@@ -1,0 +1,30 @@
+@use "../../styles/partials/mixins" as *;
+
+.hero {
+  &-banner {
+    height: 17.125rem;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(270deg, #01d085 50%, #53c2b5 95.8%);
+
+    @include sm {
+      padding-left: 2rem;
+    }
+    @include md {
+      padding-left: 6rem;
+    }
+    @include lg {
+      padding-left: 8rem;
+    }
+
+    &__title {
+      color: #fff;
+      font-family: Verdana;
+      font-size: 3rem;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 4.25rem; /* 141.667% */
+      letter-spacing: -0.051rem;
+    }
+  }
+}

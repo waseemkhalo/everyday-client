@@ -44,10 +44,9 @@ function NavModal() {
               <li>
                 <FeedbackModal />
               </li>
-              {/* <li> */}
-              {/* currently have no profile page so no need for profile link */}
-              {/* <a className='text-3xl' href="#">Profile</a> */}
-              {/* </li> */}
+              <li>
+              <a className='text-3xl' href="/newsroom">Newsroom</a>
+              </li>
               <li>
                 <a href="/" onClick={() => auth.signOut()}>
                   Logout
