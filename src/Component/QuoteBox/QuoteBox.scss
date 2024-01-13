@@ -8,22 +8,27 @@
     rgba(255, 255, 255, 0) 100.97%
   );
   border: none;
-
-  width: auto;
   height: 10rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 2rem;
 
   @include sm {
-    padding: 1rem;
+    padding: 1.5rem;
+    flex-direction: column;
+    justify-content: space-around;
   }
+
   @include md {
     padding: 4rem;
+    flex-direction: row;
+    justify-content: space-around;
   }
+
   @include lg {
-    padding: 6rem;
-    padding-left: 8rem;
+  }
+
+  &-quote {
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
   }
 }
