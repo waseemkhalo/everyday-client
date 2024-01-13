@@ -8,23 +8,29 @@
     background: linear-gradient(270deg, #01d085 50%, #53c2b5 95.8%);
 
     @include sm {
-      padding-left: 2rem;
+      padding-left: 4rem;
     }
     @include md {
-      padding-left: 6rem;
+      padding-left: 8rem;
     }
     @include lg {
-      padding-left: 8rem;
+      padding-left: 12rem;
     }
 
     &__title {
       color: #fff;
       font-family: Verdana;
-      font-size: 3rem;
-      font-style: normal;
       font-weight: 700;
-      line-height: 4.25rem; /* 141.667% */
-      letter-spacing: -0.051rem;
+
+      @include sm {
+        font-size: 1.5rem;
+      }
+
+      @include md {
+        font-size: 3rem;
+      }
     }
+
+
   }
 }
