@@ -1,0 +1,112 @@
+@use "../../styles/partials/mixins" as *;
+
+.news {
+  border-radius: 1.25rem;
+  background: #000;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  @include sm {
+    width: 25rem;
+    height: 10rem;
+  }
+  @include md {
+    width: 40rem;
+    height: 20rem;
+  }
+  @include lg {
+    width: 60rem;
+    height: 20rem;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease; /* Add transition property for smooth animation */
+
+    @include sm {
+      margin-top: 2rem;
+    }
+
+    @include md {
+      margin-top: 4rem;
+    }
+
+    @include lg {
+      margin-top: 8rem;
+    }
+  }
+
+  &__container:hover {
+    transform: scale(1.05);
+  }
+
+  &__main {
+    &-image {
+      position: relative;
+      z-index: 10;
+
+      background-color: #ff0066;
+      border-radius: 0 1.25rem 1.25rem 0;
+      background-image: url(../../assets/background/circle-scatter-haikei.svg);
+
+      @include sm {
+        left: 15rem;
+        width: 10rem;
+        height: 10rem;
+      }
+
+      @include md {
+        left: 25rem;
+        width: 15rem;
+        height: 20rem;
+      }
+
+      @include lg {
+        left: 40rem;
+        width: 20rem;
+        height: 20rem;
+      }
+    }
+
+    &-content {
+display: flex;
+flex-direction: column;
+
+      position: relative;
+      z-index: 10;
+      color: #fff;
+
+      @include sm {
+        bottom: 7rem;
+        left: 1.5rem;
+      }
+
+      @include md {
+        left: 0rem;
+      }
+
+      @include lg {
+        left: 0rem;
+      }
+
+      &-title {
+        font-weight: 700;
+        font-size: 1.5rem;
+
+        @include sm {
+          left: 0rem;
+        }
+
+        @include md {
+          left: 0rem;
+        }
+
+        @include lg {
+          left: 0rem;
+        }
+      }
+    }
+  }
+}
