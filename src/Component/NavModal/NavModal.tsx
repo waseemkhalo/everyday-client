@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import facebookIcon from "../../assets/icons/facebook-icon.svg";
 import hamburgerMenu from "../../assets/icons/hamburger-menu.svg";
 import instagramIcon from "../../assets/icons/instagram-icon.png";
-import logos from "../../assets/logo/everydayseasons.png";
+import logos from "../../assets/logo/everydaypaper.png";
 import { auth } from "../../firebase/firebase";
 import FeedbackModal from "../FeedbackModal/FeedbackModal";
 

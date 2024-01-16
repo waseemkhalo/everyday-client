@@ -1,4 +1,4 @@
-import logo from "../../assets/logo/everyday-seasons-white.png";
+import logo from "../../assets/logo/everydaypaper.png";
 import Login from "../Login/Login";
 
 /**top landing page header */
