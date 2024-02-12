@@ -34,7 +34,6 @@ function NewsroomMain() {
   return (
 
     <div>
-      <h1>Newsroom</h1>
       {currentArticles.length === 0 ? (
         <p>No news articles found.</p>
       ) : (
@@ -46,7 +45,7 @@ function NewsroomMain() {
                   <div className='news'>
                     <div className='news__main-image' />
                     <div className='news__main-content'>
-                      <h2 className=''>{article.title}</h2>
+                      <h2 className='news__main-title'>{article.title}</h2>
                       <p>{article.type}</p>
                       <p>Author: {article.author}</p>
                     </div>
