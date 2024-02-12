@@ -1,11 +1,20 @@
 /* Media queries */
 
 $mobile-breakpoint: 320px;
+$mobile-breakpoint-md: 400px;
 $tablet-breakpoint: 768px;
 $desktop-breakpoint: 1280px;
 
+
+
 @mixin sm {
   @media (min-width: $mobile-breakpoint) {
+    @content;
+  }
+}
+
+@mixin sm-but-bigger {
+  @media (min-width: $mobile-breakpoint-md) {
     @content;
   }
 }

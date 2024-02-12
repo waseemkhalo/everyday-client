@@ -9,7 +9,6 @@ function Newsroom() {
       <NavPostAuth />
       <NewsroomHero />
       <NewsroomMain />
-      <h1>Blog Page</h1>
       {/* Add your blog content here */}
     </div>
   );

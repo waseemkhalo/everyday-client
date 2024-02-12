@@ -2,16 +2,21 @@
 
 .hero {
   &-banner {
-    height: 17.125rem;
     display: flex;
     align-items: center;
     background: linear-gradient(270deg, #01d085 50%, #53c2b5 95.8%);
 
     @include sm {
       padding-left: 4rem;
+      height: 12.125rem;
+    }
+
+    @include sm-but-bigger {
+      padding-left: 4rem;
     }
     @include md {
       padding-left: 8rem;
+      height: 17.125rem;
     }
     @include lg {
       padding-left: 12rem;
@@ -30,7 +35,5 @@
         font-size: 3rem;
       }
     }
-
-
   }
 }

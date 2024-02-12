@@ -4,11 +4,18 @@
   border-radius: 1.25rem;
   background: #000;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: #fff;
 
   @include sm {
+    width: 15rem;
+    height: 10rem;
+  }
+
+  @include sm-but-bigger {
     width: 25rem;
     height: 10rem;
   }
+
   @include md {
     width: 40rem;
     height: 20rem;
@@ -23,6 +30,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    
     transition: transform 0.3s ease; /* Add transition property for smooth animation */
 
     @include sm {
@@ -52,10 +60,17 @@
       background-image: url(../../assets/background/circle-scatter-haikei.svg);
 
       @include sm {
+        left: 10rem;
+        width: 5rem;
+        height: 10rem;
+      }
+
+    @include sm-but-bigger {
         left: 15rem;
         width: 10rem;
         height: 10rem;
       }
+
 
       @include md {
         left: 25rem;
@@ -71,9 +86,8 @@
     }
 
     &-content {
-display: flex;
-flex-direction: column;
-
+      display: flex;
+      flex-direction: column;
       position: relative;
       z-index: 10;
       color: #fff;

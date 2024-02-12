@@ -26,3 +26,5 @@ export const getAllNews = async () => {
     return []; // Return an empty array in case of an error
   }
 };
+
+

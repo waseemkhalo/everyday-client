@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-firebase/hooks": "^0.1.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -11,7 +12,7 @@
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "axios": "^1.6.0",
-    "firebase": "^9.18.0",
+    "firebase": "^9.23.0",
     "firebaseui": "^6.0.2",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
