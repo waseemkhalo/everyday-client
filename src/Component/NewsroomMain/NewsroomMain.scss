@@ -30,7 +30,6 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    
     transition: transform 0.3s ease; /* Add transition property for smooth animation */
 
     @include sm {
@@ -54,7 +53,6 @@
     &-image {
       position: relative;
       z-index: 10;
-
       background-color: #ff0066;
       border-radius: 0 1.25rem 1.25rem 0;
       background-image: url(../../assets/background/circle-scatter-haikei.svg);
@@ -98,11 +96,14 @@
       }
 
       @include md {
-        left: 0rem;
+        left: 3rem;
+        bottom: 12rem;
       }
 
       @include lg {
-        left: 0rem;
+        left: 6rem;
+        bottom: 12rem;
+
       }
 
       &-title {

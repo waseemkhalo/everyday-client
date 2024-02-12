@@ -23,7 +23,7 @@ function NewsroomMain() {
       }
     };
 
-    fetchData(); // Call the fetchData function when the component mounts
+    fetchData(); 
   }, []);
 
   // const formatDate = (timestamp: string) => {
@@ -45,7 +45,7 @@ function NewsroomMain() {
                   <div className='news'>
                     <div className='news__main-image' />
                     <div className='news__main-content'>
-                      <h2 className='news__main-title'>{article.title}</h2>
+                      <h2 className='news__main-title sm:text-md lg:text-3xl font-bold'>{article.title}</h2>
                       <p>{article.type}</p>
                       <p>Author: {article.author}</p>
                     </div>
@@ -60,29 +60,6 @@ function NewsroomMain() {
   );
 };
 
-//     <>
-//       {!loading && (
-//         <>
-//           <div className='news__container'>
-//             <div className="news">
-//               <div className='news__main-image' />
-//               {currentArticles.map((currentArticle) => (
-//                 <div key={currentArticle.date_created}>
-//                   <div className='news__main-content'>
-//                     <h3 className=''>{currentArticle.type}</h3>
-//                     <h1 className='news__main-title'>{currentArticle.title}</h1>
-//                     {/* <span>{currentArticle.date_created}</span> */}
-//                   </div>
-//                 </div>  
-//               ))}
-//             </div>
-//           </div>
-
-//         </>
-//       )}
-//     </>
-//   );
-// }
 
 
 export default NewsroomMain;
